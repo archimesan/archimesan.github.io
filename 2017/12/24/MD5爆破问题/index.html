@@ -3,19 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CTF学习 | Archimesan</title>
+  <title>MD5 爆破问题 | Archimesan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一些CTF学习的网站">
+  <meta name="description" content="几道 MD5 爆破问题 题目1md5多一位  代码如下：1234mymd5=&quot;d78b6f302l25cdc811adfe8d4e7c9fd34&quot;for i in xrange(33):    newmd5=mymd5[:i]+mymd5[i+1:]    print newmd5 难道是逐个解密？">
 <meta name="keywords" content="ctf">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CTF学习">
-<meta property="og:url" content="http://archimesan.me/2017/12/14/CTF学习/index.html">
+<meta property="og:title" content="MD5 爆破问题">
+<meta property="og:url" content="http://archimesan.me/2017/12/24/MD5爆破问题/index.html">
 <meta property="og:site_name" content="Archimesan">
-<meta property="og:description" content="一些CTF学习的网站">
-<meta property="og:updated_time" content="2017-12-14T05:57:17.441Z">
+<meta property="og:description" content="几道 MD5 爆破问题 题目1md5多一位  代码如下：1234mymd5=&quot;d78b6f302l25cdc811adfe8d4e7c9fd34&quot;for i in xrange(33):    newmd5=mymd5[:i]+mymd5[i+1:]    print newmd5 难道是逐个解密？？ 不对。 MD5 包含0-9a-f共16个字符，不存在 l  很明显应该去掉 l  对 “d78b">
+<meta property="og:image" content="http://archimesan.me/2017/12/24/MD5爆破问题/1_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/24/MD5爆破问题/1_2.png">
+<meta property="og:updated_time" content="2017-12-28T03:47:59.643Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CTF学习">
-<meta name="twitter:description" content="一些CTF学习的网站">
+<meta name="twitter:title" content="MD5 爆破问题">
+<meta name="twitter:description" content="几道 MD5 爆破问题 题目1md5多一位  代码如下：1234mymd5=&quot;d78b6f302l25cdc811adfe8d4e7c9fd34&quot;for i in xrange(33):    newmd5=mymd5[:i]+mymd5[i+1:]    print newmd5 难道是逐个解密？？ 不对。 MD5 包含0-9a-f共16个字符，不存在 l  很明显应该去掉 l  对 “d78b">
+<meta name="twitter:image" content="http://archimesan.me/2017/12/24/MD5爆破问题/1_1.png">
   
     <link rel="alternative" href="/atom.xml" title="Archimesan" type="application/atom+xml">
   
@@ -225,11 +228,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-CTF学习" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-MD5爆破问题" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/12/14/CTF学习/" class="article-date">
-      <time datetime="2017-12-14T05:11:10.000Z" itemprop="datePublished">2017-12-14</time>
+      <a href="/2017/12/24/MD5爆破问题/" class="article-date">
+      <time datetime="2017-12-24T12:18:20.000Z" itemprop="datePublished">2017-12-24</time>
 </a>
     </div>
   
@@ -242,7 +245,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      CTF学习
+      MD5 爆破问题
     </h1>
   
 
@@ -263,36 +266,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>一些CTF学习的网站</p>
-<a id="more"></a>
-<h1 id="CTF-资讯"><a href="#CTF-资讯" class="headerlink" title=" CTF 资讯 "></a><font size="5"> CTF 资讯 </font></h1><p><a href="https://www.xctf.org.cn/" target="_blank" rel="noopener"><em>XCTF联赛</em></a></p>
-<p><a href="http://bobao.350.cn/" target="_blank" rel="noopener"><em>350安全客</em></a></p>
-<p><a href="https://ctftime.org/event/list/upcoming" target="_blank" rel="noopener"><em>CTFTIME</em></a></p>
-<h1 id="CTF练习"><a href="#CTF练习" class="headerlink" title=" CTF练习 "></a><font size="5"> CTF练习 </font></h1><h1 id="BIN"><a href="#BIN" class="headerlink" title="BIN:"></a>BIN:</h1><p><a href="http://reversing.kr" target="_blank" rel="noopener"><em>Reverse逆向学习</em></a></p>
-<p><a href="http://pwnable.kr/" target="_blank" rel="noopener"><em>Pwnable</em></a></p>
-<p><a href="http://pwnable.tw" target="_blank" rel="noopener"><em>Pwnable (台湾)</em></a></p>
-<p><a href="http://security.cs.rpi.edu/courses/binexp-spring2015" target="_blank" rel="noopener"><em>Modern Binary Exploitation</em></a></p>
-<h1 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h1><p><a href="http://xss-quiz.int21h.jp/" target="_blank" rel="noopener"><em>XSS 挑战</em></a></p>
-<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p><a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener"><em>Sqli-lbas</em></a></p>
-<h1 id="综合练习"><a href="#综合练习" class="headerlink" title=" 综合练习 "></a><font size="5"> 综合练习 </font></h1><p><a href="http://hackinglab.cn/" target="_blank" rel="noopener"><em>网络信息攻防学习平台</em></a></p>
-<p><a href="http://www.baimaoxueyuan.com/" target="_blank" rel="noopener"><em>白茅学院</em></a></p>
-<p><a href="http://captf.com/" target="_blank" rel="noopener"><em>CTF题目</em></a></p>
-<p><a href="http://www.shiyanbar.com/ctf/index" target="_blank" rel="noopener"><em>西普实验吧</em></a></p>
-<p><a href="http://www.hetianlab.com/CTFrace.html" target="_blank" rel="noopener"><em>合天CTF</em></a></p>
-<p><a href="http://www.ichunqiu.com/tiaozhans" target="_blank" rel="noopener"><em>I春秋CTF挑战</em></a></p>
-<p><a href="http://ctf.idf.cn/" target="_blank" rel="noopener"><em>IDF 实验室</em></a></p>
-<h1 id="OJ平台以及CTF赛事复盘"><a href="#OJ平台以及CTF赛事复盘" class="headerlink" title=" OJ平台以及CTF赛事复盘 "></a><font size="5"> OJ平台以及CTF赛事复盘 </font></h1><p><a href="http://oj.xctf.org.cn/" target="_blank" rel="noopener"><em>XCTF-OJ</em></a></p>
-<p><a href="http://pwnhub.cn" target="_blank" rel="noopener"><em>Pwnhub</em></a></p>
-<p><a href="https://www.jarvisoj.com/" target="_blank" rel="noopener"><em>Jarvisoj -汪师傅OJ平台</em></a></p>
-<p><a href="http://ctf.nuptsast.com" target="_blank" rel="noopener"><em>南京邮电大学复盘</em></a></p>
-<h1 id="各种姿势的学习平台"><a href="#各种姿势的学习平台" class="headerlink" title=" 各种姿势的学习平台 "></a><font size="5"> 各种姿势的学习平台 </font></h1><p><a href="http://www.52pojie.cn/" target="_blank" rel="noopener"><em>吾爱破解</em></a></p>
-<p><a href="http://bbs.pediy.com/" target="_blank" rel="noopener"><em>看雪论坛</em></a></p>
-<p><a href="https://www.t00ls.net/" target="_blank" rel="noopener"><em>T00ls</em></a></p>
-<h1 id="CTF-Writeup-解题报告"><a href="#CTF-Writeup-解题报告" class="headerlink" title=" CTF-Writeup 解题报告 "></a><font size="5"> CTF-Writeup 解题报告 </font></h1><p><a href="http://bobao.350.cn/ctf/" target="_blank" rel="noopener"><em>350安全客</em></a></p>
-<p><a href="https://github.com/ctfs/" target="_blank" rel="noopener"><em>CTF Writeup -github</em></a></p>
-<p><a href="https://github.com/VulnHub/ctf-writeups" target="_blank" rel="noopener"><em>Writeups</em></a></p>
-<p>Good good study,day day up !</p>
-<p><a href="http://archimesan.me/">回到主页</a></p>
+        <p>几道 MD5 爆破问题</p>
+<h2 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h2><p>md5多一位</p>
+<p><img src="1_1.png" alt=""></p>
+<p>代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mymd5=<span class="string">"d78b6f302l25cdc811adfe8d4e7c9fd34"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(33):</span><br><span class="line">    newmd5=mymd5[:i]+mymd5[i+1:]</span><br><span class="line">    <span class="built_in">print</span> newmd5</span><br></pre></td></tr></table></figure></p>
+<p>难道是逐个解密？？</p>
+<p>不对。</p>
+<p>MD5 包含0-9a-f共16个字符，不存在 l </p>
+<p>很明显应该去掉 l </p>
+<p>对 “d78b6f30225cdc811adfe8d4e7c9fd34” 进行解密即可。</p>
+<p><img src="1_2.png" alt=""></p>
+<h2 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h2><p>代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import hashlib</span><br><span class="line">def <span class="built_in">test</span>():</span><br><span class="line">    count=0</span><br><span class="line">    md5=<span class="string">'38e4c352809e150186920aac37190cbc'</span></span><br><span class="line">    str=<span class="string">'flag&#123;www_shiyanbar_com_is_very_good_'</span></span><br><span class="line">    <span class="keyword">while</span> count==0:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">            a=chr(i)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">                b=chr(i)</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">                    c=chr(i)</span><br><span class="line">                    <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">                        d=chr(i)</span><br><span class="line">                        <span class="built_in">test</span>=str+a+b+c+d+<span class="string">'&#125;'</span></span><br><span class="line">                        m=hashlib.md5()</span><br><span class="line">                        m.update(<span class="built_in">test</span>)</span><br><span class="line">                        m=m.hexdigest()</span><br><span class="line">                        <span class="keyword">if</span>(cmp(m,md5)==0):</span><br><span class="line">                             count=1</span><br><span class="line">                             <span class="built_in">print</span> <span class="string">'ok'</span></span><br><span class="line">                             <span class="built_in">print</span> <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="built_in">test</span>()</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
+<h2 id="题目3"><a href="#题目3" class="headerlink" title="题目3"></a>题目3</h2><p>md5加盐爆破</p>
+<p>题目：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have found a passwd file containing salted passwords. An unprotected configuration file has revealed a salt of 5948. The hashed password <span class="keyword">for</span> the <span class="string">'admin'</span> user appears to be 81bdf501ef206ae7d3b92070196f7e98, try to brute force this password.</span><br></pre></td></tr></table></figure></p>
+<p>python 脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf -*-</span></span><br><span class="line">from hashlib import md5</span><br><span class="line"></span><br><span class="line">def foo():</span><br><span class="line">    f=open(<span class="string">'1.txt'</span>,<span class="string">'rb'</span>).readlines()</span><br><span class="line">    salt=<span class="string">'5948'</span></span><br><span class="line">    m=<span class="string">'81bdf501ef206ae7d3b92070196f7e98'</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        t=line.strip()+salt</span><br><span class="line">        t=md5(t).hexdigest()</span><br><span class="line">        <span class="keyword">if</span> t==m:</span><br><span class="line">            <span class="built_in">print</span> line.strip()</span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    foo()</span><br><span class="line">    <span class="built_in">print</span> <span class="string">'ok'</span></span><br></pre></td></tr></table></figure></p>
 
       
       
@@ -348,13 +335,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/12/14/CTF学习/">CTF学习</a></p>
+        <p><span>本文标题:</span><a href="/2017/12/24/MD5爆破问题/">MD5 爆破问题</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
-        <p><span>发布时间:</span>2017年12月14日 - 13时11分</p>
-        <p><span>最后更新:</span>2017年12月14日 - 13时57分</p>
+        <p><span>发布时间:</span>2017年12月24日 - 20时18分</p>
+        <p><span>最后更新:</span>2017年12月28日 - 11时47分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/12/14/CTF学习/" title="CTF学习">http://archimesan.me/2017/12/14/CTF学习/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2017/12/14/CTF学习/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/24/MD5爆破问题/" title="MD5 爆破问题">http://archimesan.me/2017/12/24/MD5爆破问题/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2017/12/24/MD5爆破问题/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -367,18 +354,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/12/15/2017湖湘杯/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/25/序列化漏洞/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          2017湖湘杯
+          序列化漏洞
         
       </div>
     </a>
   
   
-    <a href="/2017/12/13/burpsuite/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">BurpSuite 永久使用版（附下载）</div>
+    <a href="/2017/12/23/hash长度扩展攻击/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hash长度扩展攻击</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -389,7 +376,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CTF-资讯"><span class="toc-number">1.</span> <span class="toc-text"> CTF 资讯 </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTF练习"><span class="toc-number">2.</span> <span class="toc-text"> CTF练习 </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BIN"><span class="toc-number">3.</span> <span class="toc-text">BIN:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS"><span class="toc-number">4.</span> <span class="toc-text">XSS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL"><span class="toc-number">5.</span> <span class="toc-text">SQL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#综合练习"><span class="toc-number">6.</span> <span class="toc-text"> 综合练习 </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OJ平台以及CTF赛事复盘"><span class="toc-number">7.</span> <span class="toc-text"> OJ平台以及CTF赛事复盘 </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#各种姿势的学习平台"><span class="toc-number">8.</span> <span class="toc-text"> 各种姿势的学习平台 </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CTF-Writeup-解题报告"><span class="toc-number">9.</span> <span class="toc-text"> CTF-Writeup 解题报告 </span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目1"><span class="toc-number">1.</span> <span class="toc-text">题目1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目2"><span class="toc-number">2.</span> <span class="toc-text">题目2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目3"><span class="toc-number">3.</span> <span class="toc-text">题目3</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -455,13 +442,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/12/15/2017湖湘杯/" title="上一篇: 2017湖湘杯">
+            <a href="/2017/12/25/序列化漏洞/" title="上一篇: 序列化漏洞">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/12/13/burpsuite/" title="下一篇: BurpSuite 永久使用版（附下载）">
+            <a href="/2017/12/23/hash长度扩展攻击/" title="下一篇: hash长度扩展攻击">
                 <i class="fa fa-angle-right"></i>
             </a>
         
