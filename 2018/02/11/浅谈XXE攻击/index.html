@@ -3,22 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>快速抓取网页内容 | Archimesan</title>
+  <title>浅谈XXE攻击 | Archimesan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="python 快速抓取网页内容">
-<meta name="keywords" content="python">
+  <meta name="description" content="Archimesan&apos;s Blog">
+<meta name="keywords" content="常见漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速抓取网页内容">
-<meta property="og:url" content="http://archimesan.me/2017/12/28/快速抓取网页内容/index.html">
+<meta property="og:title" content="浅谈XXE攻击">
+<meta property="og:url" content="http://archimesan.me/2018/02/11/浅谈XXE攻击/index.html">
 <meta property="og:site_name" content="Archimesan">
-<meta property="og:description" content="python 快速抓取网页内容">
-<meta property="og:image" content="http://archimesan.me/2017/12/28/快速抓取网页内容/1.png">
-<meta property="og:image" content="http://archimesan.me/2017/12/28/快速抓取网页内容/2.png">
-<meta property="og:updated_time" content="2017-12-28T07:15:18.777Z">
+<meta property="og:description" content="Archimesan&apos;s Blog">
+<meta property="og:updated_time" content="2018-02-11T08:20:37.077Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="快速抓取网页内容">
-<meta name="twitter:description" content="python 快速抓取网页内容">
-<meta name="twitter:image" content="http://archimesan.me/2017/12/28/快速抓取网页内容/1.png">
+<meta name="twitter:title" content="浅谈XXE攻击">
+<meta name="twitter:description" content="Archimesan&apos;s Blog">
   
     <link rel="alternative" href="/atom.xml" title="Archimesan" type="application/atom+xml">
   
@@ -228,11 +225,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="n-快速抓取网页内容" class="article article-type-n" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-浅谈XXE攻击" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/12/28/快速抓取网页内容/" class="article-date">
-      <time datetime="2017-12-28T07:11:36.000Z" itemprop="datePublished">2017-12-28</time>
+      <a href="/2018/02/11/浅谈XXE攻击/" class="article-date">
+      <time datetime="2018-02-11T03:13:25.000Z" itemprop="datePublished">2018-02-11</time>
 </a>
     </div>
   
@@ -245,7 +242,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      快速抓取网页内容
+      浅谈XXE攻击
     </h1>
   
 
@@ -256,7 +253,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见漏洞/">常见漏洞</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -266,13 +263,7 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>python 快速抓取网页内容 </p>
-<a id="more"></a>
-<h1 id="两道例题"><a href="#两道例题" class="headerlink" title="两道例题"></a>两道例题</h1><h2 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h2><p><img src="1.png" alt=""></p>
-<p>python 代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import requests,re</span><br><span class="line">from base64 import b64decode</span><br><span class="line">s = requests.Session()</span><br><span class="line">url = <span class="string">'http://120.24.86.145:8002/web6/'</span></span><br><span class="line">r = s.get(url)</span><br><span class="line">head = r.headers</span><br><span class="line">flag = b64decode(head[<span class="string">'flag'</span>]).split(<span class="string">':'</span>)[1]</span><br><span class="line">flag = b64decode(‘flag’)</span><br><span class="line">r1 = s.post(url, data=&#123;<span class="string">'margin'</span>:flag&#125;)</span><br><span class="line"><span class="built_in">print</span> r1.text</span><br></pre></td></tr></table></figure></p>
-<h2 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h2><p><img src="2.png" alt=""></p>
-<p>python 代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests,re</span><br><span class="line">from base64 import b64decode</span><br><span class="line">s = requests.Session()</span><br><span class="line">url = <span class="string">'http://ctf5.shiyanbar.com/web/10/10.php'</span></span><br><span class="line">r = s.get(url)</span><br><span class="line">head = r.headers</span><br><span class="line">flag = b64decode(head[<span class="string">'flag'</span>]).split(<span class="string">':'</span>)[1]</span><br><span class="line">r1 = s.post(url, data=&#123;<span class="string">'key'</span>:flag&#125;)</span><br><span class="line"><span class="built_in">print</span> r1.text</span><br></pre></td></tr></table></figure></p>
-
+        
       
       
         <div class="page-reward">
@@ -327,13 +318,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/12/28/快速抓取网页内容/">快速抓取网页内容</a></p>
+        <p><span>本文标题:</span><a href="/2018/02/11/浅谈XXE攻击/">浅谈XXE攻击</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
-        <p><span>发布时间:</span>2017年12月28日 - 15时11分</p>
-        <p><span>最后更新:</span>2017年12月28日 - 15时15分</p>
+        <p><span>发布时间:</span>2018年02月11日 - 11时13分</p>
+        <p><span>最后更新:</span>2018年02月11日 - 16时20分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/12/28/快速抓取网页内容/" title="快速抓取网页内容">http://archimesan.me/2017/12/28/快速抓取网页内容/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2017/12/28/快速抓取网页内容/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2018/02/11/浅谈XXE攻击/" title="浅谈XXE攻击">http://archimesan.me/2018/02/11/浅谈XXE攻击/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2018/02/11/浅谈XXE攻击/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -346,18 +337,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2017/12/29/磁盘分区恢复/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          磁盘分区恢复
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/25/序列化漏洞/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">序列化漏洞</div>
+    <a href="/2018/02/04/Firefox渗透插件—Web渗透必备工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Firefox渗透插件—Web渗透必备工具</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -368,7 +350,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#两道例题"><span class="toc-number">1.</span> <span class="toc-text">两道例题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目1"><span class="toc-number">1.1.</span> <span class="toc-text">题目1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#题目2"><span class="toc-number">1.2.</span> <span class="toc-text">题目2</span></a></li></ol></li></ol>
+    
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -434,13 +416,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/12/29/磁盘分区恢复/" title="上一篇: 磁盘分区恢复">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/12/25/序列化漏洞/" title="下一篇: 序列化漏洞">
+            <a href="/2018/02/04/Firefox渗透插件—Web渗透必备工具/" title="下一篇: Firefox渗透插件—Web渗透必备工具">
                 <i class="fa fa-angle-right"></i>
             </a>
         
