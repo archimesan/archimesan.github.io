@@ -15,7 +15,8 @@
 <meta property="og:image" content="d:/.git/hexo/source/_posts/test/1_1.png">
 <meta property="og:image" content="http://archimesan.me/2019/03/22/test/1_2.png">
 <meta property="og:image" content="d:/.git/hexo/source/_posts/test/3_3.png">
-<meta property="og:updated_time" content="2019-03-21T16:32:51.360Z">
+<meta property="og:image" content="d:/.git/hexo/source/_posts/test/3_3.png">
+<meta property="og:updated_time" content="2019-03-21T16:35:44.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="test">
 <meta name="twitter:description" content="几个序列号漏洞的例子。 序列化漏洞神盾局的秘密 看下逻辑看源码发现了 123&amp;lt;img src=&amp;quot;showimg.php?img=c2hpZWxkLmpwZw==&amp;quot; width=&amp;quot;100%&amp;quot;/&amp;gt; 这里有个文件包含，base64 解码之后得到 shield.jpg 尝试读取 index.php  12 123456789&amp;lt;?php     re">
@@ -279,8 +280,7 @@
 <p><img src="D:\.git\hexo\source\_posts\test\3_3.png" alt="">或者：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">//flag is in pctf.php</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Shield</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> $file;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($filename = <span class="string">''</span>)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">$this</span> -&gt; file = $filename;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">$q = <span class="keyword">new</span> Shield();</span><br><span class="line">$q-&gt;file = <span class="string">'pctf.php'</span>;</span><br><span class="line"><span class="keyword">echo</span> serialize($q);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>payload 如下：</p>
-<p>![(D:.git\hexo\source_posts\序列化漏洞\1_3.png)</p>
-<p>![(D:.git\hexo\source_posts\序列化漏洞\1_4.png)</p>
+<p><img src="D:\.git\hexo\source\_posts\test\3_3.png" alt=""></p>
 
       
       
@@ -339,7 +339,7 @@
         <p><span>本文标题:</span><a href="/2019/03/22/test/">test</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Archimesan 的个人博客">Archimesan</a></p>
         <p><span>发布时间:</span>2019年03月22日 - 00时09分</p>
-        <p><span>最后更新:</span>2019年03月22日 - 00时32分</p>
+        <p><span>最后更新:</span>2019年03月22日 - 00时35分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/03/22/test/" title="test">http://archimesan.me/2019/03/22/test/</a>
             <span class="copy-path" data-clipboard-text="原文: http://archimesan.me/2019/03/22/test/　　作者: Archimesan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
