@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ctf,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Archimesan" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="分享一些RSA题目">
+<meta name="keywords" content="ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RSA归纳">
+<meta property="og:url" content="http://archimesan.me/2017/12/20/RSA归纳/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="分享一些RSA题目">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/rsatool.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/rsatool1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/flagdec.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/flag2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/flag3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/rsa-winner.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/rabin.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/20/RSA归纳/flag5.png">
+<meta property="og:updated_time" content="2019-03-22T07:03:56.822Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RSA归纳">
+<meta name="twitter:description" content="分享一些RSA题目">
+<meta name="twitter:image" content="http://archimesan.me/2017/12/20/RSA归纳/rsatool.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://archimesan.me/2017/12/20/RSA归纳/">
+
+
+
+
+
+  <title>RSA归纳 | Archimesan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Archimesan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">思而不学则殆！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://archimesan.me/2017/12/20/RSA归纳/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Archimesan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Archimesan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RSA归纳</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T08:36:29+08:00">
+                2017-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/20/RSA归纳/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/12/20/RSA归纳/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>分享一些RSA题目</p>
+<a id="more"></a>
+<h1 id="RSA-原理"><a href="#RSA-原理" class="headerlink" title="RSA 原理"></a>RSA 原理</h1><p>RSA 大概原理，可百度<br>大数 N 是由两个大的素数相乘而得，如果 N 唯一，p，q 唯一<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">N = p*q</span><br><span class="line">fn = (p-1)*(q-1)</span><br></pre></td></tr></table></figure></p>
+<p>找到一对 e,d 使得 e*d mod fn = 1，如果 e 是公钥，d 就是私钥<br>明文 c，密文 m 的关系，^ 为幂运算符<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c = m^e mod N</span><br><span class="line">m = c^d mod N</span><br></pre></td></tr></table></figure></p>
+<p>ps:如果 e=1,则 c=m </p>
+<h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>已知 <a href="public.zip">PUBLIC KEY</a> 和 <a href="flag.enc">flag.enc</a></p>
+<h2 id="公钥算出-N-e"><a href="#公钥算出-N-e" class="headerlink" title="公钥算出 N e"></a>公钥算出 N e</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.PublicKey import RSA </span><br><span class="line">pub = RSA.importKey(open(<span class="string">'public.pem'</span>).<span class="built_in">read</span>())</span><br><span class="line">n = long(pub.n)</span><br><span class="line">e = long(pub.e)</span><br><span class="line"><span class="built_in">print</span> n</span><br><span class="line"><span class="built_in">print</span> e</span><br></pre></td></tr></table></figure>
+<h2 id="分解-N-得出-p-q"><a href="#分解-N-得出-p-q" class="headerlink" title="分解 N 得出 p q"></a>分解 N 得出 p q</h2><p>利用工具：<a href="yafu-1.34.zip">yafu下载</a></p>
+<p>使用方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yafu-x64.exe factor(109966163992...) </span><br><span class="line"></span><br><span class="line">q=286924040788547268861394901519826758027</span><br><span class="line">p=258631601377848992211685134376492365269</span><br></pre></td></tr></table></figure>
+<p>N 如果太大可能无法分解</p>
+<h2 id="利用-p-q-e-算-d"><a href="#利用-p-q-e-算-d" class="headerlink" title="利用 p q e 算 d"></a>利用 p q e 算 d</h2><p>方法一：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import gmpy2</span><br><span class="line">p=286924040788547268861394901519826758027  </span><br><span class="line">q=258631601377848992211685134376492365269</span><br><span class="line">e=65537</span><br><span class="line">d=gmpy2.invert(e, (p-1)*(q-1))</span><br><span class="line"><span class="built_in">print</span> d</span><br><span class="line"></span><br><span class="line">d=23071769375111040425287244625328797615295772814180109366784249976498215494337</span><br></pre></td></tr></table></figure></p>
+<p>方法二：</p>
+<p>利用 rsatool.py <a href="rsatool.py">rsatool.py下载</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python rsatool.py -p 286924040788547268861394901519826758027  -q 258631601377848992211685134376492365269 -e 65537</span><br></pre></td></tr></table></figure></p>
+<p>ps: 得出的 d 是16进制</p>
+<p><img src="rsatool.png" alt></p>
+<h2 id="利用-e-N-d-算-private-key-pem"><a href="#利用-e-N-d-算-private-key-pem" class="headerlink" title="利用 e N d 算 private_key.pem"></a>利用 e N d 算 private_key.pem</h2><p>利用 rsatool.py<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python rsatool.py -e 65537 -n 74207624142945242263057035287110983967646020057307828709587969646701361764263 -d 23071769375111040425287244625328797615295772814180109366784249976498215494337 -o private_key.pem -f PEM</span><br></pre></td></tr></table></figure></p>
+<p>得到私钥 private_key.pem</p>
+<p><img src="rsatool1.png" alt></p>
+<h2 id="利用私钥解密"><a href="#利用私钥解密" class="headerlink" title="利用私钥解密"></a>利用私钥解密</h2><p>把 flag.enc 和 private_key.pem 放在同一个目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsautl -decrypt -<span class="keyword">in</span> flag.enc -inkey private_key.pem -out flag.dec</span><br></pre></td></tr></table></figure>
+<p>得到明文</p>
+<p><img src="flagdec.png" alt></p>
+<h1 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h1><p>已知 p q 和密文 c ，算出明文 m </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p = 9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span><br><span class="line">q = 11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span><br><span class="line">e = 65537</span><br><span class="line">c = 83208298995174604174773590298203639360540024871256126892889661345742403314929861939100492666605647316646576486526217457006376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</span><br></pre></td></tr></table></figure>
+<p>python 代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p =  9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span><br><span class="line">q =  11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span><br><span class="line">n =  p*q</span><br><span class="line">d =  56632047571190660567520341028861194862411428416862507034762587229995138605649836960220619903456392752115943299335385163216233744624623848874235303309636393446736347238627793022725260986466957974753004129210680401432377444984195145009801967391196615524488853620232925992387563270746297909112117451398527453977</span><br><span class="line">c =  0x767e17d22b50bcca982d1b09432365d6db9e417a03eef72899e6a05cb7a8bb4cc0b158fbdc463adba96d9b4acfd43cd75c80da6e87749a8482a65b5dffcec573c63924c62903ad802fe6e60905ae3c02cb9e916c01e651de914663f76267ed23895add9915ec171966841ad7b6d9d943a2bd023c3af9f96893705e98613f739a</span><br><span class="line"><span class="built_in">print</span> int((<span class="string">'%x'</span> % pow(c,d,n)),16)</span><br></pre></td></tr></table></figure>
+<p>求出m的十进制</p>
+<p><img src="flag2.png" alt></p>
+<h1 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h1><p>已知 N e 和数组 c</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;920139713,19&#125;</span><br><span class="line"> </span><br><span class="line">704796792</span><br><span class="line">752211152</span><br><span class="line">274704164</span><br><span class="line">18414022</span><br><span class="line">368270835</span><br><span class="line">483295235</span><br><span class="line">263072905</span><br><span class="line">459788476</span><br><span class="line">483295235</span><br><span class="line">459788476</span><br><span class="line">663551792</span><br><span class="line">475206804</span><br><span class="line">459788476</span><br><span class="line">428313374</span><br><span class="line">475206804</span><br><span class="line">459788476</span><br><span class="line">425392137</span><br><span class="line">704796792</span><br><span class="line">458265677</span><br><span class="line">341524652</span><br><span class="line">483295235</span><br><span class="line">534149509</span><br><span class="line">425392137</span><br><span class="line">428313374</span><br><span class="line">425392137</span><br><span class="line">341524652</span><br><span class="line">458265677</span><br><span class="line">263072905</span><br><span class="line">483295235</span><br><span class="line">828509797</span><br><span class="line">341524652</span><br><span class="line">425392137</span><br><span class="line">475206804</span><br><span class="line">428313374</span><br><span class="line">483295235</span><br><span class="line">475206804</span><br><span class="line">459788476</span><br><span class="line">306220148</span><br></pre></td></tr></table></figure>
+<p>利用 yafu 求出 p q </p>
+<p>再利用 p q e 算 d </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import gmpy2</span><br><span class="line">p=18443 </span><br><span class="line">q=49891</span><br><span class="line">e=19</span><br><span class="line">d=gmpy2.invert(e, (p-1)*(q-1))</span><br><span class="line"><span class="built_in">print</span> d</span><br></pre></td></tr></table></figure>
+<p>python 代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf8 -*-</span></span><br><span class="line"><span class="comment">#快速幂取模</span></span><br><span class="line">def expMod2 (x, y, k ):  </span><br><span class="line">    MASK = 0xffffffff  </span><br><span class="line">    tx = x  </span><br><span class="line">    modRes = 1  </span><br><span class="line">    tx %= k  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> (y&amp;MASK):  </span><br><span class="line">        <span class="keyword">if</span> (y&amp;1):  </span><br><span class="line">            modRes = modRes * tx % k;</span><br><span class="line">              </span><br><span class="line">        y = (y&gt;&gt;1);  </span><br><span class="line">        tx = tx * tx % k;  </span><br><span class="line">    <span class="built_in">return</span> modRes  </span><br><span class="line"></span><br><span class="line">def toStr(i):</span><br><span class="line">    result = <span class="string">""</span></span><br><span class="line">    <span class="keyword">while</span> i!=0:</span><br><span class="line">        result = chr(i % 256) + result</span><br><span class="line">        i = i/256</span><br><span class="line">    <span class="built_in">return</span> result</span><br><span class="line"></span><br><span class="line">B = [</span><br><span class="line">704796792,</span><br><span class="line">752211152,</span><br><span class="line">274704164,</span><br><span class="line">18414022,</span><br><span class="line">368270835,</span><br><span class="line">483295235,</span><br><span class="line">263072905,</span><br><span class="line">459788476,</span><br><span class="line">483295235,</span><br><span class="line">459788476,</span><br><span class="line">663551792,</span><br><span class="line">475206804,</span><br><span class="line">459788476,</span><br><span class="line">428313374,</span><br><span class="line">475206804,</span><br><span class="line">459788476,</span><br><span class="line">425392137,</span><br><span class="line">704796792,</span><br><span class="line">458265677,</span><br><span class="line">341524652,</span><br><span class="line">483295235,</span><br><span class="line">534149509,</span><br><span class="line">425392137,</span><br><span class="line">428313374,</span><br><span class="line">425392137,</span><br><span class="line">341524652,</span><br><span class="line">458265677,</span><br><span class="line">263072905,</span><br><span class="line">483295235,</span><br><span class="line">828509797,</span><br><span class="line">341524652,</span><br><span class="line">425392137,</span><br><span class="line">475206804,</span><br><span class="line">428313374,</span><br><span class="line">483295235,</span><br><span class="line">475206804,</span><br><span class="line">459788476,</span><br><span class="line">306220148, </span><br><span class="line">     ]</span><br><span class="line"></span><br><span class="line">n = 920139713</span><br><span class="line">d = 96849619</span><br><span class="line">result = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> b <span class="keyword">in</span> B:</span><br><span class="line">    a = expMod2(b, d, n)</span><br><span class="line">    result += toStr(a)</span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span> result</span><br></pre></td></tr></table></figure>
+<p><img src="flag3.png" alt></p>
+<h1 id="第四题"><a href="#第四题" class="headerlink" title="第四题"></a>第四题</h1><p>N 很大的无法分解的情况</p>
+<p>已知 <a href="warmup.zip">PUBLIC KEY</a> 和 <a href="c.txt">c</a></p>
+<h2 id="求出-n-e"><a href="#求出-n-e" class="headerlink" title="求出 n e"></a>求出 n e</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.PublicKey import RSA </span><br><span class="line">pub = RSA.importKey(open(<span class="string">'warmup.pub'</span>).<span class="built_in">read</span>())</span><br><span class="line">n = long(pub.n)</span><br><span class="line">e = long(pub.e)</span><br><span class="line"><span class="built_in">print</span> <span class="string">'n:%d'</span>%n</span><br><span class="line"><span class="built_in">print</span> <span class="string">'e:%d'</span>%e</span><br><span class="line"></span><br><span class="line">n:109966163992903243770643456296093759130737510333736483352345488643432614201030629970207047930115652268531222079508230987041869779760776072105738457123387124961036111210544028669181361694095594938869077306417325203381820822917059651429857093388618818437282624857927551285811542685269229705594166370426152128895901914709902037365652575730201897361139518816164746228733410283595236405985958414491372301878718635708605256444921222945267625853091126691358833453283744166617463257821375566155675868452032401961727814314481343467702299949407935602389342183536222842556906657001984320973035314726867840698884052182976760066141</span><br><span class="line">e:30749686305802061816334591167284030734478031427751495527922388099381921172620569310945418007467306454160014597828390709770861577479329793948103408489494025272834473555854835044153374978554414416305012267643957838998648651100705446875979573675767605387333733876537528353237076626094553367977134079292593746416875606876735717905892280664538346000950343671655257046364067221469807138232820446015769882472160551840052921930357988334306659120253114790638496480092361951536576427295789429197483597859657977832368912534761100269065509351345050758943674651053419982561094432258103614830448382949765459939698951824447818497599</span><br></pre></td></tr></table></figure>
+<h2 id="尝试用-n-算出-p-q-factor-十进制"><a href="#尝试用-n-算出-p-q-factor-十进制" class="headerlink" title="尝试用 n 算出 p q  factor(十进制..)"></a>尝试用 n 算出 p q  factor(十进制..)</h2><p>yafu-x64.exe factor(109966163992…)  N太大算不出来。。</p>
+<h2 id="使用RSAwienerHacker-py-直接算出-d"><a href="#使用RSAwienerHacker-py-直接算出-d" class="headerlink" title="使用RSAwienerHacker.py 直接算出 d"></a>使用RSAwienerHacker.py 直接算出 d</h2><p><a href="rsa-wiener-attack-master.rar">RSAwienerHacker.py下载</a></p>
+<p><img src="rsa-winner.png" alt></p>
+<h2 id="利用-c-d-n-求-m"><a href="#利用-c-d-n-求-m" class="headerlink" title="利用 c d n 求 m"></a>利用 c d n 求 m</h2><p>方法一：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c=0x1e04304936215de8e21965cfca9c245b1a8f38339875d36779c0f123c475bc24d5eef50e7d9ff5830e80c62e8083ec55f27456c80b0ab26546b9aeb8af30e82b650690a2ed7ea407dcd094ab9c9d3d25a93b2140dcebae1814610302896e67f3ae37d108cd029fae6362ea7ac1168974c1a747ec9173799e1107e7a56d783660418ebdf6898d7037cea25867093216c2c702ef3eef71f694a6063f5f0f1179c8a2afe9898ae8dec5bb393cdffa3a52a297cd96d1ea602309ecf47cd009829b44ed3100cf6194510c53c25ca7435f60ce5f4f614cdd2c63756093b848a70aade002d6bc8f316c9e5503f32d39a56193d1d92b697b48f5aa43417631846824b5e86</span><br><span class="line">d=4221909016509078129201801236879446760697885220928506696150646938237440992746683409881141451831939190609743447676525325543963362353923989076199470515758399L</span><br><span class="line">n=109966163992903243770643456296093759130737510333736483352345488643432614201030629970207047930115652268531222079508230987041869779760776072105738457123387124961036111210544028669181361694095594938869077306417325203381820822917059651429857093388618818437282624857927551285811542685269229705594166370426152128895901914709902037365652575730201897361139518816164746228733410283595236405985958414491372301878718635708605256444921222945267625853091126691358833453283744166617463257821375566155675868452032401961727814314481343467702299949407935602389342183536222842556906657001984320973035314726867840698884052182976760066141</span><br><span class="line"><span class="built_in">print</span> (<span class="string">'%x'</span> % pow(c,d,n)).decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>方法二：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from libnum import n2s</span><br><span class="line">n=0x1564aade6f1b9f169dcc94c9787411984cd3878bcd6236c5ce00b4aad6ca7cb0ca8a0334d9fe0726f8b057c4412cfbff75967a91a370a1c1bd185212d46b581676cf750c05bbd349d3586e78b33477a9254f6155576573911d2356931b98fe4fec387da3e9680053e95a4709934289dc0bc5cdc2aa97ce62a6ca6ba25fca6ae38c0b9b55c16be0982b596ef929b7c71da3783c1f20557e4803de7d2a91b5a6e85df64249f48b4cf32aec01c12d3e88e014579982ecd046042af370045f09678c9029f8fc38ebaea564c29115e19c7030f245ebb2130cbf9dc1c340e2cf17a625376ca52ad8163cfb2e33b6ecaf55353bc1ff19f8f4dc7551dc5ba36235af9758b</span><br><span class="line">d=0x12314d6d6327261ee18a7c6ce8562c304c05069bc8c8e0b34e0023a3b48cf5849278d3493aa86004b02fa6336b098a3330180b9b9655cdf927896b22402a18fae186828efac14368e0a5af2c4d992cb956d52e7c9899d9b16a0a07318aa28c8202ebf74c50ccf49a6733327dde111393611f915f1e1b82933a2ba164aff93ef4ab2ab64aacc2b0447d437032858f089bcc0ddeebc45c45f8dc357209a423cd49055752bfae278c93134777d6e181be22d4619ef226abb6bfcc4adec696cac131f5bd10c574fa3f543dd7f78aee1d0665992f28cdbcf55a48b32beb7a1c0fa8a9fc38f0c5c271e21b83031653d96d25348f8237b28642ceb69f0b0374413308481</span><br><span class="line">c=0x126c24e146ae36d203bef21fcd88fdeefff50375434f64052c5473ed2d5d2e7ac376707d76601840c6aa9af27df6845733b9e53982a8f8119c455c9c3d5df1488721194a8392b8a97ce6e783e4ca3b715918041465bb2132a1d22f5ae29dd2526093aa505fcb689d8df5780fa1748ea4d632caed82ca923758eb60c3947d2261c17f3a19d276c2054b6bf87dcd0c46acf79bff2947e1294a6131a7d8c786bed4a1c0b92a4dd457e54df577fb625ee394ea92b992a2c22e3603bf4568b53cceb451e5daca52c4e7bea7f20dd9075ccfd0af97f931c0703ba8d1a7e00bb010437bb4397ae802750875ae19297a7d8e1a0a367a2d6d9dd03a47d404b36d7defe8469</span><br><span class="line"><span class="built_in">print</span> n2s(pow(c,d,n))</span><br></pre></td></tr></table></figure>
+<h1 id="第五题"><a href="#第五题" class="headerlink" title="第五题"></a>第五题</h1><p>e=2 的情况</p>
+<p><img src="rabin.png" alt></p>
+<p>已知 <a href="pubkey1.zip">PUBLIC KEY</a> 和 <a href="flag1.enc">flag.enc</a>  </p>
+<h2 id="求出-n-e-1"><a href="#求出-n-e-1" class="headerlink" title="求出 n e"></a>求出 n e</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.PublicKey import RSA </span><br><span class="line">pub = RSA.importKey(open(<span class="string">'pubkey.pem'</span>).<span class="built_in">read</span>())</span><br><span class="line">n = long(pub.n)</span><br><span class="line">e = long(pub.e)</span><br><span class="line"><span class="built_in">print</span> <span class="string">'n:%d'</span>%n</span><br><span class="line"><span class="built_in">print</span> <span class="string">'e:%d'</span>%e</span><br></pre></td></tr></table></figure>
+<h2 id="利用-n-算出-p-q-factor-十进制"><a href="#利用-n-算出-p-q-factor-十进制" class="headerlink" title="利用 n 算出 p q  factor(十进制..)"></a>利用 n 算出 p q  factor(十进制..)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yafu-x64.exe factor(87924348264132406875276140514499937145050893665602592992418171647042491658461) </span><br><span class="line"></span><br><span class="line">p = 275127860351348928173285174381581152299</span><br><span class="line">q = 319576316814478949870590164193048041239</span><br></pre></td></tr></table></figure>
+<p>python 代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">代码如下：</span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">from libnum import n2s,s2n</span><br><span class="line">import gmpy2</span><br><span class="line">f = open(<span class="string">'flag.enc'</span>,<span class="string">'r'</span>)</span><br><span class="line">c = f.read()</span><br><span class="line">c = s2n(c)</span><br><span class="line">p = 275127860351348928173285174381581152299</span><br><span class="line">q = 319576316814478949870590164193048041239</span><br><span class="line">n = p*q</span><br><span class="line">r = pow(c,(p+1)/4,p)</span><br><span class="line">s = pow(c,(q+1)/4,q)</span><br><span class="line">a = gmpy2.invert(p,q)</span><br><span class="line">b = gmpy2.invert(q,p)</span><br><span class="line">x =(a*p*s+b*q*r)%n</span><br><span class="line">y =(a*p*s-b*q*r)%n</span><br><span class="line"><span class="built_in">print</span> n2s(x%n)</span><br><span class="line"><span class="built_in">print</span> n2s((-x)%n)</span><br><span class="line"><span class="built_in">print</span> n2s(y%n)</span><br><span class="line"><span class="built_in">print</span> n2s((-y)%n)</span><br></pre></td></tr></table></figure></p>
+<p><img src="flag5.png" alt></p>
+<h1 id="第六题"><a href="#第六题" class="headerlink" title="第六题"></a>第六题</h1><p>Extremely hard RSA</p>
+<p>已知 <a href="pubkey2.zip">PUBLIC KEY</a> 和 <a href="flag2.enc">flag.enc</a> </p>
+<p>N 非常大，e=3</p>
+<h2 id="求出-n-e-2"><a href="#求出-n-e-2" class="headerlink" title="求出 n e"></a>求出 n e</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.PublicKey import RSA </span><br><span class="line">pub = RSA.importKey(open(<span class="string">'pubkey.pem'</span>).<span class="built_in">read</span>())</span><br><span class="line">n = long(pub.n)</span><br><span class="line">e = long(pub.e)</span><br><span class="line"><span class="built_in">print</span> <span class="string">'n:%d'</span>%n</span><br><span class="line"><span class="built_in">print</span> <span class="string">'e:%d'</span>%e</span><br><span class="line"></span><br><span class="line">n:721059527572145959497866070657244746540818298735241721382435892767279354577831824618770455583435147844630635953460258329387406192598509097375098935299515255208445013180388186216473913754107215551156731413550416051385656895153798495423962750773689964815342291306243827028882267935999927349370340823239030087548468521168519725061290069094595524921012137038227208900579645041589141405674545883465785472925889948455146449614776287566375730215127615312001651111977914327170496695481547965108836595145998046638495232893568434202438172004892803105333017726958632541897741726563336871452837359564555756166187509015523771005760534037559648199915268764998183410394036820824721644946933656264441126738697663216138624571035323231711566263476403936148535644088575960271071967700560360448191493328793704136810376879662623765917690163480410089565377528947433177653458111431603202302962218312038109342064899388130688144810901340648989107010954279327738671710906115976561154622625847780945535284376248111949506936128229494332806622251145622565895781480383025403043645862516504771643210000415216199272423542871886181906457361118669629044165861299560814450960273479900717138570739601887771447529543568822851100841225147694940195217298482866496536787241</span><br><span class="line">e:3</span><br></pre></td></tr></table></figure>
+<p>公钥中，e=3，N非常大。所以可以不断地c+N然后开三次方，直接写代码爆破，不过python单线程有点长，跑了将近30分钟。</p>
+<p>python代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">from libnum import s2n,n2s</span><br><span class="line">from gmpy2 import iroot</span><br><span class="line">n = 721059527572145959497866070657244746540818298735241721382435892767279354577831824618770455583435147844630635953460258329387406192598509097375098935299515255208445013180388186216473913754107215551156731413550416051385656895153798495423962750773689964815342291306243827028882267935999927349370340823239030087548468521168519725061290069094595524921012137038227208900579645041589141405674545883465785472925889948455146449614776287566375730215127615312001651111977914327170496695481547965108836595145998046638495232893568434202438172004892803105333017726958632541897741726563336871452837359564555756166187509015523771005760534037559648199915268764998183410394036820824721644946933656264441126738697663216138624571035323231711566263476403936148535644088575960271071967700560360448191493328793704136810376879662623765917690163480410089565377528947433177653458111431603202302962218312038109342064899388130688144810901340648989107010954279327738671710906115976561154622625847780945535284376248111949506936128229494332806622251145622565895781480383025403043645862516504771643210000415216199272423542871886181906457361118669629044165861299560814450960273479900717138570739601887771447529543568822851100841225147694940195217298482866496536787241</span><br><span class="line">e = 3</span><br><span class="line">f = open(<span class="string">'flag.enc'</span>,<span class="string">'rb'</span>)</span><br><span class="line">c= f.read()</span><br><span class="line">c = s2n(c)</span><br><span class="line">f.close()</span><br><span class="line">i = 118719480</span><br><span class="line"><span class="keyword">while</span> 1:</span><br><span class="line">    res = iroot(c+i*n,3)</span><br><span class="line">    <span class="keyword">if</span>(res[1] == True):</span><br><span class="line">        <span class="built_in">print</span> res[0]</span><br><span class="line">        <span class="built_in">break</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">"i="</span>+str(i)</span><br><span class="line">    i = i+1</span><br><span class="line"><span class="built_in">print</span> n2s(res[0])</span><br><span class="line"></span><br><span class="line"><span class="comment">#i=118719487</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="第七题"><a href="#第七题" class="headerlink" title="第七题"></a>第七题</h1><p>共模攻击(hard RSA)</p>
+<p>已知<a href="rsa.txt">rsa.txt</a></p>
+<p>当 n 不变的情况下，知道 n e1 e2 c1 c2 可以在不知道 d1 d2 的情况下，解出 m<br>首先找到两个 e 是互质的,能够找到 s1,s2</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e1*s1 + e2*s2 = 1</span><br></pre></td></tr></table></figure>
+<p>根据一系列推算，可以算出明文 m<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">m = c1^s1*c2^s2 mod N</span><br></pre></td></tr></table></figure></p>
+<p>判断是否互质<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def gcd(a,b):  </span><br><span class="line">    <span class="keyword">if</span> a%b == 0:  </span><br><span class="line">        <span class="built_in">return</span> b  </span><br><span class="line">    <span class="keyword">else</span> :  </span><br><span class="line">        <span class="built_in">return</span> gcd(b,a%b)  <span class="comment">#判断是否互质</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="找出互质的两个数"><a href="#找出互质的两个数" class="headerlink" title="找出互质的两个数"></a>找出互质的两个数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">data=open(<span class="string">'rsa.txt'</span>,<span class="string">'r'</span>).<span class="built_in">read</span>()</span><br><span class="line">e=re.compile(r<span class="string">'zks(.*?)zks'</span>).findall(data)  <span class="comment">#把文件中的：改成zks</span></span><br><span class="line">def gcd(a,b):  </span><br><span class="line">    <span class="keyword">if</span> a%b == 0:  </span><br><span class="line">        <span class="built_in">return</span> b  </span><br><span class="line">    <span class="keyword">else</span> :  </span><br><span class="line">        <span class="built_in">return</span> gcd(b,a%b)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> e:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> e:</span><br><span class="line">        <span class="keyword">if</span> gcd(int(i.replace(<span class="string">'L'</span>,<span class="string">''</span>),16),int(j.replace(<span class="string">'L'</span>,<span class="string">''</span>),16))==1:</span><br><span class="line">            <span class="built_in">print</span> i,j,int(i.replace(<span class="string">'L'</span>,<span class="string">''</span>),16),int(j.replace(<span class="string">'L'</span>,<span class="string">''</span>),16)</span><br></pre></td></tr></table></figure>
+<h2 id="python代码如下："><a href="#python代码如下：" class="headerlink" title="python代码如下："></a>python代码如下：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">代码如下：</span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">from gmpy2 import invert</span><br><span class="line">from libnum import n2s</span><br><span class="line"></span><br><span class="line">def egcd(a, b):</span><br><span class="line">    <span class="keyword">if</span> a == 0:</span><br><span class="line">        <span class="built_in">return</span> (b, 0, 1)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        g, y, x = egcd(b % a, a)</span><br><span class="line">        <span class="built_in">return</span> (g, x - (b // a) * y, y)</span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    n = 116547141139745534253172934123407786743246513874292261984447028928003798881819567221547298751255790928878194794155722543477883428672342894945552668904410126460402501558930911637857436926624838677630868157884406020858164140754510239986466552869866296144106255873879659676368694043769795604582888907403261286211</span><br><span class="line">    c1 = 78552378607874335972488545767374401332953345586323262531477516680347117293352843468592985447836452620945707838830990843415342047337735534418287912723395148814463617627398248738969202758950481027762126608368555442533803610260859075919831387641824493902538796161102236794716963153162784732179636344267189394853</span><br><span class="line">    c2 = 98790462909782651815146615208104450165337326951856608832305081731255876886710141821823912122797166057063387122774480296375186739026132806230834774921466445172852604926204802577270611302881214045975455878277660638731607530487289267225666045742782663867519468766276566912954519691795540730313772338991769270201</span><br><span class="line">    e1 = 1804229351</span><br><span class="line">    e2 = 17249876309</span><br><span class="line">    s = egcd(e1, e2)</span><br><span class="line">    s1 = s[1]</span><br><span class="line">    s2 = s[2]</span><br><span class="line">  <span class="comment"># 求模反元素</span></span><br><span class="line">    <span class="keyword">if</span> s1&lt;0:</span><br><span class="line">        s1 = - s1</span><br><span class="line">        c1 = invert(c1, n)</span><br><span class="line">    <span class="keyword">elif</span> s2&lt;0:</span><br><span class="line">        s2 = - s2</span><br><span class="line">        c2 = invert(c2, n)</span><br><span class="line"></span><br><span class="line">    m = pow(c1,s1,n)*pow(c2,s2,n) % n</span><br><span class="line">    <span class="comment">#m=hex(m).replace('0x','')</span></span><br><span class="line">    <span class="comment">#print m.decode('hex')</span></span><br><span class="line">    <span class="built_in">print</span> n2s(m)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h1 id="第八题"><a href="#第八题" class="headerlink" title="第八题"></a>第八题</h1><p>已知<a href="veryhardRSA.rar">veryhardRSA.rar</a></p>
+<p>首先分析加密脚本，先判断下是否够 512-11 位，不够的随机补全。<br>然后就是使用相同的 N，不同的 e,加密相同的数据，所以想到了共模攻击。</p>
+<p>python代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">代码如下：</span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">from libnum import n2s,s2n</span><br><span class="line">from gmpy2 import invert</span><br><span class="line">n = 0x00b0bee5e3e9e5a7e8d00b493355c618fc8c7d7d03b82e409951c182f398dee3104580e7ba70d383ae5311475656e8a964d380cb157f48c951adfa65db0b122ca40e42fa709189b719a4f0d746e2f6069baf11cebd650f14b93c977352fd13b1eea6d6e1da775502abff89d3a8b3615fd0db49b88a976bc20568489284e181f6f11e270891c8ef80017bad238e363039a458470f1749101bc29949d3a4f4038d463938851579c7525a69984f15b5667f34209b70eb261136947fa123e549dfff00601883afd936fe411e006e4e93d1a00b0fea541bbfc8c5186cb6220503a94b2413110d640c77ea54ba3220fc8f4cc6ce77151e29b3e06578c478bd1bebe04589ef9a197f6f806db8b3ecd826cad24f5324ccdec6e8fead2c2150068602c8dcdc59402ccac9424b790048ccdd9327068095efa010b7f196c74ba8c37b128f9e1411751633f78b7b9e56f71f77a1b4daad3fc54b5e7ef935d9a72fb176759765522b4bbc02e314d5c06b64d5054b7b096c601236e6ccf45b5e611c805d335dbab0c35d226cc208d8ce4736ba39a0354426fae006c7fe52d5267dcfb9c3884f51fddfdf4a9794bcfe0e1557113749e6c8ef421dba263aff68739ce00ed80fd0022ef92d3488f76deb62bdef7bea6026f22a1d25aa2a92d124414a8021fe0c174b9803e6bb5fad75e186a946a17280770f1243f4387446ccceb2222a965cc30b3929L</span><br><span class="line">def egcd(a, b):</span><br><span class="line">  <span class="keyword">if</span> a == 0:</span><br><span class="line">    <span class="built_in">return</span> (b, 0, 1)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    g, y, x = egcd(b % a, a)</span><br><span class="line">    <span class="built_in">return</span> (g, x - (b // a) * y, y)</span><br><span class="line">fo1 = open(<span class="string">'flag.enc1'</span>, <span class="string">'rb'</span>)</span><br><span class="line">fo2 = open(<span class="string">'flag.enc2'</span>, <span class="string">'rb'</span>)</span><br><span class="line">datafo1 = fo1.read()</span><br><span class="line">c1 = s2n(datafo1)</span><br><span class="line">fo1.close()</span><br><span class="line">datafo2 = fo2.read()</span><br><span class="line">c2 = s2n(datafo2)</span><br><span class="line">fo2.close()</span><br><span class="line">c2 = invert(c2,n)</span><br><span class="line">e1 = 17</span><br><span class="line">e2 = 65537</span><br><span class="line">s = egcd(e1,e2)</span><br><span class="line">s1 = s[1]</span><br><span class="line">s2 = s[2]</span><br><span class="line">s2 = - s2</span><br><span class="line">m = pow(c1, s1, n) * pow(c2, s2, n) % n</span><br><span class="line"><span class="built_in">print</span> n2s(m)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ctf/" rel="tag"><i class="fa fa-tag"></i> ctf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/19/文件包含漏洞/" rel="next" title="文件包含漏洞">
+                <i class="fa fa-chevron-left"></i> 文件包含漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/21/php弱类型漏洞/" rel="prev" title="php弱类型漏洞">
+                php弱类型漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Archimesan</p>
+              <p class="site-description motion-element" itemprop="description">Archimesan's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RSA-原理"><span class="nav-number">1.</span> <span class="nav-text">RSA 原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一题"><span class="nav-number">2.</span> <span class="nav-text">第一题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥算出-N-e"><span class="nav-number">2.1.</span> <span class="nav-text">公钥算出 N e</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分解-N-得出-p-q"><span class="nav-number">2.2.</span> <span class="nav-text">分解 N 得出 p q</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用-p-q-e-算-d"><span class="nav-number">2.3.</span> <span class="nav-text">利用 p q e 算 d</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用-e-N-d-算-private-key-pem"><span class="nav-number">2.4.</span> <span class="nav-text">利用 e N d 算 private_key.pem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用私钥解密"><span class="nav-number">2.5.</span> <span class="nav-text">利用私钥解密</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二题"><span class="nav-number">3.</span> <span class="nav-text">第二题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三题"><span class="nav-number">4.</span> <span class="nav-text">第三题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四题"><span class="nav-number">5.</span> <span class="nav-text">第四题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求出-n-e"><span class="nav-number">5.1.</span> <span class="nav-text">求出 n e</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尝试用-n-算出-p-q-factor-十进制"><span class="nav-number">5.2.</span> <span class="nav-text">尝试用 n 算出 p q  factor(十进制..)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用RSAwienerHacker-py-直接算出-d"><span class="nav-number">5.3.</span> <span class="nav-text">使用RSAwienerHacker.py 直接算出 d</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用-c-d-n-求-m"><span class="nav-number">5.4.</span> <span class="nav-text">利用 c d n 求 m</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五题"><span class="nav-number">6.</span> <span class="nav-text">第五题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求出-n-e-1"><span class="nav-number">6.1.</span> <span class="nav-text">求出 n e</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用-n-算出-p-q-factor-十进制"><span class="nav-number">6.2.</span> <span class="nav-text">利用 n 算出 p q  factor(十进制..)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六题"><span class="nav-number">7.</span> <span class="nav-text">第六题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求出-n-e-2"><span class="nav-number">7.1.</span> <span class="nav-text">求出 n e</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七题"><span class="nav-number">8.</span> <span class="nav-text">第七题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#找出互质的两个数"><span class="nav-number">8.1.</span> <span class="nav-text">找出互质的两个数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python代码如下："><span class="nav-number">8.2.</span> <span class="nav-text">python代码如下：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第八题"><span class="nav-number">9.</span> <span class="nav-text">第八题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-Archimesan"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Archimesan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Archimesan',
+            repo: 'archimesan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'b73a10c58c0472c9aed7b6554c9a0ecbd4e1579e',
+            
+                client_id: '0f6bbe5567c49373ccbf'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
