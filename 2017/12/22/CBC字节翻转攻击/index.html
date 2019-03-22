@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ctf,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CBC 字节翻转攻击原理和例题">
+<meta name="keywords" content="ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CBC字节翻转攻击">
+<meta property="og:url" content="http://archimesan.me/2017/12/22/CBC字节翻转攻击/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="CBC 字节翻转攻击原理和例题">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://archimesan.me/2017/12/22/CBC字节翻转攻击/加密过程.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/22/CBC字节翻转攻击/加密过程1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/22/CBC字节翻转攻击/加密过程2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/22/CBC字节翻转攻击/3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/22/CBC字节翻转攻击/1_1.png">
+<meta property="og:updated_time" content="2017-12-23T04:34:00.343Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CBC字节翻转攻击">
+<meta name="twitter:description" content="CBC 字节翻转攻击原理和例题">
+<meta name="twitter:image" content="http://archimesan.me/2017/12/22/CBC字节翻转攻击/加密过程.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://archimesan.me/2017/12/22/CBC字节翻转攻击/">
+
+
+
+
+
+  <title>CBC字节翻转攻击 | Archimesan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Archimesan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">思而不学则殆！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://archimesan.me/2017/12/22/CBC字节翻转攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Archimesan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Archimesan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CBC字节翻转攻击</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-22T12:04:31+08:00">
+                2017-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/22/CBC字节翻转攻击/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/12/22/CBC字节翻转攻击/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>CBC 字节翻转攻击原理和例题</p>
+<a id="more"></a>
+<h1 id="CBC-字节翻转攻击原理"><a href="#CBC-字节翻转攻击原理" class="headerlink" title="CBC 字节翻转攻击原理"></a>CBC 字节翻转攻击原理</h1><p>加密过程</p>
+<p><img src="加密过程.png" alt></p>
+<p>Plaintext：待加密的数据。</p>
+<p>IV：用于随机化加密的比特块，保证即使对相同明文多次加密，也可以得到不同的密文。</p>
+<p>Key：被一些如 AES 的对称加密算法使用。</p>
+<p>Ciphertext：加密后的数据。</p>
+<p>在这里重要的一点是，CBC 工作于一个固定长度的比特组，将其称之为块。在本文中，我们将使用包含 16 字节的块。</p>
+<p>因为作者讨厌高数（和译者一样），所以作者造了一些自己的公式（方便记忆）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">● Ciphertext-0 = Encrypt(Plaintext XOR IV)—只用于第一个组块</span><br><span class="line">● Ciphertext-N= Encrypt(Plaintext XOR Ciphertext-N-1)—用于第二及剩下的组块</span><br></pre></td></tr></table></figure></p>
+<p>注意：正如你所见，前一块的密文用来产生后一块的密文。</p>
+<p><img src="加密过程1.png" alt></p>
+<p>Decryption Process<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">● Plaintext-0 = Decrypt(Ciphertext) XOR IV—只用于第一个组块</span><br><span class="line">● Plaintext-N= Decrypt(Ciphertext) XOR Ciphertext-N-1—用于第二及剩下的组块</span><br></pre></td></tr></table></figure></p>
+<p>注意：Ciphertext-N-1（密文-N-1）是用来产生下一块明文；这就是字节翻转攻击开始发挥作用的地方。如果我们改变Ciphertext-N-1（密文-N-1）的一个字节，然后与下一个解密后的组块异或，我们就可以得到一个不同的明文了！You got it? 别担心，下面我们将看到一个详细的例子。与此同时，下面的这张图也可以很好地说明这种攻击：</p>
+<p><img src="加密过程2.png" alt></p>
+<h2 id="一个例子（CBC-Blocks-of-16-bytes）"><a href="#一个例子（CBC-Blocks-of-16-bytes）" class="headerlink" title="一个例子（CBC Blocks of 16 bytes）"></a>一个例子（CBC Blocks of 16 bytes）</h2><p>比方说，我们有这样的明文序列：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:2:&#123;s:4:<span class="string">"name"</span>;s:6:<span class="string">"sdsdsd"</span>;s:8:<span class="string">"greeting"</span>;s:20:<span class="string">"echo 'Hello sdsdsd!'"</span>;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们的目标是将 “s:6” 当中的数字6转换成数字 “7”。我们需要做的第一件事就是把明文分成 16 个字节的块：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">● Block 1:a:2:&#123;s:4:<span class="string">"name"</span>;</span><br><span class="line">● Block 2:s:6:<span class="string">"sdsdsd"</span>;s:8</span><br><span class="line">● Block 3::<span class="string">"greeting"</span>;s:20</span><br><span class="line">● Block 4::<span class="string">"echo 'Hello sd</span></span><br><span class="line"><span class="string">● Block 5:sdsd!'"</span>;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因此，我们的目标字符位于块 2，这意味着我们需要改变块1的密文来改变第二块的明文。<br>有一条经验法则是（注：结合上面的说明图可以得到），你在密文中改变的字节，只会影响到在下一明文当中，具有相同偏移量的字节。所以我们目标的偏移量是2：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">● [0] = s</span><br><span class="line">● [1] = :</span><br><span class="line">● [2] = 6</span><br></pre></td></tr></table></figure></p>
+<p>因此我们要改变在第一个密文块当中，偏移量是 2 的字节。正如你在下面的代码当中看到的，在第 2 行我们得到了整个数据的密文，然后在第 3 行中，我们改变块1中偏移量为 2 的字节，最后我们再调用解密函数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. <span class="variable">$v</span> = <span class="string">"a:2:&#123;s:4:"</span>name<span class="string">";s:6:"</span>sdsdsd<span class="string">";s:8:"</span>greeting<span class="string">";s:20:"</span><span class="built_in">echo</span> <span class="string">'Hello sdsdsd!'</span><span class="string">";&#125;"</span>;</span><br><span class="line">2. <span class="variable">$enc</span> = @encrypt(<span class="variable">$v</span>);</span><br><span class="line">3. <span class="variable">$enc</span>[2] = chr(ord(<span class="variable">$enc</span>[2]) ^ ord(<span class="string">"6"</span>) ^ ord (<span class="string">"7"</span>));</span><br><span class="line">4. <span class="variable">$b</span> = @decrypt(<span class="variable">$enc</span>);</span><br></pre></td></tr></table></figure></p>
+<p>运行这段代码后，我们可以将数字 6 变为 7：</p>
+<p><img src="3.png" alt></p>
+<p>但是我们在第 3 行中，是如何改变字节成为我们想要的值呢？</p>
+<p>基于上述的解密过程，我们知道有，A = Decrypt(Ciphertext) 与 B = Ciphertext-N-1 异或后最终得到 C = 6。等价于：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C = A XOR B</span><br></pre></td></tr></table></figure></p>
+<p>所以，我们唯一不知道的值就是 A（注：对于B，C来说）（block cipher decryption）;借由 XOR，我们可以很轻易地得到 A 的值：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = B XOR C</span><br></pre></td></tr></table></figure></p>
+<p>最后，A XOR B XOR C 等于 0。有了这个公式，我们可以在 XOR 运算的末尾处设置我们自己的值，就像这样：</p>
+<p>A XOR B XOR C XOR “7”会在块 2 的明文当中，偏移量为 2 的字节处得到 7。</p>
+<p>下面是相关原理实现的 PHP 源代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">'MY_AES_KEY'</span>, <span class="string">"abcdef0123456789"</span>);</span><br><span class="line"><span class="keyword">function</span> aes(<span class="variable">$data</span>, <span class="variable">$encrypt</span>) &#123;</span><br><span class="line">    <span class="variable">$aes</span> = mcrypt_module_open(MCRYPT_RIJNDAEL_128, <span class="string">''</span>, MCRYPT_MODE_CBC, <span class="string">''</span>);</span><br><span class="line">    <span class="variable">$iv</span> = <span class="string">"1234567891234567"</span>;</span><br><span class="line">    mcrypt_generic_init(<span class="variable">$aes</span>, MY_AES_KEY, <span class="variable">$iv</span>);</span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$encrypt</span> ? mcrypt_generic(<span class="variable">$aes</span>,<span class="variable">$data</span>) : mdecrypt_generic(<span class="variable">$aes</span>,<span class="variable">$data</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">define(<span class="string">'MY_MAC_LEN'</span>, 40);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> encrypt(<span class="variable">$data</span>) &#123;</span><br><span class="line">    <span class="built_in">return</span> aes(<span class="variable">$data</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> decrypt(<span class="variable">$data</span>) &#123;</span><br><span class="line">    <span class="variable">$data</span> = rtrim(aes(<span class="variable">$data</span>, <span class="literal">false</span>), <span class="string">"\0"</span>);</span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$v</span> = <span class="string">"a:2:&#123;s:4:\"name\";s:6:\"sdsdsd\";s:8:\"greeting\";s:20:\"echo 'Hello sdsdsd!'\";&#125;"</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Plaintext before attack: <span class="variable">$v</span>\n"</span>;</span><br><span class="line"><span class="variable">$b</span> = array();</span><br><span class="line"><span class="variable">$enc</span> = array();</span><br><span class="line"><span class="variable">$enc</span> = @encrypt(<span class="variable">$v</span>);</span><br><span class="line"><span class="variable">$enc</span>[2] =  chr(ord(<span class="variable">$enc</span>[2]) ^ ord(<span class="string">"6"</span>) ^ ord (<span class="string">"7"</span>));</span><br><span class="line"><span class="variable">$b</span> = @decrypt(<span class="variable">$enc</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Plaintext AFTER attack : <span class="variable">$b</span>\n"</span>;</span><br></pre></td></tr></table></figure></p>
+<h1 id="一道ctf题目"><a href="#一道ctf题目" class="headerlink" title="一道ctf题目"></a>一道ctf题目</h1><p><a href="http://47.93.190.246:49168/index.php" target="_blank" rel="noopener">http://47.93.190.246:49168/index.php</a></p>
+<p><img src="1_1.png" alt></p>
+<p>无法用 admin 登录，其它帐号名任意登录。<br>题目提示 CBC 字节翻转 有 .index.php.swp 文件下载。<br>用 vim -r .index.php.swp 打开即，用 :w index.php 另存为 index.php，即可还原出源代码。<br>关键代码段：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">define(<span class="string">"SECRET_KEY"</span>, file_get_contents(<span class="string">'/root/key'</span>));</span><br><span class="line">define(<span class="string">"METHOD"</span>, <span class="string">"aes-128-cbc"</span>);</span><br><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">get_random_iv</span></span>()&#123;</span><br><span class="line">    <span class="variable">$random_iv</span>=<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span>=0;<span class="variable">$i</span>&lt;16;<span class="variable">$i</span>++)&#123;</span><br><span class="line">        <span class="variable">$random_iv</span>.=chr(rand(1,255));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$random_iv</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> login(<span class="variable">$info</span>)&#123;</span><br><span class="line">    <span class="variable">$iv</span> = get_random_iv();</span><br><span class="line">    <span class="variable">$plain</span> = serialize(<span class="variable">$info</span>);</span><br><span class="line">    <span class="variable">$cipher</span> = openssl_encrypt(<span class="variable">$plain</span>, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, <span class="variable">$iv</span>);</span><br><span class="line">    <span class="variable">$_SESSION</span>[<span class="string">'username'</span>] = <span class="variable">$info</span>[<span class="string">'username'</span>];</span><br><span class="line">    setcookie(<span class="string">"iv"</span>, base64_encode(<span class="variable">$iv</span>));</span><br><span class="line">    setcookie(<span class="string">"cipher"</span>, base64_encode(<span class="variable">$cipher</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">check_login</span></span>()&#123;</span><br><span class="line">    <span class="keyword">if</span>(isset(<span class="variable">$_COOKIE</span>[<span class="string">'cipher'</span>]) &amp;&amp; isset(<span class="variable">$_COOKIE</span>[<span class="string">'iv'</span>]))&#123;</span><br><span class="line">        <span class="variable">$cipher</span> = base64_decode(<span class="variable">$_COOKIE</span>[<span class="string">'cipher'</span>]);</span><br><span class="line">        <span class="variable">$iv</span> = base64_decode(<span class="variable">$_COOKIE</span>[<span class="string">"iv"</span>]);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$plain</span> = openssl_decrypt(<span class="variable">$cipher</span>, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, <span class="variable">$iv</span>))&#123;</span><br><span class="line">            <span class="variable">$info</span> = unserialize(<span class="variable">$plain</span>) or die(<span class="string">"&lt;p&gt;base64_decode('"</span>.base64_encode(<span class="variable">$plain</span>).<span class="string">"') can't unserialize&lt;/p&gt;"</span>);</span><br><span class="line">            <span class="variable">$_SESSION</span>[<span class="string">'username'</span>] = <span class="variable">$info</span>[<span class="string">'username'</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            die(<span class="string">"ERROR!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">show_homepage</span></span>()&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_SESSION</span>[<span class="string">"username"</span>]===<span class="string">'admin'</span>)&#123;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'&lt;p&gt;Hello admin&lt;/p&gt;'</span>;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'&lt;p&gt;Flag is $flag&lt;/p&gt;'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'&lt;p&gt;hello '</span>.<span class="variable">$_SESSION</span>[<span class="string">'username'</span>].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">'&lt;p&gt;Only admin can see flag&lt;/p&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">'&lt;p&gt;&lt;a href="loginout.php"&gt;Log out&lt;/a&gt;&lt;/p&gt;'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们登录名 admiz 密码 bb 的 COOKIE 信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">GET /index.php HTTP/1.1</span><br><span class="line">Host: 47.93.190.246:49168</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 40</span><br><span class="line">Referer: http://47.93.190.246:49168/index.php</span><br><span class="line">Cookie: PHPSESSID=7nld2kvg1t560mtvuniqo63u02; iv=KYVIlJkfaja2cM8pENnLDg%3D%3D; cipher=3TFLhFRlhpfCeag8v7t% 2BtsVZnK%2Bl5YbtAHidL7blfvJMKe11Mwc% 2FBcFvys1PUmX51WYas4LuK62qXaSWihjHwQ%3D%3D </span><br><span class="line">Connection: close </span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br></pre></td></tr></table></figure></p>
+<p>尝试更改 iv 或 cipher 的单个字节<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">YToyOntzOjg6InVzZXJuYYLHOrSKF5f/2bmVuBfm/45zOjg6InBhc3EXb3JkIjtzOjI6 ImJiIjt9</span><br></pre></td></tr></table></figure></p>
+<p>BASE64 解码看一下信息，发现序列完全被破坏：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:2:&#123;s:8:<span class="string">"usernaÇ:´ÿÙ¹¸æÿs:8:"</span>pasqord<span class="string">";s:2:"</span>bb<span class="string">";&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>再换个字节：a:2:{s:8:”username”;s:5:”admiz”;ÚJW¹¼=;o·$YL::”bb”;} 反序列化失败。 </p>
+<p>我们要修改 admiz 为 admin 先分组，我们只关心前两组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">第一组： a:2:&#123;s:8:<span class="string">"userna </span></span><br><span class="line"><span class="string">第二组： me"</span>;s:5:<span class="string">"admiz"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>z 位于第二组第 14 个字节，为改变 z 我们要改变第一组第 14 个字节<br>我们将其异或掉 z,再异或以 n。<br>代码如下：</p>
+<p>python版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import base64,urllib2</span><br><span class="line">cipher=base64.b64decode(urllib2.unquote(<span class="string">"3TFLhFRlhpfCe ag8v7t%2BtsVZnK%2Bl5YbtAHidL7blfvJMKe11Mwc% 2FBcFvys1PUmX51WYas4LuK62qXaSWihjHwQ%3D%3D"</span>)) newcipher=cipher[0:13]+chr(ord(cipher[13])^ord(<span class="string">'z'</span>)^or d(<span class="string">'n'</span>))+cipher[14:] newcipher=urllib2.quote(base64.b64encode(newcipher)) </span><br><span class="line"><span class="built_in">print</span> newcipher</span><br></pre></td></tr></table></figure></p>
+<p>php版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$cipher</span> = <span class="string">"3TFLhFRlhpfCeag8v69+tsVZnK+l5YbtAHidL7blfvJMKe11Mwc/BcFvys1PUmX51WYas4LuK62qXaSWihjHwQ=="</span>;</span><br><span class="line"><span class="variable">$cipher</span> = base64_decode(<span class="variable">$cipher</span>);</span><br><span class="line"><span class="variable">$cipher</span>[9] = chr(ord(<span class="variable">$cipher</span>[9]) ^ ord(<span class="string">"q"</span>) ^ ord (<span class="string">"a"</span>));</span><br><span class="line"><span class="variable">$newcipher</span> = base64_encode(<span class="variable">$cipher</span>);</span><br><span class="line"><span class="variable">$newcipher1</span> = urlencode(<span class="variable">$newcipher</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$newcipher</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$newcipher1</span>;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>得到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3TFLhFRlhpfCeag8v69%2BtsVZnK% 2Bl5YbtAHidL7blfvJMKe11Mwc/BcFvys1PUmX51WYas4LuK62qXaS WihjHwQ%3D%3D</span><br></pre></td></tr></table></figure></p>
+<p>将此字符串作新的 cipher 值与原 iv 值一起提交返回如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;base64 _decode(<span class="string">'GM6nRG1acpWMpWWr1Wz8Cm1lIjtzOjU6ImFkbWluIjtzO jg6InBhc3N3b3JkIjtzOjI6ImJiIjt9'</span>) can<span class="string">'t unserialize&lt;/p&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Base64解码得到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Î§DmZr¥e«Õlü me<span class="string">";s:5:"</span>admin<span class="string">";s:8:"</span>password<span class="string">";s:2:"</span>bb<span class="string">";&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>发现序列完全被破坏, 反序列化失败。 原因是第一个块数据（16字节）被破坏了。因为要 username 要等于 admin 所以不能利用文章（0x03一个练习中）里的说的填充字符。<br>又因为是第一个块数据被破坏，第一个块数据是和 IV 有关，所以只要将在 CBC 字符翻转攻击，得到新的 IV 就可以修复第一块数据, 我们将 IV 值异或掉 data 的前16字节（用返回的 Base64 解码的明文信息 data），再异或我们要明文<br>代码如下：</p>
+<p>python版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import base64,urllib2</span><br><span class="line">first_16Bytes=<span class="string">'a:2:&#123;s:8:"userna'</span></span><br><span class="line">data=base64.b64decode(urllib2.unquote(<span class="string">"GM6nRG1acpWMpWWr1Wz8Cm1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjI6ImJiIjt9"</span>))</span><br><span class="line">iv=base64.b64decode(urllib2.unquote(<span class="string">"KYVIlJkfaja2cM8pENnLDg%3D%3D"</span>))</span><br><span class="line">newiv=<span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(16):</span><br><span class="line">    newiv+=chr(ord(first_16Bytes[i])^ord(iv[i])^ord(data[i])) </span><br><span class="line"><span class="built_in">print</span> urllib2.quote(base64.b64encode(newiv))</span><br></pre></td></tr></table></figure></p>
+<p>php版本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$first_16Bytes</span>=<span class="string">'a:2:&#123;s:8:"userna'</span>;</span><br><span class="line"><span class="variable">$cipher</span> = base64_decode(<span class="string">'GM6nRG1acpWMpWWr1Wz8Cm1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjI6ImJiIjt9'</span>);</span><br><span class="line"><span class="variable">$iv</span>=base64_decode(<span class="string">'KYVIlJkfaja2cM8pENnLDg=='</span>);</span><br><span class="line"><span class="variable">$newiv</span>=<span class="string">''</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span>=0;<span class="variable">$i</span>&lt;16;<span class="variable">$i</span>++)&#123;</span><br><span class="line">    <span class="variable">$newiv</span>.=chr(ord(<span class="variable">$first_16Bytes</span>[<span class="variable">$i</span>])^ord(<span class="variable">$iv</span>[<span class="variable">$i</span>])^ord(<span class="variable">$cipher</span>[<span class="variable">$i</span>]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$newiv</span> = base64_encode(<span class="variable">$newiv</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$newiv</span>;</span><br><span class="line"><span class="variable">$newiv</span> = urlencode(<span class="variable">$newiv</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"&lt;br&gt;"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$newiv</span>;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ctf/" rel="tag"># ctf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/21/php弱类型漏洞/" rel="next" title="php弱类型漏洞">
+                <i class="fa fa-chevron-left"></i> php弱类型漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/23/hash长度扩展攻击/" rel="prev" title="hash长度扩展攻击">
+                hash长度扩展攻击 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Archimesan</p>
+              <p class="site-description motion-element" itemprop="description">Archimesan's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CBC-字节翻转攻击原理"><span class="nav-number">1.</span> <span class="nav-text">CBC 字节翻转攻击原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个例子（CBC-Blocks-of-16-bytes）"><span class="nav-number">1.1.</span> <span class="nav-text">一个例子（CBC Blocks of 16 bytes）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一道ctf题目"><span class="nav-number">2.</span> <span class="nav-text">一道ctf题目</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-Archimesan"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Archimesan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Archimesan',
+            repo: 'archimesan.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'b73a10c58c0472c9aed7b6554c9a0ecbd4e1579e',
+            
+                client_id: '0f6bbe5567c49373ccbf'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

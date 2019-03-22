@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ctf,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="hash 长度扩展攻击原理和实例">
+<meta name="keywords" content="ctf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hash长度扩展攻击">
+<meta property="og:url" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="hash 长度扩展攻击原理和实例">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/1.jpeg">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/2.jpeg">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/3.jpeg">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/4.jpeg">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/5.jpeg">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/6.jpeg">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/3.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/4.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/5.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/6.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/7.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/3_1.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/3_2.png">
+<meta property="og:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/3_3.png">
+<meta property="og:updated_time" content="2017-12-23T12:52:55.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hash长度扩展攻击">
+<meta name="twitter:description" content="hash 长度扩展攻击原理和实例">
+<meta name="twitter:image" content="http://archimesan.me/2017/12/23/hash长度扩展攻击/1.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://archimesan.me/2017/12/23/hash长度扩展攻击/">
+
+
+
+
+
+  <title>hash长度扩展攻击 | Archimesan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Archimesan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">思而不学则殆！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://archimesan.me/2017/12/23/hash长度扩展攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Archimesan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Archimesan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hash长度扩展攻击</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-23T19:18:25+08:00">
+                2017-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/23/hash长度扩展攻击/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/12/23/hash长度扩展攻击/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>hash 长度扩展攻击原理和实例</p>
+<a id="more"></a>
+<h1 id="sha1-的-hash-原理"><a href="#sha1-的-hash-原理" class="headerlink" title="sha1 的 hash 原理"></a>sha1 的 hash 原理</h1><p>谈一下对 sha1 加密的理解。</p>
+<p><img src="1.jpeg" alt></p>
+<p>首先，当 hash 函数拿到需要被 hash 的字符串后，先将其字节长度整除 64，取得余数。如果该余数正好等于 56，那么就在该字符串最后添加上 8 个字节的长度描述符（具体用bit表示）。如果不等于 56，就先对字符串进行长度填充，填充时第一个字节为 hex(80)，其他字节均用 hex(00) 填充，填充至余数为 56 后，同样增加 8 个字节的长度描述符（该长度描述符为需要被 hash 的字符串的长度，不是填充之后整个字符串的长度）。以上过程，称之为补位。</p>
+<p>补位完成后，字符串以 64 位一组进行分组（因为上面的余数为 56,加上 8 个字节的长度描述符后，正好是 64 位，凑成一组）。字符串能被分成几组就会进行多少次“复杂的数学变化”。每次进行“复杂的数学变化”都会生成一组新的 registers 值供下一次“复杂的数学变化”来调用。第一次“复杂的数学变化”会调用程序中的默认值。当后面已经没有分组可以进行数学变化时，该组生成的 registers 值就是最后的 hash 值。</p>
+<p>在 sha1 的运算过程中，为确保同一个字符串的 sha1 值唯一，所以需要保证第一次 registers 的值也唯一。所以在 sha1 算法中，registers 具有初始值（固定的）。如上图中的 registers 值 0。<br>Hash 值的随机性完全依赖于进行 “复杂的数学变化” 时输入的 registers 值和该次运算中字符串分组的数据。如果进行 “复杂数学变化” 时输入的 registers 值和该次运算的字符串分组相同，那么他们各自生成的新的 registers 值也相同。</p>
+<h2 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h2><p>当需要被 hash 的字符串为 str_a = “123456”，程序首先判断，len(str_a) % 64 == 56 是否成立。这里很明显不成立。那么程序就进行补位操作。首先补位成余数为 56 的长度。</p>
+<p><img src="2.jpeg" alt></p>
+<p>如上图，蓝色字体就为程序对该字符串进行补位的数据。当满足 len(str_a) % 64 == 56 后，程序就在该字符串的后面添加 8 个字节的长度描述符。注意，此处的长度为原始需要被 hash 的长度。也就是<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">len(str_a) = 6 字节 *8bit/字节 = 48bit = 0x30bit。</span><br></pre></td></tr></table></figure></p>
+<p><img src="3.jpeg" alt></p>
+<p>补位+长度描述符 = 64 个字节，正好是一个分组。所以此处只要进行一次复杂的数学变化就可以了。程序根据该 64 个字节的数据和 registers 值 0 生成新的 registers 值 1。那么该新的 registers 值 1 就是 str_a 的 sha1 值。</p>
+<h2 id="如何利用？"><a href="#如何利用？" class="headerlink" title="如何利用？"></a>如何利用？</h2><p>讲了这么多，好像都没讲到如何利用该扩展攻击。那么下面，重点来了。</p>
+<p>简单来说，就是服务器上会生成一个 salt 值，该 salt 值你是不可预测的。但是你又知道了 sha1(salt+filename)的值，该 filename 的值你也是知道的。假设此处的 filename 的值 report.pdf，最后 sha1 的值为：0a8d538b724c6f2b4288526eb540ee7c。为了方便理解，我们继续假设 salt 的长度为 16 位。</p>
+<p><img src="4.jpeg" alt></p>
+<p>将上图的字符串进行 sha1 操作时，同样先进行整除，然后取余。最后再补上 8 位的长度描述符。补位+添加长度描述符后的字符串如下图：</p>
+<p><img src="5.jpeg" alt></p>
+<p>该长度也就满足了 64 位的分组，只需要进行一次 “复杂的数学运算” 就可以得到最后的sha1值了。<br>下面请各位看官思考如何进行下面一个字符串的 sha1 操作。</p>
+<p><img src="6.jpeg" alt></p>
+<p>同样，还是先进行分组。由于该字符串的长度大于 64 个字节，且小于 128 个字节，所以要分成两组，需要进行两次“复杂的数学运算”。这个时候我们发现，第一个分组的数据和上图中补码后的数据完全一样，又因为他们都是第一个分组，初始的 registers 值也一样。那么经过第一轮“复杂的数学运算”，他们各自生成的 registers 值也同样是相同的。唯一不同的是，由于上面的长度小于 64 字节，所以只需要进行一轮运算便得到了最后的 sha1 值。然后这里的字符串有两个分组，需要将第一轮更新的 registers 值（也就是第一轮运算出来的 sha1 值）作为第二轮“复杂的数学运算”的 registers 值，然后才能得出最终的 sha1 值。</p>
+<p>根据上面例子就说明，如果 salt 的值你不知道，但是你知道长度，又知道 sha1(salt)，那么就也就可以知道 sha1(salt+“填充数据”+“任意可控数据”).这里的 salt+“填充数据”就是对 salt 进行 sha1 时所补全的数据+最后8位的长度描述符。一般来说，salt+”填充数据”的长度就是64字节，正好是一个分组。如果 salt 的长度就大于了56个字节，那么加入填充数据后的长度应该是N个64字节，等于 N 个分组。如果最后一块长度大于 56 或等于 64 时一直填充到多出一个块并且该块长度为 56 字节。<br>为什么？你可以想象，sha1 程序再对（salt+“填充数据”+“任意可控数据”）进行 hash 时，只需要进行第二轮及第二轮以后的运算。因为第一轮运算后的 registers 值就是 sha1(salt)的值，该值你已经知道了。</p>
+<p>PS : MD5、SHA-1、SHA-2 类似</p>
+<h1 id="hash-长度扩展攻击实例"><a href="#hash-长度扩展攻击实例" class="headerlink" title="hash 长度扩展攻击实例"></a>hash 长度扩展攻击实例</h1><h2 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h2><p><img src="1.png" alt></p>
+<p><img src="2.png" alt></p>
+<p><img src="3.png" alt></p>
+<p><img src="4.png" alt></p>
+<p>源码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$flag</span> = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXX"</span>;</span><br><span class="line"><span class="variable">$secret</span> = <span class="string">"XXXXXXXXXXXXXXX"</span>; // This secret is 15 characters long <span class="keyword">for</span> security!</span><br><span class="line"></span><br><span class="line"><span class="variable">$username</span> = <span class="variable">$_POST</span>[<span class="string">"username"</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">"password"</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!empty(<span class="variable">$_COOKIE</span>[<span class="string">"getmein"</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> (urldecode(<span class="variable">$username</span>) === <span class="string">"admin"</span> &amp;&amp; urldecode(<span class="variable">$password</span>) != <span class="string">"admin"</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$COOKIE</span>[<span class="string">"getmein"</span>] === md5(<span class="variable">$secret</span> . urldecode(<span class="variable">$username</span> . <span class="variable">$password</span>))) &#123;</span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"Congratulations! You are a registered user.\n"</span>;</span><br><span class="line">            die (<span class="string">"The flag is "</span>. <span class="variable">$flag</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            die (<span class="string">"Your cookies don't match up! STOP HACKING THIS SITE."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        die (<span class="string">"You are not an admin! LEAVE."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setcookie(<span class="string">"sample-hash"</span>, md5(<span class="variable">$secret</span> . urldecode(<span class="string">"admin"</span> . <span class="string">"admin"</span>)), time() + (60 * 60 * 24 * 7));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (empty(<span class="variable">$_COOKIE</span>[<span class="string">"source"</span>])) &#123;</span><br><span class="line">    setcookie(<span class="string">"source"</span>, 0, time() + (60 * 60 * 24 * 7));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_COOKIE</span>[<span class="string">"source"</span>] != 0) &#123;</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">""</span>; // This <span class="built_in">source</span> code is outputted here</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>python 代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">samplehash='</span>571580b26c65f306376d4f64e53cb5c7<span class="string">'</span></span><br><span class="line"><span class="string">s1='</span>0x<span class="string">'+samplehash[6:8]+samplehash[4:6]+samplehash[2:4]+samplehash[0:2]</span></span><br><span class="line"><span class="string">s2='</span>0x<span class="string">'+samplehash[14:16]+samplehash[12:14]+samplehash[10:12]+samplehash[8:10]</span></span><br><span class="line"><span class="string">s3='</span>0x<span class="string">'+samplehash[22:24]+samplehash[20:22]+samplehash[18:20]+samplehash[16:18]</span></span><br><span class="line"><span class="string">s4='</span>0x<span class="string">'+samplehash[30:32]+samplehash[28:30]+samplehash[26:28]+samplehash[24:26]</span></span><br><span class="line"><span class="string">print s1,'</span>\n<span class="string">',s2,'</span>\n<span class="string">',s3,'</span>\n<span class="string">',s4</span></span><br><span class="line"><span class="string">'</span><span class="string">''</span></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author：DshtAnger</span></span><br><span class="line">import my_md5</span><br><span class="line"><span class="comment">#reference:</span></span><br><span class="line"><span class="comment">#   http://www.freebuf.com/articles/web/69264.html</span></span><br><span class="line"><span class="comment">#problem link:</span></span><br><span class="line"><span class="comment">#   http://ctf4.shiyanbar.com/web/kzhan.php</span></span><br><span class="line"></span><br><span class="line">samplehash=<span class="string">"571580b26c65f306376d4f64e53cb5c7"</span></span><br><span class="line"><span class="comment">#将哈希值分为四段,并反转该四字节为小端序,作为64第二次循环的输入幻书</span></span><br><span class="line">s1=0xb2801557</span><br><span class="line">s2=0x06f3656c</span><br><span class="line">s3=0x644f6d37</span><br><span class="line">s4=0xc7b53ce5</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">type</span>(s1)</span><br></pre></td></tr></table></figure></p>
+<p>exp：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">secret = <span class="string">"a"</span>*15</span><br><span class="line">secret_admin = secret+<span class="string">'adminadmin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00admin'</span></span><br><span class="line">r = my_md5.deal_rawInputMsg(secret_admin)</span><br><span class="line">inp = r[len(r)/2:]</span><br><span class="line"><span class="built_in">print</span> <span class="string">"getmein:"</span>+my_md5.run_md5(s1,s2,s3,s4,inp)</span><br></pre></td></tr></table></figure></p>
+<p>burp抓包改包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username=admin</span><br><span class="line">password=admin+\x80\x00……admin</span><br><span class="line">\x80\x00要在hex里面修改</span><br></pre></td></tr></table></figure></p>
+<p><img src="5.png" alt></p>
+<p><img src="6.png" alt></p>
+<h2 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h2><p>源代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line"><span class="variable">$SECRET</span>=<span class="string">"234098761"</span>;</span><br><span class="line"><span class="built_in">echo</span> serialize(<span class="literal">false</span>).<span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line"><span class="built_in">echo</span> serialize(<span class="literal">true</span>).<span class="string">"&lt;br /&gt;"</span>;</span><br><span class="line"><span class="variable">$auth</span>=<span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span> (isset(<span class="variable">$_COOKIE</span>[<span class="string">"auth"</span>]))</span><br><span class="line">&#123;</span><br><span class="line">        <span class="variable">$auth</span>=unserialize(<span class="variable">$_COOKIE</span>[<span class="string">"auth"</span>]);  //先给<span class="variable">$auth</span>赋一个真值</span><br><span class="line">        <span class="variable">$hsh</span>=<span class="variable">$_COOKIE</span>[<span class="string">"hsh"</span>];</span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$_COOKIE</span>[<span class="string">"auth"</span>].<span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$hsh</span> !== <span class="built_in">hash</span>(<span class="string">"sha256"</span>,<span class="variable">$SECRET</span>.strrev(<span class="variable">$_COOKIE</span>[<span class="string">"auth"</span>])))</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="variable">$auth</span>=<span class="literal">false</span>;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"hsh is error! &lt;br /&gt;"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="variable">$auth</span> = <span class="literal">false</span>;</span><br><span class="line">        <span class="variable">$s</span>=serialize(<span class="variable">$auth</span>);</span><br><span class="line">        setcookie(<span class="string">"auth"</span>,<span class="variable">$s</span>);</span><br><span class="line">        setcookie(<span class="string">"hsh"</span>,<span class="built_in">hash</span>(<span class="string">"sha256"</span>,<span class="variable">$SECRET</span>.strrev(<span class="variable">$s</span>)));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$auth</span>)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"succusel &lt;br/&gt;"</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"fails &lt;br /&gt;"</span>;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>分析：<br>strrev()  反转字符串<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> ./hash_extender -f sha256 -l 9 -d <span class="string">';0:b'</span> -s feab615a09e9c09c1c79e806337bf73450786f1026ef88cf23a0c775b9c28391 -a <span class="string">';1:b'</span> --out-data-format=html  </span><br><span class="line"></span><br><span class="line">Type: sha256  </span><br><span class="line">Secret length: 9  </span><br><span class="line">New signature: 4cd85bfa32cfded3b01ed2a18af281c7dfd8118fdb3ce2d0d729f48fecbb1560  </span><br><span class="line">New string: %3b0%3ab%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00h%3b1%3ab</span><br></pre></td></tr></table></figure></p>
+<p>从上面算得的值hash值是 sha256(key || padding || append) append的值是true的值。将cookie中的hsh换成上面的生成的新hash,再把上面的string逆序下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b%3a1%3bh%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%80b%3a0%3b</span><br></pre></td></tr></table></figure></p>
+<p>用上面的字符串修改auth的cookie值，再访问此网页就会认证成功了：</p>
+<p><img src="7.png" alt></p>
+<h2 id="实例3"><a href="#实例3" class="headerlink" title="实例3"></a>实例3</h2><p>secret长度不知道暴力攻击</p>
+<p>题目：flag在管理员手里</p>
+<p><img src="3_1.png" alt></p>
+<p><img src="3_2.png" alt></p>
+<p>用御剑 1.5 扫描 找到 index.php~  打开都是乱码<br>拷贝至 linux 虚拟机名字改成 .index.php.swp<br>vim -r index.php  保存即可</p>
+<p>得到的代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;Web 350&lt;/title&gt;</span><br><span class="line">&lt;style <span class="built_in">type</span>=<span class="string">"text/css"</span>&gt;</span><br><span class="line">	body &#123;</span><br><span class="line">		background:gray;</span><br><span class="line">		text-align:center;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;?php </span><br><span class="line">		<span class="variable">$auth</span> = <span class="literal">false</span>;</span><br><span class="line">		<span class="variable">$role</span> = <span class="string">"guest"</span>;</span><br><span class="line">		<span class="variable">$salt</span> = </span><br><span class="line">		<span class="keyword">if</span> (isset(<span class="variable">$_COOKIE</span>[<span class="string">"role"</span>])) &#123;</span><br><span class="line">			<span class="variable">$role</span> = unserialize(<span class="variable">$_COOKIE</span>[<span class="string">"role"</span>]);</span><br><span class="line">			<span class="variable">$hsh</span> = <span class="variable">$_COOKIE</span>[<span class="string">"hsh"</span>];</span><br><span class="line">			<span class="keyword">if</span> (<span class="variable">$role</span>===<span class="string">"admin"</span> &amp;&amp; <span class="variable">$hsh</span> === md5(<span class="variable">$salt</span>.strrev(<span class="variable">$_COOKIE</span>[<span class="string">"role"</span>]))) &#123;</span><br><span class="line">				<span class="variable">$auth</span> = <span class="literal">true</span>;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="variable">$auth</span> = <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="variable">$s</span> = serialize(<span class="variable">$role</span>);</span><br><span class="line">			setcookie(<span class="string">'role'</span>,<span class="variable">$s</span>);</span><br><span class="line">			<span class="variable">$hsh</span> = md5(<span class="variable">$salt</span>.strrev(<span class="variable">$s</span>));</span><br><span class="line">			setcookie(<span class="string">'hsh'</span>,<span class="variable">$hsh</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (<span class="variable">$auth</span>) &#123;</span><br><span class="line">			<span class="built_in">echo</span> <span class="string">"&lt;h3&gt;Welcome Admin. Your flag is </span></span><br><span class="line"><span class="string">		&#125; else &#123;</span></span><br><span class="line"><span class="string">			echo "</span>&lt;h3&gt;Only Admin can see the flag!!&lt;/h3&gt;<span class="string">";</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	?&gt;</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>很明显secret长度不知道，只能通过爆破</p>
+<p>python 代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line">from urlparse import urlparse</span><br><span class="line">from httplib import HTTPConnection</span><br><span class="line">from urllib import urlencode</span><br><span class="line">import json</span><br><span class="line">import time</span><br><span class="line">import os</span><br><span class="line">import urllib</span><br><span class="line"></span><br><span class="line">def gao(x, y):</span><br><span class="line">    <span class="comment">#print x</span></span><br><span class="line">    <span class="comment">#print y</span></span><br><span class="line">    url = <span class="string">"http://web.jarvisoj.com:32778/index.php"</span></span><br><span class="line">    cookie = <span class="string">"role="</span> + x + <span class="string">";hsh="</span> + y</span><br><span class="line">        <span class="comment">#print cookie</span></span><br><span class="line">    build_header = &#123;</span><br><span class="line">            <span class="string">'Cookie'</span>: cookie,</span><br><span class="line">            <span class="string">'User-Agent'</span>: <span class="string">' Mozilla/5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0'</span>,</span><br><span class="line">            <span class="string">'Host'</span>: <span class="string">'web.jarvisoj.com:32778'</span>,</span><br><span class="line">            <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    urlparts = urlparse(url)</span><br><span class="line">    conn = HTTPConnection(urlparts.hostname, urlparts.port or 80)</span><br><span class="line">    conn.request(<span class="string">"GET"</span>, urlparts.path, <span class="string">''</span>, build_header)</span><br><span class="line">    resp = conn.getresponse()</span><br><span class="line">    body = resp.read()</span><br><span class="line">    <span class="built_in">return</span> body</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(1000):</span><br><span class="line">    <span class="built_in">print</span> i</span><br><span class="line">    <span class="comment"># secret len = ???</span></span><br><span class="line">    find_hash = <span class="string">"./hash_extender -d ';\"tseug\":5:s' -s 3a4727d57463f122833d9e732f94e4e0 -f md5  -a ';\"nimda\":5:s' --out-data-format=html -l "</span> + str(i) + <span class="string">" --quiet"</span></span><br><span class="line">    <span class="comment">#print find_hash</span></span><br><span class="line">    calc_res = os.popen(find_hash).readlines()</span><br><span class="line">    hash_value = calc_res[0][:32]</span><br><span class="line">    attack_padding = calc_res[0][32:]</span><br><span class="line">    attack_padding = urllib.quote(urllib.unquote(attack_padding)[::-1])</span><br><span class="line">    ret = gao(attack_padding, hash_value)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">"Welcome"</span> <span class="keyword">in</span> ret:</span><br><span class="line">        <span class="built_in">print</span> ret</span><br><span class="line">        <span class="built_in">break</span></span><br></pre></td></tr></table></figure></p>
+<p>将上述代码保存至 hash_extender.py<br>到 hash_extender 的目录下运行 python hash_extender.py 得到如下：</p>
+<p><img src="3_3.png" alt></p>
+<h1 id="知识点："><a href="#知识点：" class="headerlink" title="知识点："></a>知识点：</h1><h2 id="HashExtender和hashdump使用"><a href="#HashExtender和hashdump使用" class="headerlink" title="HashExtender和hashdump使用"></a>HashExtender和hashdump使用</h2><h3 id="HashExtender"><a href="#HashExtender" class="headerlink" title="HashExtender"></a>HashExtender</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Installing</span><br><span class="line">$ pip install HashExtender</span><br><span class="line"></span><br><span class="line">Usage</span><br><span class="line">&gt;&gt;&gt; import hashext</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span> hashext.md5(data = <span class="string">'123'</span>, sign = <span class="string">'109889f941630d269546335f728f3558'</span>, length = 5, append = <span class="string">'test'</span>)</span><br><span class="line">(<span class="string">'123\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00@\x00\x00\x00\x00\x00\x00\x00test'</span>, <span class="string">'e5f78513e536615a6f5164ccff96d4d9'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ● data - your original signed message</span><br><span class="line">  ● sign - message signature, MD5(secret + msg)</span><br><span class="line">  ● length - probable length of secret string</span><br><span class="line">  ● append - data to append to new string</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">Installing</span><br><span class="line"></span><br><span class="line">  1. git <span class="built_in">clone</span> https://github.com/iagox86/hash_extender  </span><br><span class="line">  2. <span class="built_in">cd</span> hash_extender  </span><br><span class="line">  3. make  </span><br><span class="line"></span><br><span class="line">useage</span><br><span class="line"></span><br><span class="line"> ./hash_extender &lt;--data=|--file=&gt; --signature= --format= [options]</span><br><span class="line"></span><br><span class="line">INPUT OPTIONS</span><br><span class="line">-d --data=</span><br><span class="line">      The original string that we<span class="string">'re going to extend.</span></span><br><span class="line"><span class="string">--data-format=</span></span><br><span class="line"><span class="string">      The format the string is being passed in as. Default: raw.</span></span><br><span class="line"><span class="string">      Valid formats: raw, hex, html, cstr</span></span><br><span class="line"><span class="string">--file=</span></span><br><span class="line"><span class="string">      As an alternative to specifying a string, this reads the original string</span></span><br><span class="line"><span class="string">      as a file.</span></span><br><span class="line"><span class="string">-s --signature=</span></span><br><span class="line"><span class="string">      The original signature.</span></span><br><span class="line"><span class="string">--signature-format=</span></span><br><span class="line"><span class="string">      The format the signature is being passed in as. Default: hex.</span></span><br><span class="line"><span class="string">      Valid formats: raw, hex, html, cstr</span></span><br><span class="line"><span class="string">-a --append=</span></span><br><span class="line"><span class="string">      The data to append to the string. Default: raw.</span></span><br><span class="line"><span class="string">--append-format=</span></span><br><span class="line"><span class="string">      Valid formats: raw, hex, html, cstr</span></span><br><span class="line"><span class="string">-f --format= [REQUIRED]</span></span><br><span class="line"><span class="string">      The hash_type of the signature. This can be given multiple times if you</span></span><br><span class="line"><span class="string">      want to try multiple signatures. '</span>all<span class="string">' will base the chosen types off</span></span><br><span class="line"><span class="string">      the size of the signature and use the hash(es) that make sense.</span></span><br><span class="line"><span class="string">      Valid types: md4, md5, ripemd160, sha, sha1, sha256, sha512, whirlpool</span></span><br><span class="line"><span class="string">-l --secret=</span></span><br><span class="line"><span class="string">      The length of the secret, if known. Default: 8.</span></span><br><span class="line"><span class="string">--secret-min=</span></span><br><span class="line"><span class="string">--secret-max=</span></span><br><span class="line"><span class="string">      Try different secret lengths (both options are required)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OUTPUT OPTIONS</span></span><br><span class="line"><span class="string">--table</span></span><br><span class="line"><span class="string">      Output the string in a table format.</span></span><br><span class="line"><span class="string">--out-data-format=</span></span><br><span class="line"><span class="string">      Output data format.</span></span><br><span class="line"><span class="string">      Valid formats: none, raw, hex, html, html-pure, cstr, cstr-pure, fancy</span></span><br><span class="line"><span class="string">--out-signature-format=</span></span><br><span class="line"><span class="string">      Output signature format.</span></span><br><span class="line"><span class="string">      Valid formats: none, raw, hex, html, html-pure, cstr, cstr-pure, fancy</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OTHER OPTIONS</span></span><br><span class="line"><span class="string">-h --help </span></span><br><span class="line"><span class="string">      Display the usage (this).</span></span><br><span class="line"><span class="string">--test</span></span><br><span class="line"><span class="string">      Run the test suite.</span></span><br><span class="line"><span class="string">-q --quiet</span></span><br><span class="line"><span class="string">      Only output what'</span>s absolutely necessary (the output string and the</span><br><span class="line">      signature)</span><br></pre></td></tr></table></figure></p>
+<p>Example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> ./hash_extender -f sha256 -l 9 -d <span class="string">';0:b'</span> -s feab615a09e9c09c1c79e806337bf73450786f1026ef88cf23a0c775b9c28391 -a <span class="string">';1:b'</span> --out-data-format=html  </span><br><span class="line"></span><br><span class="line">Type: sha256  </span><br><span class="line">Secret length: 9  </span><br><span class="line">New signature: 4cd85bfa32cfded3b01ed2a18af281c7dfd8118fdb3ce2d0d729f48fecbb1560  </span><br><span class="line">New string: %3b0%3ab%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00h%3b1%3ab</span><br></pre></td></tr></table></figure></p>
+<p>-f 代表加密方式</p>
+<p>-l key的长度</p>
+<p>-s 原始的hash值</p>
+<p>-a 添加的值</p>
+<p>–out-data-format 输出的格式</p>
+<h3 id="hashdump"><a href="#hashdump" class="headerlink" title="hashdump"></a>hashdump</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Installing</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/bwall/HashPump</span><br><span class="line">apt-get install g++ libssl-dev</span><br><span class="line"><span class="built_in">cd</span> HashPump</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>至于想在python里实现hashpump，可以使用hashpumpy这个插件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install hashpumpy</span><br></pre></td></tr></table></figure></p>
+<p>Usage<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hashpump</span></span><br><span class="line">Input Signature: 571580b26c65f306376d4f64e53cb5c7</span><br><span class="line">Input Data: admin</span><br><span class="line">Input Key Length: 20</span><br><span class="line">Input Data to Add: pcat</span><br></pre></td></tr></table></figure></p>
+<p>或者直接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashpump -s 571580b26c65f306376d4f64e53cb5c7 -d admin -k 20 -a pcat</span><br></pre></td></tr></table></figure></p>
+<p>就会得到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3e67e8f0c05e1ad68020df30bbc505f5</span><br><span class="line">admin\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc8\x00\x00\x00\x00\x00\x00\x00pcat</span><br></pre></td></tr></table></figure></p>
+<p>第一个是新的签名，把它设置到cookies的getmein里。<br>第二个先把\x替换为%后，post提交<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">password=admin%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%c8%00%00%00%00%00%00%00pcat</span><br></pre></td></tr></table></figure></p>
+<h2 id="os-命令介绍"><a href="#os-命令介绍" class="headerlink" title="os 命令介绍"></a>os 命令介绍</h2><h3 id="os-popen"><a href="#os-popen" class="headerlink" title="os.popen"></a>os.popen</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">os.system(cmd) 的返回值只会有 0(成功),1,2</span><br><span class="line"></span><br><span class="line">os.popen(cmd) 会吧执行的 cmd 的输出作为值返回。</span><br><span class="line"></span><br><span class="line">os.popen() 可以实现一个“管道”，从这个命令获取的值可以继续被调用。而 os.system 不同，它只是调用，调用完后自身退出，可能返回个 0 吧</span><br><span class="line"></span><br><span class="line">比如，我想得到 ntpd 的进程 id，就要这么做：</span><br><span class="line"></span><br><span class="line">os.popen(<span class="string">'ps -C ntpd | grep -v CMD |awk '</span>&#123; <span class="built_in">print</span> <span class="variable">$1</span> &#125;<span class="string">').readlines()[0]</span></span><br></pre></td></tr></table></figure>
+<h3 id="urlparse"><a href="#urlparse" class="headerlink" title="urlparse"></a>urlparse</h3><p>将urlstring解析成6个部分，它从urlstring中取得URL，并返回元组 (scheme, netloc, path, parameters, query, fragment)，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import urlparse</span><br><span class="line">&gt;&gt;&gt; url=urlparse.urlparse(<span class="string">'http://www.baidu.com/index.php?username=guol'</span>)</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span> url</span><br><span class="line">ParseResult(scheme=<span class="string">'http'</span>, netloc=<span class="string">'www.baidu.com'</span>, path=<span class="string">'/index.php'</span>, params=<span class="string">''</span>, query=<span class="string">'username=guol'</span>, fragment=<span class="string">''</span>)</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span> url.netloc</span><br><span class="line">www.baidu.com</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br><span class="line">urlparse.urlunparse(parts)</span><br><span class="line"></span><br><span class="line">    从一个元组构建一个url，元组类似urlparse返回的，它接收元组(scheme, netloc, path, parameters, query, fragment)后，会重新组成一个具有正确格式的URL，以便供Python的其他HTML解析模块使用。</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; import urlparse</span><br><span class="line">&gt;&gt;&gt; url=urlparse.urlparse(<span class="string">'http://www.baidu.com/index.php?username=guol'</span>)</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span> url</span><br><span class="line">ParseResult(scheme=<span class="string">'http'</span>, netloc=<span class="string">'www.baidu.com'</span>, path=<span class="string">'/index.php'</span>, params=<span class="string">''</span>, query=<span class="string">'username=guol'</span>, fragment=<span class="string">''</span>)</span><br><span class="line">&gt;&gt;&gt; u=urlparse.urlunparse(url)</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">print</span> u</span><br><span class="line">http://www.baidu.com/index.php?username=guol</span><br></pre></td></tr></table></figure>
+<p>Example：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from urlparse import urlparse</span><br><span class="line">url = <span class="string">"http://web.jarvisoj.com:32778/index.php"</span></span><br><span class="line">urlparts = urlparse(url)</span><br><span class="line"><span class="built_in">print</span> urlparts.hostname,urlparts.port,urlparts.scheme</span><br><span class="line"></span><br><span class="line">输出：web.jarvisoj.com 32778 http</span><br></pre></td></tr></table></figure></p>
+<h2 id="HTTPConnection"><a href="#HTTPConnection" class="headerlink" title="HTTPConnection"></a>HTTPConnection</h2><h3 id="HTTPConnection创建对象"><a href="#HTTPConnection创建对象" class="headerlink" title="HTTPConnection创建对象"></a>HTTPConnection创建对象</h3><p>HTTPConnection(host[, port[, strict[, timeout]]])<br>host: 请求的服务器host，不能带<a href="http://开头" target="_blank" rel="noopener">http://开头</a><br>port: 服务器web服务端口<br>strict: 是否严格检查请求的状态行，就是http1.0/1.1 协议版本的那一行，即请求的第一行，默认为False，为True时检查错误会抛异常<br>timeout: 单次请求的超时时间，没有时默认使用httplib模块内的全局的超时时间</p>
+<h3 id="HTTPConnection对象request方法："><a href="#HTTPConnection对象request方法：" class="headerlink" title="HTTPConnection对象request方法："></a>HTTPConnection对象request方法：</h3><p>说明：<br>发送一个请求</p>
+<p>原型：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conn.request(method, url[, body[, headers]])</span><br><span class="line">method: 请求的方式，如<span class="string">'GET'</span>,<span class="string">'POST'</span>,<span class="string">'HEAD'</span>,<span class="string">'PUT'</span>,<span class="string">'DELETE'</span>等</span><br><span class="line">url: 请求的网页路径。如：<span class="string">'/index.html'</span></span><br><span class="line">body: 请求是否带数据，该参数是一个字典</span><br><span class="line">headers: 请求是否带头信息，该参数是一个字典，不过键的名字是指定的http头关键字</span><br></pre></td></tr></table></figure></p>
+<h3 id="HTTPConnection对象getresponse方法"><a href="#HTTPConnection对象getresponse方法" class="headerlink" title="HTTPConnection对象getresponse方法"></a>HTTPConnection对象getresponse方法</h3><p>说明：<br>获取一个http响应对象，相当于执行最后的2个回车</p>
+<p>原型/实例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = conn.getresponse()</span><br></pre></td></tr></table></figure></p>
+<h3 id="HTTPResponse对象read方法"><a href="#HTTPResponse对象read方法" class="headerlink" title="HTTPResponse对象read方法"></a>HTTPResponse对象read方法</h3><p>说明：<br>获得http响应的内容部分，即网页源码</p>
+<p>原型：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">body = res.read([amt])</span><br></pre></td></tr></table></figure></p>
+<p>amt: 读取指定长度的字符，默认为空，即读取所有内容</p>
+<p>实例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">body = res.read()  </span><br><span class="line">pbody = res.read(10)</span><br></pre></td></tr></table></figure></p>
+<p>返回：<br>网页内容字符串</p>
+<h3 id="conn-getheaders"><a href="#conn-getheaders" class="headerlink" title="conn.getheaders()"></a>conn.getheaders()</h3><p>说明：</p>
+<p>获得http响应头</p>
+<p>Example:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python    </span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-    </span></span><br><span class="line">import httplib  </span><br><span class="line">import urllib  </span><br><span class="line">  </span><br><span class="line">   </span><br><span class="line">def sendhttp():  </span><br><span class="line">    data = urllib.urlencode(&#123;<span class="string">'@number'</span>: 12524, <span class="string">'@type'</span>: <span class="string">'issue'</span>, <span class="string">'@action'</span>: <span class="string">'show'</span>&#125;)     </span><br><span class="line">    headers = &#123;<span class="string">"Content-type"</span>: <span class="string">"application/x-www-form-urlencoded"</span>,  </span><br><span class="line">               <span class="string">"Accept"</span>: <span class="string">"text/plain"</span>&#125;  </span><br><span class="line">    conn = httplib.HTTPConnection(<span class="string">'bugs.python.org'</span>)  </span><br><span class="line">    conn.request(<span class="string">'POST'</span>, <span class="string">'/'</span>, data, headers)  </span><br><span class="line">    httpres = conn.getresponse()  </span><br><span class="line">    <span class="built_in">print</span> httpres.status  </span><br><span class="line">    <span class="built_in">print</span> httpres.reason  </span><br><span class="line">    <span class="built_in">print</span> httpres.read()  </span><br><span class="line">             </span><br><span class="line">                </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:    </span><br><span class="line">    sendhttp()</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ctf/" rel="tag"># ctf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/22/CBC字节翻转攻击/" rel="next" title="CBC字节翻转攻击">
+                <i class="fa fa-chevron-left"></i> CBC字节翻转攻击
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/24/MD5爆破问题/" rel="prev" title="MD5 爆破问题">
+                MD5 爆破问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Archimesan</p>
+              <p class="site-description motion-element" itemprop="description">Archimesan's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sha1-的-hash-原理"><span class="nav-number">1.</span> <span class="nav-text">sha1 的 hash 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举个例子"><span class="nav-number">1.1.</span> <span class="nav-text">举个例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何利用？"><span class="nav-number">1.2.</span> <span class="nav-text">如何利用？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash-长度扩展攻击实例"><span class="nav-number">2.</span> <span class="nav-text">hash 长度扩展攻击实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例1"><span class="nav-number">2.1.</span> <span class="nav-text">实例1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例2"><span class="nav-number">2.2.</span> <span class="nav-text">实例2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例3"><span class="nav-number">2.3.</span> <span class="nav-text">实例3</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点："><span class="nav-number">3.</span> <span class="nav-text">知识点：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashExtender和hashdump使用"><span class="nav-number">3.1.</span> <span class="nav-text">HashExtender和hashdump使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashExtender"><span class="nav-number">3.1.1.</span> <span class="nav-text">HashExtender</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashdump"><span class="nav-number">3.1.2.</span> <span class="nav-text">hashdump</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#os-命令介绍"><span class="nav-number">3.2.</span> <span class="nav-text">os 命令介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#os-popen"><span class="nav-number">3.2.1.</span> <span class="nav-text">os.popen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#urlparse"><span class="nav-number">3.2.2.</span> <span class="nav-text">urlparse</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPConnection"><span class="nav-number">3.3.</span> <span class="nav-text">HTTPConnection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPConnection创建对象"><span class="nav-number">3.3.1.</span> <span class="nav-text">HTTPConnection创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPConnection对象request方法："><span class="nav-number">3.3.2.</span> <span class="nav-text">HTTPConnection对象request方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPConnection对象getresponse方法"><span class="nav-number">3.3.3.</span> <span class="nav-text">HTTPConnection对象getresponse方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPResponse对象read方法"><span class="nav-number">3.3.4.</span> <span class="nav-text">HTTPResponse对象read方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conn-getheaders"><span class="nav-number">3.3.5.</span> <span class="nav-text">conn.getheaders()</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-Archimesan"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Archimesan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Archimesan',
+            repo: 'archimesan.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'b73a10c58c0472c9aed7b6554c9a0ecbd4e1579e',
+            
+                client_id: '0f6bbe5567c49373ccbf'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
