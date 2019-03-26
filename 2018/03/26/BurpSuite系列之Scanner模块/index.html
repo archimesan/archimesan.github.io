@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, Archimesan">
+  <meta name="keywords" content="工具,">
 
 
 
@@ -81,16 +81,30 @@
 
 
 
-<meta name="description" content="Archimesan&apos;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Archimesan">
-<meta property="og:url" content="http://archimesan.me/archives/2019/03/index.html">
+<meta name="description" content="引言BurpSuite系列之Scanner模块(漏洞扫描)">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BurpSuite系列之Scanner模块">
+<meta property="og:url" content="http://archimesan.me/2018/03/26/BurpSuite系列之Scanner模块/index.html">
 <meta property="og:site_name" content="Archimesan">
-<meta property="og:description" content="Archimesan&apos;s Blog">
+<meta property="og:description" content="引言BurpSuite系列之Scanner模块(漏洞扫描)">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045400722.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045411253.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045424075.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045429074.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045434255.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045439303.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045445120.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045448834.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045454641.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045458043.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045504023.png">
+<meta property="og:updated_time" content="2019-03-26T15:21:41.730Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Archimesan">
-<meta name="twitter:description" content="Archimesan&apos;s Blog">
+<meta name="twitter:title" content="BurpSuite系列之Scanner模块">
+<meta name="twitter:description" content="引言BurpSuite系列之Scanner模块(漏洞扫描)">
+<meta name="twitter:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045400722.png">
 
 
 
@@ -120,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://archimesan.me/archives/2019/03/">
+  <link rel="canonical" href="http://archimesan.me/2018/03/26/BurpSuite系列之Scanner模块/">
 
 
 
 
 
-  <title>归档 | Archimesan</title>
+  <title>BurpSuite系列之Scanner模块 | Archimesan</title>
   
 
 
@@ -145,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	
 <a href="https://github.com/archimesan" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -293,71 +307,343 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 44 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://archimesan.me/2018/03/26/BurpSuite系列之Scanner模块/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Archimesan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Archimesan">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/26/BurpSuite系列之Scanner模块/" itemprop="url">
-              
-                <span itemprop="name">BurpSuite系列之Scanner模块</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">BurpSuite系列之Scanner模块</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-26T16:49:50+08:00" content="2019-03-26">
-          03-26
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T16:49:50+08:00">
+                2018-03-26
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件安装与使用/" itemprop="url" rel="index">
+                    <span itemprop="name">软件安装与使用</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件安装与使用/Burpsuite/" itemprop="url" rel="index">
+                    <span itemprop="name">Burpsuite</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/26/BurpSuite系列之Scanner模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/26/BurpSuite系列之Scanner模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/03/26/BurpSuite系列之Scanner模块/" class="leancloud_visitors" data-flag-title="BurpSuite系列之Scanner模块">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+			   <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  603
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>BurpSuite系列之Scanner模块(漏洞扫描)<br><a id="more"></a></p>
+<p>一、简介<br>Burp Scanner 是一个进行自动发现 web 应用程序的安全漏洞的工具。它是为渗透测试人员设计的，并且它和你现有的手动执行进行的 web 应用程序半自动渗透测试的技术方法很相似。<br>使用的大多数的 web 扫描器都是单独运行的：你提供了一个开始 URL，单击‖go‖,然后注视着进度条的更新直到扫描结束，最后产生一个报告。Burp Scanner 和这完全不同，在攻击一个应用程序时它和你执行的操作紧紧的结合在一起。让你细微控制着每一个扫描的请求，并直接反馈回结果。<br>Burp Scanner 可以执行两种扫描类型：主动扫描(Active scanning)，被动扫描(Passive scanning)。<br>二、模块说明<br>1：Issue activity</p>
+<p> <img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045400722.png" alt><br>2：Scan queue  扫描队列，这里将显示扫描队列的状态 进度 结果等。<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045411253.png" alt></p>
+<p>主要包含以下内容：</p>
+<ol>
+<li>索引号的项目，反映该项目的添加顺序。</li>
+<li>目的地协议，主机和URL 。</li>
+<li>该项目的当前状态，包括完成百分比。</li>
+<li>项目扫描问题的数量（这是根据所附的最严重问题的重要性和彩色化） 。</li>
+<li>在扫描项目的请求数量进行。</li>
+<li>网络错误的数目遇到的问题。</li>
+<li>为项目创建的插入点的数量。</li>
+</ol>
+<p>3：Live scanning<br>实时扫描可让您决定哪些内容通过使用浏览器的目标应用，通过BurpProxy服务器进行扫描。您可以实时主动扫描设定live active scanning(积极扫描)和live passive（被动扫描）两种扫描模式。<br>Live Active Scanning：积极扫描。当浏览时自动发送漏洞利用代码。<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045424075.png" alt></p>
+<p>Live Passive Scanning：被动扫描。只分析流量不发送任何请求。<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045429074.png" alt></p>
+<p>3：Issue Definitions<br>漏洞列表，列出了burp可以扫描到的漏洞详情<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045434255.png" alt></p>
+<p>4：Options<br>包含Burp扫描选项进行攻击的插入点，主动扫描引擎，主动扫描优化，主动扫描区和被动扫描区域。<br>1：Attack Insertion Points<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045439303.png" alt></p>
+<p>2：Active Scanning Engine<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045445120.png" alt></p>
+<p>3：Active Scanning Optimization<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045448834.png" alt></p>
+<p>4：Active Scanning Areas<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045454641.png" alt></p>
+<p>5：Passive Scanning Areas<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045458043.png" alt></p>
+<p>6：Static Code Analysis<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164950/20190326045504023.png" alt></p>
+<p>介绍：仅供技术交流学习探讨，请勿用于非法用途。本文部分资源来源于网络，如有侵权请联系版主删除。</p>
+
+      
     </div>
+    
+    
+    
+	
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>纯属好玩，打赏多少您随意！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatimg.jpg" alt="Archimesan 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipayimg.jpg" alt="Archimesan 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Archimesan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archimesan.me/2018/03/26/BurpSuite系列之Scanner模块/" title="BurpSuite系列之Scanner模块">http://archimesan.me/2018/03/26/BurpSuite系列之Scanner模块/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/BurpSuite系列之Spider模块/" rel="next" title="BurpSuite之Spider模块">
+                <i class="fa fa-chevron-left"></i> BurpSuite之Spider模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/28/Burpsuite系列之Intruder模块/" rel="prev" title="Burpsuite系列之Intruder模块">
+                Burpsuite系列之Intruder模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -365,6 +651,17 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -385,8 +682,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -485,6 +791,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -654,6 +976,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -700,6 +1026,30 @@
 
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Archimesan',
+            repo: 'archimesan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '919c0e81082ddaf80a0057732718963ade43a74f',
+            
+                client_id: 'c03fea9aeaee9613c681'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 
