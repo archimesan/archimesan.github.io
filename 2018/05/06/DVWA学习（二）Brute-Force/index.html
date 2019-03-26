@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/锚180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/锚32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/锚16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/锚512.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DVWA,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Archimesan" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="引言DVWA学习（二）Brute Force（暴力破解模块）">
+<meta name="keywords" content="DVWA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DVWA学习（二）Brute Force">
+<meta property="og:url" content="http://archimesan.me/2018/05/06/DVWA学习（二）Brute-Force/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="引言DVWA学习（二）Brute Force（暴力破解模块）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326071837707.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072033918.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072404904.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072436744.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072501647.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072532239.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072629561.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072640144.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072820654.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072842898.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072928707.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072938164.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073409973.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073433422.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073445949.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073457658.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073508810.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073518119.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073529792.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073600338.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073609811.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073619831.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073630632.png">
+<meta property="og:updated_time" content="2019-03-26T11:39:48.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DVWA学习（二）Brute Force">
+<meta name="twitter:description" content="引言DVWA学习（二）Brute Force（暴力破解模块）">
+<meta name="twitter:image" content="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326071837707.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://archimesan.me/2018/05/06/DVWA学习（二）Brute-Force/">
+
+
+
+
+
+  <title>DVWA学习（二）Brute Force | Archimesan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+<a href="https://github.com/archimesan" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Archimesan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">思而不学则殆！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-ctf学习">
+          <a href="/2017/12/14/CTF学习/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            CTF学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://archimesan.me/2018/05/06/DVWA学习（二）Brute-Force/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Archimesan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Archimesan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DVWA学习（二）Brute Force</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T19:15:26+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/DVWA/" itemprop="url" rel="index">
+                    <span itemprop="name">DVWA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/06/DVWA学习（二）Brute-Force/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/06/DVWA学习（二）Brute-Force/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/05/06/DVWA学习（二）Brute-Force/" class="leancloud_visitors" data-flag-title="DVWA学习（二）Brute Force">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+			   <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  22
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>DVWA学习（二）Brute Force（暴力破解模块）<br><a id="more"></a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>暴力破解一般指穷举法，穷举法的基本思想是根据题目的部分条件确定答案的大致范围，并在此范围内对所有可能的情况逐一验证，直到全部情况验证完毕。若某个情况验证符合题目的全部条件，则为本问题的一个解；若全部情况验证后都不符合题目的全部条件，则本题无解。穷举法也称为枚举法。</p>
+<h1 id="Burp-Intruder模块"><a href="#Burp-Intruder模块" class="headerlink" title="Burp Intruder模块"></a>Burp Intruder模块</h1><p>1.Burp Intruder是一个强大的工具，用于自动对Web应用程序自定义的攻击，Burp Intruder 是高度可配置的，并被用来在广范围内进行自动化攻击。</p>
+<p>原理：Intruder在原始请求数据的基础上，通过修改各种请求参数，以获取不同的请求应答。每一次请求中，Intruder通常会携带一个或多个有效攻击载荷（Payload),在不同的位置进行攻击重放，通过应答数据的比对分析来获得需要的特征数据。Burp Intruder通常被使用在以下场景：</p>
+<p>●标识符枚举 Web应用程序经常使用标识符来引用用户、账户、资产等数据信息。例如，用户名，文件ID和账户号码。<br>●提取有用的数据 在某些场景下，而不是简单地识别有效标识符，你需要通过简单标识符提取一些其他的数据。比如说，你想通过用户的个人空间id，获取所有用户在个人空间标准的昵称和年龄。<br>●模糊测试 很多输入型的漏洞，如SQL注入，跨站点脚本和文件路径遍历可以通过请求参数提交各种测试字符串，并分析错误消息和其他异常情况，来对应用程序进行检测。由于的应用程序的大小和复杂性，手动执行这个测试是一个耗时且繁琐的过程。这样的场景，您可以设置Payload，通过Burp Intruder自动化地对Web应用程序进行模糊测试。</p>
+<p>2.Burp Intruder主要有四个模块组成:</p>
+<p>●：Target 用于配置目标服务器进行攻击的详细信息。<br>●：Positions 设置Payloads的插入点以及攻击类型（攻击模式）。<br>●：Payloads 设置payload，配置字典<br>●：Opetions 此选项卡包含了request headers，request engine，attack results ，grep match，grep_extrack，grep payloads和redirections。你可以发动攻击之前，在主要Intruder的UI上编辑这些选项，大部分设置也可以在攻击时对已在运行的窗口进行修改。</p>
+<p><strong>Target 目标选项(Target tab)</strong></p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326071837707.png" alt></p>
+<p><strong>Positions 位置选项(Positions tab)</strong></p>
+<p>这个选项是用来配置在攻击里产生的所有 HTTP 请求的模板：</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072033918.png" alt></p>
+<p><a href="https://blog.csdn.net/huilan_same/article/details/64440284" target="_blank" rel="noopener">Burp Suite Intruder的4种攻击类型</a></p>
+<p><strong>Payloads 有效负荷选项(Payloads tab)</strong></p>
+<p>选项1：Payload Sets Payload数量类型设置</p>
+<p>选项2：Payload Opetions[Simple list] 该选项会根据选项1中Payload type的设置而改变</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072404904.png" alt></p>
+<p>选项3：Payload Processing 对生成的Payload进行编码、加密、截取等操作</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072436744.png" alt></p>
+<p>选项4：Payload Encoding 你可以配置哪些有效载荷中的字符应该是URL编码的HTTP请求中的安全传输。任何已配置的URL编码最后应用，任何有效载荷处理规则执行之后。 这是推荐使用此设置进行最终URL编码，而不是一个有效载荷处理规则，因为可以用来有效载荷的grep选项来检查响应为呼应有效载荷的最终URL编码应用之前。</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072501647.png" alt></p>
+<p><strong>Opetions 选项卡(Options tab)</strong></p>
+<p>选项1：Request Headers 这些设置控制在Intruder是否更新配置请求头。</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072532239.png" alt></p>
+<p>如果选中‘update Content-Length header’框，Burp Intruder 会使用每个请求的 HTTP 主体长度的正确值，添加或更新这个请求里 HTTP 消息头的内容长度。这个功能对一些需要把可变长度的有效载荷插入到 HTTP 请求模板主体的攻击是很有必要的。这个 HTTP 规范和大多数 web 服务器一样，需要使用消息头内容长度来指定 HTTP 主体长度的正确值。如果没有指定正确值，目标服务器会返回一个错误，也可能返回一个未完成的请求，也可能无限期地等待接收请求里的进一步数据。</p>
+<p>如果选中‘set Connection: close’框，则 Burp Intruder 会添加或更新 HTTP 消息头的连接来请求在每个请求后已关闭的连接。在多数情况下，这个选项会让攻击执行得更快。</p>
+<p>选项2：Request Engine 设置发送请求的线程、超时重试等。</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072629561.png" alt></p>
+<p>选项3：Attack Results 设置攻击结果的显示。</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072640144.png" alt></p>
+<p>选项4：Grep - Match Grep Match——这个设置主要用来从响应消息中提取结果项，如果匹配，则在攻击结果中添加的新列中标明，便于排序和数据提取。比如说，在密码猜测攻击，扫描诸如“密码不正确”或“登录成功”，可以找到成功的登录;在测试SQL注入漏洞，扫描包含“ODBC”，“错误”等消息可以识别脆弱的参数</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072820654.png" alt></p>
+<p>选项5：Grep Extract——这些设置可用于提取响应消息中的有用信息。对于列表中配置的每个项目，Burp会增加包含提取该项目的文本的新结果列。然后，您可以排序此列（通过单击列标题）命令所提取的数据。此选项是从应用数据挖掘有用的，能够支持广泛的攻击。例如，如果你是通过一系列文档ID的循环，可以提取每个文档寻找有趣的项目的页面标题。如果您发现返回的其他应用程序用户详细信息的功能，可以通过用户ID重复和检索有关用户寻找管理帐户，甚至密码。如果“遗忘密码”的功能需要一个用户名作为参数，并返回一个用户配置的密码提示，您可以通过共同的用户名列表运行和收获的所有相关密码的提示，然后直观地浏览列表寻找容易被猜到密码。</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072842898.png" alt></p>
+<p>选项6：Grep Payloads——这些设置可用于提取响应消息中是否包含Payload的值，比如说，你想验证反射性的XSS脚本是否成功，可以通过此设置此项。当此项设置后，会在响应的结果列表中，根据Payload组的数目，添加新的列，显示匹配的结果，你可以通过点击列标题对结果集进行排序和查找。</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072928707.png" alt></p>
+<p>选项7：Redirections 重定向响应，重定向（Redirections）——这些设置主要是用来控制执行攻击时Burp如何处理重定向，在实际使用中往往是必须遵循重定向，才能实现你的攻击目的。例如，在密码猜测攻击，每次尝试的结果可能是密码错误会重定向响应到一个错误消息提示页面，如果密码正确会重定向到用户中心的首页。 但设置了重定向也可能会遇到其他的问题，比如说，在某些情况下，应用程序存储您的会话中初始请求的结果，并提供重定向响应时检索此值，这时可能有必要在重定向时只使用一个单线程攻击。也可能会遇到，当你设置重定向，应用程序响应会重定向到注销页面，这时候，按照重定向可能会导致您的会话被终止时.</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326072938164.png" alt></p>
+<p>参考：<a href="https://link.jianshu.com/?t=https://blog.csdn.net/u011781521/article/details/54772795" target="_blank" rel="noopener">BurpSuite系列(五)—-Intruder模块(暴力破解)</a></p>
+<h1 id="Brute-Force（暴力破解）"><a href="#Brute-Force（暴力破解）" class="headerlink" title="Brute Force（暴力破解）"></a>Brute Force（暴力破解）</h1><h2 id="LOW等级"><a href="#LOW等级" class="headerlink" title="LOW等级"></a>LOW等级</h2><p>查看源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">if( isset( $_GET[ &apos;Login&apos; ] ) ) &#123;</span><br><span class="line">// Get username</span><br><span class="line">$user = $_GET[ &apos;username&apos; ];</span><br><span class="line"></span><br><span class="line">// Get password</span><br><span class="line">$pass = $_GET[ &apos;password&apos; ];</span><br><span class="line">$pass = md5( $pass );</span><br><span class="line"></span><br><span class="line">// Check the database</span><br><span class="line">$query = &quot;SELECT * FROM `users` WHERE user = &apos;$user&apos; AND password = &apos;$pass&apos;;&quot;;</span><br><span class="line">$result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;], $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );</span><br><span class="line"></span><br><span class="line">if( $result &amp;&amp; mysqli_num_rows( $result ) == 1 ) &#123;</span><br><span class="line">// Get users details</span><br><span class="line">$row = mysqli_fetch_assoc( $result );</span><br><span class="line">$avatar = $row[&quot;avatar&quot;];</span><br><span class="line"></span><br><span class="line">// Login successful</span><br><span class="line">echo &quot;&lt;p&gt;Welcome to the password protected area &#123;$user&#125;&lt;/p&gt;&quot;;</span><br><span class="line">echo &quot;&lt;img src=\&quot;&#123;$avatar&#125;\&quot; /&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">// Login failed</span><br><span class="line">echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>很明显没有任何过滤，存在SQL注入，因为mysqli_num_rows( $result ) == 1，所以产生的结果数必须为1条,而且密码经过了md5加密，是不可控的，所以只能在username上构造语句:<br>SELECT * FROM ‘users’ WHERE user = ‘1’ or 1=1 limit 0,1#’ AND password = ‘随意填’;</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073409973.png" alt></p>
+<p>当然如果你知道一个用户名为admin的话，也可以构造：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM &apos;users&apos; WHERE user = &apos;admin&apos;#&apos; AND password = &apos;$pass&apos;;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073433422.png" alt></p>
+<p>上面是SQL注入，可是这道题是让暴力破解的，第二种方法：<br>Burp抓包发送到Intruder模块，假设已知管理员用户名admin，需要对password暴破，把password的参数设置为需要破解的变量，只有一个类型使用狙击手模式即可。</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073445949.png" alt></p>
+<p>简单模式，配置字典，也可以加载外部字典</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073457658.png" alt></p>
+<p>也可以设置从响应消息中提取结果</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073508810.png" alt></p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073518119.png" alt></p>
+<p>根据Welcome为对号或者Length不同找到正确的密码</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073529792.png" alt></p>
+<h2 id="Medium等级"><a href="#Medium等级" class="headerlink" title="Medium等级"></a>Medium等级</h2><p>源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">if( isset( $_GET[ &apos;Login&apos; ] ) ) &#123;</span><br><span class="line">// Sanitise username input</span><br><span class="line">$user = $_GET[ &apos;username&apos; ];</span><br><span class="line">$user = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;], $user ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line"></span><br><span class="line">// Sanitise password input</span><br><span class="line">$pass = $_GET[ &apos;password&apos; ];</span><br><span class="line">$pass = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;], $pass ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line">$pass = md5( $pass );</span><br><span class="line"></span><br><span class="line">// Check the database</span><br><span class="line">$query = &quot;SELECT * FROM `users` WHERE user = &apos;$user&apos; AND password = &apos;$pass&apos;;&quot;;</span><br><span class="line">$result = mysqli_query($GLOBALS[&quot;___mysqli_ston&quot;], $query ) or die( &apos;&lt;pre&gt;&apos; . ((is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_error($GLOBALS[&quot;___mysqli_ston&quot;]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . &apos;&lt;/pre&gt;&apos; );</span><br><span class="line"></span><br><span class="line">if( $result &amp;&amp; mysqli_num_rows( $result ) == 1 ) &#123;</span><br><span class="line">// Get users details</span><br><span class="line">$row = mysqli_fetch_assoc( $result );</span><br><span class="line">$avatar = $row[&quot;avatar&quot;];</span><br><span class="line"></span><br><span class="line">// Login successful</span><br><span class="line">echo &quot;&lt;p&gt;Welcome to the password protected area &#123;$user&#125;&lt;/p&gt;&quot;;</span><br><span class="line">echo &quot;&lt;img src=\&quot;&#123;$avatar&#125;\&quot; /&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">// Login failed</span><br><span class="line">sleep( 2 );</span><br><span class="line">echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;/pre&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">((is_null($___mysqli_res = mysqli_close($GLOBALS[&quot;___mysqli_ston&quot;]))) ? false : $___mysqli_res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>跟LOW相比，username和password经过了mysqli_real_escape_string()函数过滤，这个函数会对字符串中的特殊符号（x00，n，r，，’，”，x1a）进行转义，MySQL5.5.37以下版本如果设置编码为GBK，能够构造编码绕过mysql_real_escape_string 对单引号的转义，实验环境为MySQL5.7.21，所以无法进行SQL注入。<br>以及如果密码错误的话会sleep( 2 )，每一次的请求包响应时间由毫秒基本变成了2~10秒。这样大大的增加了我们破解出密码锁需要的时间。步骤与LOW模式一致。<br>这里就当作不知道用户名和密码，添加两个字典用集束炸弹模式用笛卡儿积的方式同时暴破两个参数：</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073600338.png" alt></p>
+<p>设置payload1，2对应的用户名密码字典</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073609811.png" alt></p>
+<p>同样在响应头提取welcome</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073619831.png" alt></p>
+<p>等待筛选到的welcome即可</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/DVWA学习（二）Brute-Force/20190326073630632.png" alt></p>
+<h2 id="High等级"><a href="#High等级" class="headerlink" title="High等级"></a>High等级</h2><p>源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">if( isset( $_POST[ &apos;Login&apos; ] ) &amp;&amp; isset ($_POST[&apos;username&apos;]) &amp;&amp; isset ($_POST[&apos;password&apos;]) ) &#123;</span><br><span class="line">// Check Anti-CSRF token</span><br><span class="line">checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );</span><br><span class="line"></span><br><span class="line">// Sanitise username input</span><br><span class="line">$user = $_POST[ &apos;username&apos; ];</span><br><span class="line">$user = stripslashes( $user );</span><br><span class="line">$user = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;], $user ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line"></span><br><span class="line">// Sanitise password input</span><br><span class="line">$pass = $_POST[ &apos;password&apos; ];</span><br><span class="line">$pass = stripslashes( $pass );</span><br><span class="line">$pass = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;], $pass ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line">$pass = md5( $pass );</span><br><span class="line"></span><br><span class="line">// Default values</span><br><span class="line">$total_failed_login = 3;</span><br><span class="line">$lockout_time = 15;</span><br><span class="line">$account_locked = false;</span><br><span class="line"></span><br><span class="line">// Check the database (Check user information)</span><br><span class="line">$data = $db-&gt;prepare( &apos;SELECT failed_login, last_login FROM users WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">$row = $data-&gt;fetch();</span><br><span class="line"></span><br><span class="line">// Check to see if the user has been locked out.</span><br><span class="line">if( ( $data-&gt;rowCount() == 1 ) &amp;&amp; ( $row[ &apos;failed_login&apos; ] &gt;= $total_failed_login ) ) &#123;</span><br><span class="line">// User locked out. Note, using this method would allow for user enumeration!</span><br><span class="line">//echo &quot;&lt;pre&gt;&lt;br /&gt;This account has been locked due to too many incorrect logins.&lt;/pre&gt;&quot;;</span><br><span class="line"></span><br><span class="line">// Calculate when the user would be allowed to login again</span><br><span class="line">$last_login = strtotime( $row[ &apos;last_login&apos; ] );</span><br><span class="line">$timeout = $last_login + ($lockout_time * 60);</span><br><span class="line">$timenow = time();</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">print &quot;The last login was: &quot; . date (&quot;h:i:s&quot;, $last_login) . &quot;&lt;br /&gt;&quot;;</span><br><span class="line">print &quot;The timenow is: &quot; . date (&quot;h:i:s&quot;, $timenow) . &quot;&lt;br /&gt;&quot;;</span><br><span class="line">print &quot;The timeout is: &quot; . date (&quot;h:i:s&quot;, $timeout) . &quot;&lt;br /&gt;&quot;;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">// Check to see if enough time has passed, if it hasn&apos;t locked the account</span><br><span class="line">if( $timenow &lt; $timeout ) &#123;</span><br><span class="line">$account_locked = true;</span><br><span class="line">// print &quot;The account is locked&lt;br /&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Check the database (if username matches the password)</span><br><span class="line">$data = $db-&gt;prepare( &apos;SELECT * FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR);</span><br><span class="line">$data-&gt;bindParam( &apos;:password&apos;, $pass, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">$row = $data-&gt;fetch();</span><br><span class="line"></span><br><span class="line">// If its a valid login...</span><br><span class="line">if( ( $data-&gt;rowCount() == 1 ) &amp;&amp; ( $account_locked == false ) ) &#123;</span><br><span class="line">// Get users details</span><br><span class="line">$avatar = $row[ &apos;avatar&apos; ];</span><br><span class="line">$failed_login = $row[ &apos;failed_login&apos; ];</span><br><span class="line">$last_login = $row[ &apos;last_login&apos; ];</span><br><span class="line"></span><br><span class="line">// Login successful</span><br><span class="line">echo &quot;&lt;p&gt;Welcome to the password protected area &lt;em&gt;&#123;$user&#125;&lt;/em&gt;&lt;/p&gt;&quot;;</span><br><span class="line">echo &quot;&lt;img src=\&quot;&#123;$avatar&#125;\&quot; /&gt;&quot;;</span><br><span class="line"></span><br><span class="line">// Had the account been locked out since last login?</span><br><span class="line">if( $failed_login &gt;= $total_failed_login ) &#123;</span><br><span class="line">echo &quot;&lt;p&gt;&lt;em&gt;Warning&lt;/em&gt;: Someone might of been brute forcing your account.&lt;/p&gt;&quot;;</span><br><span class="line">echo &quot;&lt;p&gt;Number of login attempts: &lt;em&gt;&#123;$failed_login&#125;&lt;/em&gt;.&lt;br /&gt;Last login attempt was at: &lt;em&gt;$&#123;last_login&#125;&lt;/em&gt;.&lt;/p&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Reset bad login count</span><br><span class="line">$data = $db-&gt;prepare( &apos;UPDATE users SET failed_login = &quot;0&quot; WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">&#125; else &#123;</span><br><span class="line">// Login failed</span><br><span class="line">sleep( rand( 2, 4 ) );</span><br><span class="line"></span><br><span class="line">// Give the user some feedback</span><br><span class="line">echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;br /&gt;&lt;br/&gt;Alternative, the account has been locked because of too many failed logins.&lt;br /&gt;If this is the case, &lt;em&gt;please try again in &#123;$lockout_time&#125; minutes&lt;/em&gt;.&lt;/pre&gt;&quot;;</span><br><span class="line"></span><br><span class="line">// Update bad login count</span><br><span class="line">$data = $db-&gt;prepare( &apos;UPDATE users SET failed_login = (failed_login + 1) WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Set the last login time</span><br><span class="line">$data = $db-&gt;prepare( &apos;UPDATE users SET last_login = now() WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Generate Anti-CSRF token</span><br><span class="line">generateSessionToken();</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到代码中加入了stripslashes()函数对用户名和密码去除字符串中的反斜线字符,如果有两个连续的反斜线,则只去掉一个。<br>同时加入了Token，可以抵御CSRF攻击，同时也增加了爆破的难度，通过抓包，可以看到，登录验证时提交了四个参数：username、password、Login以及user_token。</p>
+<p>每次服务器返回的登陆页面中都会包含一个随机的user_token的值，用户每次登录时都要将user_token一起提交。服务器收到请求后，会优先做token的检查，再进行sql查询。</p>
+<p>由于加入了Anti-CSRFtoken预防无脑爆破，token的值三随机变化的用burp不容易爆破成功。所以需要自己写python脚本html页面中抓取user_token的值然后进行爆破。由于python还没有学，这里先留个坑以后填Impossible级别</p>
+<p>源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if( isset( $_POST[ &apos;Login&apos; ] ) ) &#123;</span><br><span class="line">// Check Anti-CSRF token</span><br><span class="line">checkToken( $_REQUEST[ &apos;user_token&apos; ], $_SESSION[ &apos;session_token&apos; ], &apos;index.php&apos; );</span><br><span class="line">// Sanitise username input</span><br><span class="line">$user = $_POST[ &apos;username&apos; ];</span><br><span class="line">$user = stripslashes( $user );</span><br><span class="line">$user = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;], $user ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line">// Sanitise password input</span><br><span class="line">$pass = $_POST[ &apos;password&apos; ];</span><br><span class="line">$pass = stripslashes( $pass );</span><br><span class="line">$pass = ((isset($GLOBALS[&quot;___mysqli_ston&quot;]) &amp;&amp; is_object($GLOBALS[&quot;___mysqli_ston&quot;])) ? mysqli_real_escape_string($GLOBALS[&quot;___mysqli_ston&quot;], $pass ) : ((trigger_error(&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;, E_USER_ERROR)) ? &quot;&quot; : &quot;&quot;));</span><br><span class="line">$pass = md5( $pass );</span><br><span class="line">// Default values</span><br><span class="line">$total_failed_login = 3;</span><br><span class="line">$lockout_time = 15;</span><br><span class="line">$account_locked = false;</span><br><span class="line">// Check the database (Check user information)</span><br><span class="line">$data = $db-&gt;prepare( &apos;SELECT failed_login, last_login FROM users WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">$row = $data-&gt;fetch();</span><br><span class="line">// Check to see if the user has been locked out.</span><br><span class="line">if( ( $data-&gt;rowCount() == 1 ) &amp;&amp; ( $row[ &apos;failed_login&apos; ] &gt;= $total_failed_login ) ) &#123;</span><br><span class="line">// User locked out. Note, using this method would allow for user enumeration!</span><br><span class="line">//echo &quot;&lt;pre&gt;&lt;br /&gt;This account has been locked due to too many incorrect logins.&lt;/pre&gt;&quot;;</span><br><span class="line">// Calculate when the user would be allowed to login again</span><br><span class="line">$last_login = strtotime( $row[ &apos;last_login&apos; ] );</span><br><span class="line">$timeout = $last_login + ($lockout_time * 60);</span><br><span class="line">$timenow = time();</span><br><span class="line">/*</span><br><span class="line">print &quot;The last login was: &quot; . date (&quot;h:i:s&quot;, $last_login) . &quot;&lt;br /&gt;&quot;;</span><br><span class="line">print &quot;The timenow is: &quot; . date (&quot;h:i:s&quot;, $timenow) . &quot;&lt;br /&gt;&quot;;</span><br><span class="line">print &quot;The timeout is: &quot; . date (&quot;h:i:s&quot;, $timeout) . &quot;&lt;br /&gt;&quot;;</span><br><span class="line">*/</span><br><span class="line">// Check to see if enough time has passed, if it hasn&apos;t locked the account</span><br><span class="line">if( $timenow &lt; $timeout ) &#123;</span><br><span class="line">$account_locked = true;</span><br><span class="line">// print &quot;The account is locked&lt;br /&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">// Check the database (if username matches the password)</span><br><span class="line">$data = $db-&gt;prepare( &apos;SELECT * FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR);</span><br><span class="line">$data-&gt;bindParam( &apos;:password&apos;, $pass, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">$row = $data-&gt;fetch();</span><br><span class="line">// If its a valid login...</span><br><span class="line">if( ( $data-&gt;rowCount() == 1 ) &amp;&amp; ( $account_locked == false ) ) &#123;</span><br><span class="line">// Get users details</span><br><span class="line">$avatar = $row[ &apos;avatar&apos; ];</span><br><span class="line">$failed_login = $row[ &apos;failed_login&apos; ];</span><br><span class="line">$last_login = $row[ &apos;last_login&apos; ];</span><br><span class="line">// Login successful</span><br><span class="line">echo &quot;&lt;p&gt;Welcome to the password protected area &lt;em&gt;&#123;$user&#125;&lt;/em&gt;&lt;/p&gt;&quot;;</span><br><span class="line">echo &quot;&lt;img src=\&quot;&#123;$avatar&#125;\&quot; /&gt;&quot;;</span><br><span class="line">// Had the account been locked out since last login?</span><br><span class="line">if( $failed_login &gt;= $total_failed_login ) &#123;</span><br><span class="line">echo &quot;&lt;p&gt;&lt;em&gt;Warning&lt;/em&gt;: Someone might of been brute forcing your account.&lt;/p&gt;&quot;;</span><br><span class="line">echo &quot;&lt;p&gt;Number of login attempts: &lt;em&gt;&#123;$failed_login&#125;&lt;/em&gt;.&lt;br /&gt;Last login attempt was at: &lt;em&gt;$&#123;last_login&#125;&lt;/em&gt;.&lt;/p&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">// Reset bad login count</span><br><span class="line">$data = $db-&gt;prepare( &apos;UPDATE users SET failed_login = &quot;0&quot; WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">&#125; else &#123;</span><br><span class="line">// Login failed</span><br><span class="line">sleep( rand( 2, 4 ) );</span><br><span class="line">// Give the user some feedback</span><br><span class="line">echo &quot;&lt;pre&gt;&lt;br /&gt;Username and/or password incorrect.&lt;br /&gt;&lt;br/&gt;Alternative, the account has been locked because of too many failed logins.&lt;br /&gt;If this is the case, &lt;em&gt;please try again in &#123;$lockout_time&#125; minutes&lt;/em&gt;.&lt;/pre&gt;&quot;;</span><br><span class="line">// Update bad login count</span><br><span class="line">$data = $db-&gt;prepare( &apos;UPDATE users SET failed_login = (failed_login + 1) WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">&#125;</span><br><span class="line">// Set the last login time</span><br><span class="line">$data = $db-&gt;prepare( &apos;UPDATE users SET last_login = now() WHERE user = (:user) LIMIT 1;&apos; );</span><br><span class="line">$data-&gt;bindParam( &apos;:user&apos;, $user, PDO::PARAM_STR );</span><br><span class="line">$data-&gt;execute();</span><br><span class="line">&#125;</span><br><span class="line">// Generate Anti-CSRF token</span><br><span class="line">generateSessionToken();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>相比于High难度，当输入错误failed_login=3，$last_login + ($lockout_time * 60); 锁定15分钟以及随机sleep(rand(2,4)),防止了爆破。<br>而且在与数据库交互时采用PDO（PHP Data Object，PHP数据对象）机制。<br>因为两次传输，前一次传一个sql模板，第二次传查询参数，会把第二步传入的参数只做查询参数处理，不做语义解释，这样注入的条件就算执行了，也不会得到查询结果。</p>
+<p>当调用 prepare() 时，查询语句已经发送给了数据库服务器，此时只有占位符 ? 发送过去，没有用户提交的数据；当调用到 execute()时，用户提交过来的值才会传送给数据库，他们是分开传送的，两者独立的，SQL攻击者没有一点机会。</p>
+<p><a href="https://link.jianshu.com/?t=http://www.freebuf.com/articles/web/116437.html" target="_blank" rel="noopener">新手指南：DVWA-1.9全级别教程之Brute Force</a></p>
+<p>介绍：仅供技术交流学习探讨，请勿用于非法用途。本文部分资源来源于网络，如有侵权请联系版主删除。</p>
+
+      
+    </div>
+    
+    
+    
+	
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>纯属好玩，打赏多少您随意！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatimg.jpg" alt="Archimesan 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipayimg.jpg" alt="Archimesan 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Archimesan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archimesan.me/2018/05/06/DVWA学习（二）Brute-Force/" title="DVWA学习（二）Brute Force">http://archimesan.me/2018/05/06/DVWA学习（二）Brute-Force/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DVWA/" rel="tag"><i class="fa fa-tag"></i> DVWA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/01/DVWA学习（一）环境搭建/" rel="next" title="DVWA学习（一）环境搭建">
+                <i class="fa fa-chevron-left"></i> DVWA学习（一）环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/DVWA学习（三）SQL-Injection/" rel="prev" title="DVWA学习（三）SQL Injection">
+                DVWA学习（三）SQL Injection <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Archimesan">
+            
+              <p class="site-author-name" itemprop="name">Archimesan</p>
+              <p class="site-description motion-element" itemprop="description">Archimesan's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/archimesan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/472e95eede02" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://archimesan.me" title="Archimesan" target="_blank">Archimesan</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Burp-Intruder模块"><span class="nav-number">3.</span> <span class="nav-text">Burp Intruder模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Brute-Force（暴力破解）"><span class="nav-number">4.</span> <span class="nav-text">Brute Force（暴力破解）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LOW等级"><span class="nav-number">4.1.</span> <span class="nav-text">LOW等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Medium等级"><span class="nav-number">4.2.</span> <span class="nav-text">Medium等级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#High等级"><span class="nav-number">4.3.</span> <span class="nav-text">High等级</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Archimesan</span>
+
+<!--
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">59.9k</span>
+  
+-->
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  海贼访客数:<span id="busuanzi_value_site_uv"></span>次
+</span>
+</div>
+
+<!--
+<span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+-->
+<span class="post-meta-divider">|</span>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共59.9k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Archimesan',
+            repo: 'archimesan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '919c0e81082ddaf80a0057732718963ade43a74f',
+            
+                client_id: 'c03fea9aeaee9613c681'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("E7EEUaXt29pp5R2Rg0UEFxgk-gzGzoHsz", "KHszTeqDtEVA5SDGOtaizaNr");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<!-- 页面点击小红心，在末尾添加，避免找不到 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</html>

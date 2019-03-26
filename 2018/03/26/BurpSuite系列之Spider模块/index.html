@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044239593.png">
 <meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044246271.png">
 <meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044253928.png">
-<meta property="og:updated_time" content="2019-03-26T09:18:38.088Z">
+<meta property="og:updated_time" content="2019-03-26T11:00:18.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BurpSuite之Spider模块">
 <meta name="twitter:description" content="引言BurpSuite之Spider模块(蜘蛛爬行)">
@@ -478,7 +478,7 @@
 <p><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044124622.png" alt></p>
 <p>选项一、Contro<br>用来开始和停止 Burp Spider，监视它的进度，以及定义 spidering 的范围。<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044209596.png" alt><br>选项二、Options<br>这个选项里包含了许多控制 Burp Spider 动作的选项。<br>1：Crawler Settings<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044216519.png" alt><br>● check robots.txt：检测robot.txt文件。选择后Burp Spider会要求和处理robots.txt文件，提取内容链接。<br>● Detect custom “not found” responese：检测自定义的’not found’响应。打开后Burp Spider会从每个域请求不存在的资源，编制指纹与诊断“not found”响应其它请求检测自定义“not found”的响应。<br>● ignore links to non-text content：忽略非文本内容的连接。这个选项被选中，Spider 不会请求非文本资源。使用这个选项，会减少 spidering 时间。<br>● request the root of all directories：请求所有的根目录。如果这个选项被选中，Burp Spider 会请求所有已确认的目标范围内的 web 目录，如果在这个目标站点存在目录遍历， 这选项将是非常的有用。<br>● make a non-parameterized request to each dynamic page：对每个动态页面进行非参数化的请求。如果这个选项被选中，Burp Spider 会对在范围内的所有执行动作的 URL 进行无参数的 GET 请求。如果期待的参数没有被接收， 动态页面会有不同的响应，这个选项就能成功地探测出额外的站点内容和功能。<br>● Maximum link depth：这是Burp Suite在种子 URL 里的浏览”hops”的最大数。0表示让Burp Suite只请求种子 URL。如果指定的数值非常大，将会对范围内的链接进行无限期的有效跟踪。将此选项设置为一个合理的数字可以帮助防止循环Spider在某些种类的动态生成的内容。<br>● Maximum parameterized requests per URL：请求该蜘蛛用不同的参数相同的基本URL的最大数目。将此选项设置为一个合理的数字可以帮助避免爬行“无限”的内容。<br>2：Passive Spidering<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044225919.png" alt><br>● Passively spider as you browse:如果这个选项被选中，Burp Suite 会被动地处理所有通过 Burp Proxy 的 HTTP 请求，来确认访问页面上的链接和表格。使用这个选项能让 Burp Spider 建立一个包含应用程序内容的详细画面，甚至此时你仅仅使用浏览器浏览了内容的一个子集，因为所有被访问内容链接到内容都会自动地添加到 Suite 的站点地图上。<br>● link depth to associate with proxy requests:这个选项控制着与通过 Burp Proxy 访问的 web 页面 有关的” link depth”。为了防止 Burp Spider 跟踪这个页面里的所有链接，要设置一个比上面 选项卡里的” maximum link depth”值还高的一个值。<br>3：Form Submission<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044233259.png" alt><br>● individuate forms：个性化的形式。这个选项是配置个性化的标准(执行 URL，方法，区域，值)。当 Burp Spider 处理这些表格时，它会检查这些标准以确认表格是否是新的。旧的表格不会加入到提交序列。<br>● Don’t submit：开启后蜘蛛不会提交任何表单。<br>● prompt for guidance：提醒向导。如果被选中，在你提交每一个确认的表单前，Burp Suite 都会为你指示引导。这允许你根据需要在输入域中填写自定义的数据，以及选项提交到服务器的哪一个区域。<br>● automatically submit：自动提交。如果选中，Burp Spider 通过使用定义的规则来填写输入域的文本值来自动地提交范围内的表单。每一条规则让你指定一个简单的文本或者正则表达式来匹配表单字段名，并提交那些表单名匹配的字段值。<br>● set unmatched fields to：设置不匹配的字段。<br>4：application login<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044239593.png" alt><br>● don’t submit login forms：不提交登录表单。开启后burp不会提交登录表单。<br>● prompt for guidance：提示向导。Burp能交互地为你提示引导。默认设置项。<br>● handle as ordinary forms：以一般形式处理。Burp 通过你配置的信息和自动填充规则，用处理其他表单的方式来处理登陆表单。<br>● automatically submit these credentials：自动提交自定义的数据。开启后burp遇到登录表单会按照设定的值进行提交。<br>5：Spider Engine<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044246271.png" alt><br>● Number of threads – 设置请求线程。控制并发请求数。<br>● Number of retries on network failure – 如果出现连接错误或其他网络问题，Burp会放弃和移动之前重试的请求指定的次数。测试时间歇性网络故障是常见的，所以最好是在发生故障时重试该请求了好几次。<br>● Pause before retry – 当重试失败的请求，Burp会等待指定的时间（以毫秒为单位）以下，然后重试失败。如果服务器宕机，繁忙，或间歇性的问题发生，最好是等待很短的时间，然后重试。<br>● Throttle between requests：在每次请求之前等待一个指定的延迟（以毫秒为单位）。此选项很有用，以避免超载应用程序，或者是更隐蔽。<br>● Add random variations to throttle：添加随机的变化到请求中。增加隐蔽性。<br>6：Request Headers<br><img src="http://poysl5u4h.bkt.clouddn.com/20190326164000/20190326044253928.png" alt><br>您可以配置头蜘蛛在请求中使用的自定义列表。这可能是有用的，以满足各个应用程序的特定要求 – 例如，测试设计用于移动设备的应用程序时，以模拟预期的用户代理。</p>
 <p>● Use HTTP version 1.1 ：在蜘蛛请求中使用HTTP/1.1，不选中则使用HTTP/1.0.<br>● Use Referer header：当从一个页面访问另一个页面是加入Referer头，这将更加相似与浏览器访问。</p>
-<p>介绍：仅供技术交流学习探讨，请勿用于非法用途,。本文部分资源来源于网络，如有侵权请联系版主删除。</p>
+<p>介绍：仅供技术交流学习探讨，请勿用于非法用途。本文部分资源来源于网络，如有侵权请联系版主删除。</p>
 
       
     </div>
@@ -691,7 +691,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,7 +702,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -713,7 +713,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -819,7 +819,7 @@ var jiathis_config={
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">41.4k</span>
+    <span title="Site words total count">59.9k</span>
   
 -->
 </div>
@@ -852,7 +852,7 @@ var jiathis_config={
 <span class="post-meta-divider">|</span>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共41.4k字</span>
+  <span class="post-count">博客全站共59.9k字</span>
 </div>
 
         
