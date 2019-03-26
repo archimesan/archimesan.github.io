@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/锚180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/锚32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/锚16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/锚512.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Archimesan" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="引言Burpsuite系列之Intruder模块（暴力破解）">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Burpsuite系列之Intruder模块">
+<meta property="og:url" content="http://archimesan.me/2018/03/28/Burpsuite系列之Intruder模块/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="引言Burpsuite系列之Intruder模块（暴力破解）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326045934997.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326045943778.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050105567.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050110646.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050118376.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050127313.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050133518.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050138437.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050144205.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050150284.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050203273.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/attack NO.location Alocation B11no replace22no replace3no replace14no replace2二Battering ram（.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/attack NO.location Alocation B111222.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326051341304.png">
+<meta property="og:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326051412843.png">
+<meta property="og:updated_time" content="2019-03-26T09:18:06.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Burpsuite系列之Intruder模块">
+<meta name="twitter:description" content="引言Burpsuite系列之Intruder模块（暴力破解）">
+<meta name="twitter:image" content="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326045934997.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://archimesan.me/2018/03/28/Burpsuite系列之Intruder模块/">
+
+
+
+
+
+  <title>Burpsuite系列之Intruder模块 | Archimesan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+<a href="https://github.com/archimesan" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Archimesan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">思而不学则殆！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-ctf学习">
+          <a href="/2017/12/14/CTF学习/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            CTF学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://archimesan.me/2018/03/28/Burpsuite系列之Intruder模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Archimesan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Archimesan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Burpsuite系列之Intruder模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T16:56:20+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件安装与使用/" itemprop="url" rel="index">
+                    <span itemprop="name">软件安装与使用</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件安装与使用/Burpsuite/" itemprop="url" rel="index">
+                    <span itemprop="name">Burpsuite</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/28/Burpsuite系列之Intruder模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/03/28/Burpsuite系列之Intruder模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/03/28/Burpsuite系列之Intruder模块/" class="leancloud_visitors" data-flag-title="Burpsuite系列之Intruder模块">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+			   <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>Burpsuite系列之Intruder模块（暴力破解）<br><a id="more"></a></p>
+<h1 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h1><p>Burp Intruder是一个强大的工具，用于自动对Web应用程序自定义的攻击，Burp Intruder 是高度可配置的，并被用来在广范围内进行自动化攻击。你可以使用 Burp Intruder 方便地执行许多任务，包括枚举标识符，获取有用数据，漏洞模糊测试。合适的攻击类型取决于应用程序的情况，可能包括：缺陷测试：SQL 注入，跨站点脚本，缓冲区溢出，路径遍历；暴力攻击认证系统；枚举；操纵参数；拖出隐藏的内容和功能；会话令牌测序和会话劫持；数据挖掘；并发攻击；应用层的拒绝服务式攻击。</p>
+<h1 id="二、模块说明"><a href="#二、模块说明" class="headerlink" title="二、模块说明"></a>二、模块说明</h1><p>Burp Intruder主要有四个模块组成:</p>
+<p>1：Target 用于配置目标服务器进行攻击的详细信息。<br>2：Positions  设置Payloads的插入点以及攻击类型（攻击模式）。<br>3：Payloads  设置payload，配置字典<br>4：Opetions   此选项卡包含了request headers，request engine，attack results ，grep match，grep_extrack，grep payloads和redirections。你可以发动攻击之前，在主要Intruder的UI上编辑这些选项，大部分设置也可以在攻击时对已在运行的窗口进行修改。</p>
+<h2 id="Target-目标选项-Target-tab"><a href="#Target-目标选项-Target-tab" class="headerlink" title="Target 目标选项(Target tab)"></a>Target 目标选项(Target tab)</h2><p>这个选项是用来配置目标服务器的细节：<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326045934997.png" alt></p>
+<h2 id="Positions-位置选项-Positions-tab"><a href="#Positions-位置选项-Positions-tab" class="headerlink" title="Positions 位置选项(Positions tab)"></a>Positions 位置选项(Positions tab)</h2><p>这个选项是用来配置在攻击里产生的所有 HTTP 请求的模板：<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326045943778.png" alt><br>使用一对§字符来标记出有效负荷的位置，在这两个符号直接包含了模板文本的内容。当把一个有效负荷放置到一个给出的请求的特殊位置上时，就把这§符号放到这个位置，然后在两个符号之间的出现的文本都会被有效负荷替换。当有个特殊位置没有为一个给出的请求安排有效负荷时(这只适用”sniper”攻击类型)，那个位置的§字符会被删除，出现在它们之间的文本不会变化。</p>
+<p>当使用 Burp Suite 发送一个其他地方的请求时，Burp Intruder 会对你最想放置有效负荷的位置做一个最好的猜测，并且它把这些放置在每个 URL 和主体参数的值里，以及每个cookie 里。每个标记和它中间的文本都会被加亮以显得更清晰。你可以使用 Intruder 菜单上的选项标记的位置是要替换还是附加现有的参数值。在上面的请求编辑器里，指出了定义位置的数量和文本模板的大小。<br>你可以使用选项上的按钮来控制位置上的标记：</p>
+<h4 id="add-§-—-在当前光标位置插入一个位置标记。"><a href="#add-§-—-在当前光标位置插入一个位置标记。" class="headerlink" title="add § — 在当前光标位置插入一个位置标记。"></a>add § — 在当前光标位置插入一个位置标记。</h4><h3 id="clear-§-—-删除整个模板或选中的部分模板里的位置标记。"><a href="#clear-§-—-删除整个模板或选中的部分模板里的位置标记。" class="headerlink" title="clear § — 删除整个模板或选中的部分模板里的位置标记。"></a>clear § — 删除整个模板或选中的部分模板里的位置标记。</h3><h3 id="auto-§-—-这会对放置标记的位置做一个猜测，放哪里会有用，然后就把标记放到相应位置。这是一个为攻击常规漏洞-SQL-注入-快速标记出合适位置的有用的功能，然后人工标记是为自定义攻击的。"><a href="#auto-§-—-这会对放置标记的位置做一个猜测，放哪里会有用，然后就把标记放到相应位置。这是一个为攻击常规漏洞-SQL-注入-快速标记出合适位置的有用的功能，然后人工标记是为自定义攻击的。" class="headerlink" title="auto § — 这会对放置标记的位置做一个猜测，放哪里会有用，然后就把标记放到相应位置。这是一个为攻击常规漏洞(SQL 注入)快速标记出合适位置的有用的功能，然后人工标记是为自定义攻击的。"></a>auto § — 这会对放置标记的位置做一个猜测，放哪里会有用，然后就把标记放到相应位置。这是一个为攻击常规漏洞(SQL 注入)快速标记出合适位置的有用的功能，然后人工标记是为自定义攻击的。</h3><h3 id="refresh-—-如果需要，可以刷新编辑器里有颜色的代码。"><a href="#refresh-—-如果需要，可以刷新编辑器里有颜色的代码。" class="headerlink" title="refresh — 如果需要，可以刷新编辑器里有颜色的代码。"></a>refresh — 如果需要，可以刷新编辑器里有颜色的代码。</h3><h3 id="clear-—-删除整个编辑器内容。"><a href="#clear-—-删除整个编辑器内容。" class="headerlink" title="clear — 删除整个编辑器内容。"></a>clear — 删除整个编辑器内容。</h3><h2 id="Payloads-有效负荷选项-Payloads-tab"><a href="#Payloads-有效负荷选项-Payloads-tab" class="headerlink" title="Payloads 有效负荷选项(Payloads tab)"></a>Payloads 有效负荷选项(Payloads tab)</h2><p>这个选项是用来配置一个或多个有效负荷的集合。如果定义了”cluster bomb”和”pitchfork”攻击类型，然后必须为每定义的有效负荷位置(最多8个)配置一个单独的有效负荷。使用”payload set”下拉菜单选择要配置的有效负荷。<br>选项1：Payload Sets Payload数量类型设置<br>选项2：Payload Opetions[Simple list]  该选项会根据选项1中Payload type的设置而改变<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050105567.png" alt></p>
+<p>选项3：Payload Processing 对生成的Payload进行编码、加密、截取等操作<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050110646.png" alt></p>
+<p>选项4：Payload Encoding 你可以配置哪些有效载荷中的字符应该是URL编码的HTTP请求中的安全传输。任何已配置的URL编码最后应用，任何有效载荷处理规则执行之后。 这是推荐使用此设置进行最终URL编码，而不是一个有效载荷处理规则，因为可以用来有效载荷的grep选项来检查响应为呼应有效载荷的最终URL编码应用之前。<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050118376.png" alt></p>
+<h2 id="Opetions-选项卡-Options-tab"><a href="#Opetions-选项卡-Options-tab" class="headerlink" title="Opetions  选项卡(Options tab)"></a>Opetions  选项卡(Options tab)</h2><p>此选项卡包含了request headers，request engine，attack results ，grep match，grep_extrack，grep payloads和redirections。你可以发动攻击之前，在主要Intruder的UI上编辑这些选项，大部分设置也可以在攻击时对已在运行的窗口进行修改。<br>选项1：Request Headers 这些设置控制在Intruder是否更新配置请求头。</p>
+<p>如果选中‘update Content-Length header’框，Burp Intruder 会使用每个请求的 HTTP 主体长度的正确值，添加或更新这个请求里 HTTP 消息头的内容长度。这个功能对一些需要把可变长度的有效载荷插入到 HTTP 请求模板主体的攻击是很有必要的。这个 HTTP 规范和大多数 web 服务器一样，需要使用消息头内容长度来指定 HTTP 主体长度的正确值。</p>
+<p>如果没有指定正确值，目标服务器会返回一个错误，也可能返回一个未完成的请求，也可能无限期地等待接收请求里的进一步数据。</p>
+<p>如果选中‘set Connection: close’框，则 Burp Intruder 会添加或更新 HTTP 消息头的连接来请求在每个请求后已关闭的连接。在多数情况下，这个选项会让攻击执行得更快。<br>选项2：Request Engine 设置发送请求的线程、超时重试等。<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050127313.png" alt></p>
+<p>选项3：Attack Results 设置攻击结果的显示。<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050133518.png" alt></p>
+<p>选项4：Grep – Match 在响应中找出存在指定的内容的一项。<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050138437.png" alt></p>
+<p>选项5：Grep – Extract 通过正则提取返回信息中的内容。<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050144205.png" alt></p>
+<p>选项6：Grep – Payloads  这些设置可以用于包含已提交的有效负载的反射的标志结果项目。如果启用了此选项，BurpSuite会添加包含一个复选框指示当前负载的值在每个响应发现新的结果列。<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050150284.png" alt></p>
+<p>选项7：Redirections 重定向响应，控制Burp在进行攻击时如何处理重定向。<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326050203273.png" alt></p>
+<h1 id="Burp-Suite-Intruder的4种攻击类型"><a href="#Burp-Suite-Intruder的4种攻击类型" class="headerlink" title="Burp Suite Intruder的4种攻击类型"></a>Burp Suite Intruder的4种攻击类型</h1><h2 id="Sniper（狙击手模式）"><a href="#Sniper（狙击手模式）" class="headerlink" title="Sniper（狙击手模式）"></a>Sniper（狙击手模式）</h2><p>狙击手模式使用一组payload集合，它一次只使用一个payload位置，假设你标记了两个位置“A”和“B”，payload值为“1”和“2”，那么它攻击会形成以下组合（除原始数据外）：<img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/attack NO.location Alocation B11no replace22no replace3no replace14no replace2二Battering ram（.png" alt="attack NO.location Alocation B11no replace22no replace3no replace14no replace2"></p>
+<h2 id="Battering-ram（攻城锤模式）"><a href="#Battering-ram（攻城锤模式）" class="headerlink" title="Battering ram（攻城锤模式）"></a>Battering ram（攻城锤模式）</h2><p>攻城锤模式与狙击手模式类似的地方是，同样只使用一个payload集合，不同的地方在于每次攻击都是替换所有payload标记位置，而狙击手模式每次只能替换一个payload标记位置。<img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/attack NO.location Alocation B111222.png" alt="attack NO.location Alocation B111222"></p>
+<h2 id="Pitchfork（草叉模式）"><a href="#Pitchfork（草叉模式）" class="headerlink" title="Pitchfork（草叉模式）"></a>Pitchfork（草叉模式）</h2><p>草叉模式允许使用多组payload组合，在每个标记位置上遍历所有payload组合，假设有两个位置“A”和“B”，payload组合1的值为“1”和“2”，payload组合2的值为“3”和“4”，则攻击模式如下：<br><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326051341304.png" alt></p>
+<h2 id="Cluster-bomb（集束炸弹模式）"><a href="#Cluster-bomb（集束炸弹模式）" class="headerlink" title="Cluster bomb（集束炸弹模式）"></a>Cluster bomb（集束炸弹模式）</h2><p>集束炸弹模式跟草叉模式不同的地方在于，集束炸弹模式会对payload组进行笛卡尔积，还是上面的例子，如果用集束炸弹模式进行攻击，则除baseline请求外，会有四次请求：</p>
+<p><img src="http://poysl5u4h.bkt.clouddn.com/Burpsuite系列之Intruder模块/20190326051412843.png" alt></p>
+<p>介绍：仅供技术交流学习探讨，请勿用于非法用途,。本文部分资源来源于网络，如有侵权请联系版主删除。</p>
+
+      
+    </div>
+    
+    
+    
+	
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>纯属好玩，打赏多少您随意！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatimg.jpg" alt="Archimesan 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipayimg.jpg" alt="Archimesan 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Archimesan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archimesan.me/2018/03/28/Burpsuite系列之Intruder模块/" title="Burpsuite系列之Intruder模块">http://archimesan.me/2018/03/28/Burpsuite系列之Intruder模块/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/BurpSuite系列之Spider模块/" rel="next" title="BurpSuite之Spider模块">
+                <i class="fa fa-chevron-left"></i> BurpSuite之Spider模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/02/BurpSuite系列之Sequencer模块/" rel="prev" title="BurpSuite系列之Sequencer模块">
+                BurpSuite系列之Sequencer模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Archimesan">
+            
+              <p class="site-author-name" itemprop="name">Archimesan</p>
+              <p class="site-description motion-element" itemprop="description">Archimesan's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/archimesan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/472e95eede02" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://archimesan.me" title="Archimesan" target="_blank">Archimesan</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、简介"><span class="nav-number">2.</span> <span class="nav-text">一、简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、模块说明"><span class="nav-number">3.</span> <span class="nav-text">二、模块说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Target-目标选项-Target-tab"><span class="nav-number">3.1.</span> <span class="nav-text">Target 目标选项(Target tab)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Positions-位置选项-Positions-tab"><span class="nav-number">3.2.</span> <span class="nav-text">Positions 位置选项(Positions tab)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add-§-—-在当前光标位置插入一个位置标记。"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">add § — 在当前光标位置插入一个位置标记。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear-§-—-删除整个模板或选中的部分模板里的位置标记。"><span class="nav-number">3.2.1.</span> <span class="nav-text">clear § — 删除整个模板或选中的部分模板里的位置标记。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auto-§-—-这会对放置标记的位置做一个猜测，放哪里会有用，然后就把标记放到相应位置。这是一个为攻击常规漏洞-SQL-注入-快速标记出合适位置的有用的功能，然后人工标记是为自定义攻击的。"><span class="nav-number">3.2.2.</span> <span class="nav-text">auto § — 这会对放置标记的位置做一个猜测，放哪里会有用，然后就把标记放到相应位置。这是一个为攻击常规漏洞(SQL 注入)快速标记出合适位置的有用的功能，然后人工标记是为自定义攻击的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#refresh-—-如果需要，可以刷新编辑器里有颜色的代码。"><span class="nav-number">3.2.3.</span> <span class="nav-text">refresh — 如果需要，可以刷新编辑器里有颜色的代码。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear-—-删除整个编辑器内容。"><span class="nav-number">3.2.4.</span> <span class="nav-text">clear — 删除整个编辑器内容。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Payloads-有效负荷选项-Payloads-tab"><span class="nav-number">3.3.</span> <span class="nav-text">Payloads 有效负荷选项(Payloads tab)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Opetions-选项卡-Options-tab"><span class="nav-number">3.4.</span> <span class="nav-text">Opetions  选项卡(Options tab)</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Burp-Suite-Intruder的4种攻击类型"><span class="nav-number">4.</span> <span class="nav-text">Burp Suite Intruder的4种攻击类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sniper（狙击手模式）"><span class="nav-number">4.1.</span> <span class="nav-text">Sniper（狙击手模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Battering-ram（攻城锤模式）"><span class="nav-number">4.2.</span> <span class="nav-text">Battering ram（攻城锤模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pitchfork（草叉模式）"><span class="nav-number">4.3.</span> <span class="nav-text">Pitchfork（草叉模式）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster-bomb（集束炸弹模式）"><span class="nav-number">4.4.</span> <span class="nav-text">Cluster bomb（集束炸弹模式）</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Archimesan</span>
+
+<!--
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">41.4k</span>
+  
+-->
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  海贼访客数:<span id="busuanzi_value_site_uv"></span>次
+</span>
+</div>
+
+<!--
+<span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+-->
+<span class="post-meta-divider">|</span>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共41.4k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Archimesan',
+            repo: 'archimesan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '919c0e81082ddaf80a0057732718963ade43a74f',
+            
+                client_id: 'c03fea9aeaee9613c681'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("E7EEUaXt29pp5R2Rg0UEFxgk-gzGzoHsz", "KHszTeqDtEVA5SDGOtaizaNr");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<!-- 页面点击小红心，在末尾添加，避免找不到 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</html>
