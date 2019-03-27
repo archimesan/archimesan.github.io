@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/锚180.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/锚32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/锚16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/锚512.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sql注入,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Archimesan" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="引言SQLi-LABS 学习SQL注入(less 1-less 22)">
+<meta name="keywords" content="sql注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLi-LABS 学习SQL注入1">
+<meta property="og:url" content="http://archimesan.me/2018/06/01/SQLi-LABS-学习SQL注入_1/index.html">
+<meta property="og:site_name" content="Archimesan">
+<meta property="og:description" content="引言SQLi-LABS 学习SQL注入(less 1-less 22)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327120806503.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125014669.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125034524.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125047261.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125057959.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/图片.png.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125130035.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125152211.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125202531.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125216556.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125300654.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/图片.png1.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125330634.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125341593.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125402134.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125415438.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125425481.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125507117.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125525125.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125507117.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125540177.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/图片.png2.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125612908.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125623279.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125634649.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125643463.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125649568.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125657325.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327125705465.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010120645.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010137371.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010144547.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010214934.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010232536.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010312438.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010322431.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010332050.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010437721.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010725295.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010739592.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010749207.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010834731.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327010852000.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011135003.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011147798.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011209337.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011238124.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011406347.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011417120.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011446658.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011501411.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011536263.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011557607.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011612178.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011623357.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011635743.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011646781.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011657366.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011712048.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011732912.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011748231.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011759626.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011811388.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011822831.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011835149.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011858091.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327011959345.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012007235.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012200415.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012230713.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012512983.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012525134.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012534475.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012543876.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012558948.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012613692.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012620995.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012633827.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012643631.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012653168.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012721416.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012730874.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012740002.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012752819.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012759666.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012811914.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012823454.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012954436.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327012833476.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327013018759.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327013032104.png">
+<meta property="og:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327013041026.png">
+<meta property="og:updated_time" content="2019-03-27T05:33:15.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLi-LABS 学习SQL注入1">
+<meta name="twitter:description" content="引言SQLi-LABS 学习SQL注入(less 1-less 22)">
+<meta name="twitter:image" content="http://archimesan.me/SQLi-LABS-学习SQL注入_1/20190327120806503.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://archimesan.me/2018/06/01/SQLi-LABS-学习SQL注入_1/">
+
+
+
+
+
+  <title>SQLi-LABS 学习SQL注入1 | Archimesan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+<a href="https://github.com/archimesan" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Archimesan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">思而不学则殆！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-ctf学习">
+          <a href="/2017/12/14/CTF学习/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            CTF学习
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://archimesan.me/2018/06/01/SQLi-LABS-学习SQL注入_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Archimesan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Archimesan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQLi-LABS 学习SQL注入1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T12:01:34+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/01/SQLi-LABS-学习SQL注入_1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/06/01/SQLi-LABS-学习SQL注入_1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/06/01/SQLi-LABS-学习SQL注入_1/" class="leancloud_visitors" data-flag-title="SQLi-LABS 学习SQL注入1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+			   <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>SQLi-LABS 学习SQL注入(less 1-less 22)<br><a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET和POST的区别及get和post关于请求的编解码的问题</span><br><span class="line">GET请求中对MySQL的注释：-- ，--+</span><br><span class="line">POST请求对MySQL的注释：-- ，#</span><br><span class="line">注意:--后面必须跟空格，一般可以写--空格+字母 如：-- k来进行注释</span><br></pre></td></tr></table></figure>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327120806503.png" alt></p>
+<h2 id="less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入"><a href="#less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入" class="headerlink" title="less 1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)"></a>less 1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)</h2><p>先id=1’，发现报错</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125014669.png" alt></p>
+<p>分析’’1’’ LIMIT 0,1’，除去首尾两个自动加上的单引号可以猜测出来是单引号闭合。</p>
+<p>接下来是猜字段：</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125034524.png" alt></p>
+<p>到order by 4之后报错说明select 语句只有3个查询字段</p>
+<p>也可以用union来判断select语句有几个查询字段</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125047261.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125057959.png" alt></p>
+<p>可为什么union 后面的select 1,2,3没有出现其中的两个数据</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/图片.png.png" alt="图片.png"></p>
+<p>并且在命令行中是可以查询到两行的</p>
+<p>看一下源码，可以看到函数<code>mysql_fetch_array</code>只被调用了一次，而<code>mysql_fetch_array()</code> 函数从结果集中取得一行作为关联数组，或数字数组，或二者兼有，具体看你第二个参数是什么，所以这里无论怎么折腾最后只会出来第一行的查询结果。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125130035.png" alt></p>
+<p>如果要把结果集的所有行都取出来，需要用到while循环，看下面的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while ($row = mysql_fetch_array($result)) &#123;  </span><br><span class="line">    echo &quot;&lt;font size=&apos;5&apos; color= &apos;#99FF00&apos;&gt;&quot;;  </span><br><span class="line">    echo &apos;Your Login name:&apos;. $row[&apos;username&apos;];  </span><br><span class="line">    echo &quot;&lt;br&gt;&quot;;  </span><br><span class="line">    echo &apos;Your Password:&apos; .$row[&apos;password&apos;];  </span><br><span class="line">    echo &quot;&lt;/font&gt;&quot;;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以只要让union前面的语句查询结果为空，那么后面的select语句查询的结果就会显示出来。这个id他一般传的是数字，而且一般都是从1开始自增的，我们可以把id值设为非正数（负数或0），浮点数，字符型或字符串都行</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125152211.png" alt></p>
+<p>下面就要开始真正查询数据库的信息了，可以看到只有第二列和第三列显示在网页上，所以我们只能用这两个位置，但是两个位置是不够的。这时候需要用到数据库的连接函数concat或者concat_ws其中concat_ws的第一个参数是连接字符串的分隔符，还会用到group__concat(可以把查询出来的多行连接起来)</p>
+<p><a href="https://www.2cto.com/database/201202/120705.html" target="_blank" rel="noopener">concat和concat_ws()区别及MySQL的几个实用字符串函数</a></p>
+<p>user():返回当前数据库连接使用的用户<br>database():返回当前数据库连接使用的数据库<br>version():返回当前数据库的版本</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125202531.png" alt></p>
+<p>(32是空格的十进制ASCII，58是：的十进制ASCII。)<br>爆出了数据库版本，数据库名字和数据库连接使用的用户名。</p>
+<p>接下来爆数据表的名字</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125216556.png" alt></p>
+<p>这里的<code>0x7365637572697479=security</code>的16进制，因为<code>table_schema=&#39;security&#39;</code>需要用单引号，因为大部分Web应用程序防火墙都过滤了单引号，而转化为16进制之后就可以突破很多防火墙及防注入程序。</p>
+<p>mysql的数据库<code>information_schema</code>，他是系统数据库，安装完就有，记录是当前数据库的数据库，表，列，用户权限等信息，下面说一下常用的几个表<br>SCHEMATA表:储存mysql所有数据库的基本信息，包括数据库名，编码类型路径等，show databases的结果取之此表。</p>
+<p>TABLES表:储存mysql中的表信息，（当然也有数据库名这一列，这样才能找到哪个数据库有哪些表嘛）包括这个表是基本表还是系统表，数据库的引擎是什么，表有多少行，创建时间，最后更新时间等。show tables from schemaname的结果取之此表</p>
+<p>COLUMNS表：提供了表中的列信息，（当然也有数据库名和表名称这两列）详细表述了某张表的所有列以及每个列的信息，包括该列是那个表中的第几列，列的数据类型，列的编码类型，列的权限，猎德注释等。是<code>show columns from schemaname.tablename</code>的结果取之此表。</p>
+<p>[]Mysql数据库information_schema系统表说明(<a href="https://wenku.baidu.com/view/6358a5fd89eb172ded63b7a8.html" target="_blank" rel="noopener">https://wenku.baidu.com/view/6358a5fd89eb172ded63b7a8.html</a>)</p>
+<p>有了users表名，接下来就要爆字段名，同理可以通过limit把所有的字段名枚举出来，知道了有<code>id，username，password</code></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125300654.png" alt></p>
+<p>然后就可以直接select加枚举爆出所有的<code>id，username，password</code></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/图片.png1.png" alt="图片.png"></p>
+<h2 id="less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入"><a href="#less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入" class="headerlink" title="less 2 GET - Error based - Intiger based (基于错误的GET整型注入)"></a>less 2 GET - Error based - Intiger based (基于错误的GET整型注入)</h2><p>id=1’</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125330634.png" alt></p>
+<p>根据报错可以知道这里是整型注入，变量没有被字符包裹。<br>所以这里不需要单引号，可以直接注释后面的语句，剩余操作同lesson1</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125341593.png" alt></p>
+<h2 id="less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入"><a href="#less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入" class="headerlink" title="less 3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)"></a>less 3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)</h2><p>id=1’</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125402134.png" alt></p>
+<p>根据报错可以知道这里是(‘变量’)，所以用’)闭合，后面注释，其他同lesson1步骤即可。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125415438.png" alt></p>
+<p>之后发现id=1”也是不会报错的</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125425481.png" alt></p>
+<p>但是union后面的select语句无效</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125507117.png" alt></p>
+<p>最后发现是由于”没有闭合导致后面的注释不起作用。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125525125.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125507117.png" alt></p>
+<p>可以用and 1=0 和1=1来判断</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125540177.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/图片.png2.png" alt="图片.png"></p>
+<h2 id="less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）"><a href="#less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）" class="headerlink" title="less 4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）"></a>less 4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）</h2><p>直接上单引号，发现没有报错，这是因为php中双引号可以包含单引号,那么就让id=1”</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125612908.png" alt></p>
+<p>根据报错可以知道这里是(“变量”)，所以”)闭合，其他同lesson1步骤</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125623279.png" alt></p>
+<h2 id="less-5-GET-Double-Injection-Single-Quotes-String-双注入GET单引号字符型注入"><a href="#less-5-GET-Double-Injection-Single-Quotes-String-双注入GET单引号字符型注入" class="headerlink" title="less 5 GET - Double Injection - Single Quotes - String (双注入GET单引号字符型注入)"></a>less 5 GET - Double Injection - Single Quotes - String (双注入GET单引号字符型注入)</h2><p>id=1’</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125634649.png" alt></p>
+<p>根据报错可以知道这里是单引号闭合，可是即使正常闭合也不会显示数据</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125643463.png" alt></p>
+<p>因为源码中根本就没有输出$row</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125649568.png" alt></p>
+<p>很明显正常是不能够爆出来数据库的内容，所以就要通过报错来显示数据库中的内容。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125657325.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327125705465.png" alt></p>
+<p>有研究人员发现，当在一个聚合函数，比如count函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来。（我发现如果没有floor和rand函数也是不会报错的）</p>
+<p><a href="http://www.2cto.com/article/201303/192718.html" target="_blank" rel="noopener">双查询注入</a></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010120645.png" alt></p>
+<p>由于这里的报错具有随机性，所以如果没有报错需要多提交几次</p>
+<h2 id="less-6-GET-Double-Injection-Double-Quotes-String-双注入GET双引号字符型注入"><a href="#less-6-GET-Double-Injection-Double-Quotes-String-双注入GET双引号字符型注入" class="headerlink" title="less 6 GET - Double Injection - Double Quotes - String (双注入GET双引号字符型注入)"></a>less 6 GET - Double Injection - Double Quotes - String (双注入GET双引号字符型注入)</h2><p>和less5一样，只不过变成了双引号闭合</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010137371.png" alt></p>
+<p>查表</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010144547.png" alt></p>
+<p>查列</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010214934.png" alt></p>
+<p>查数据</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010232536.png" alt></p>
+<h2 id="less-7-GET-Dump-into-outfile-String-（导出文件GET字符型注入）"><a href="#less-7-GET-Dump-into-outfile-String-（导出文件GET字符型注入）" class="headerlink" title="less 7 GET - Dump into outfile - String （导出文件GET字符型注入）"></a>less 7 GET - Dump into outfile - String （导出文件GET字符型注入）</h2><p>导出到文件就是可以将查询结果导出到一个文件中，如常见的将一句话木马导出到一个php文件中<br>使用此漏洞需要知道WEB程序的根路径并且MYSQL的<code>secure-file-priv</code>配置应为可写入该路径</p>
+<p>id=1</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010312438.png" alt></p>
+<p>id=1’发现错误被屏蔽了</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010322431.png" alt></p>
+<p>而且id=1”或者id=1”)都显示正确，所以这里也涉及到了未闭合导致注释失效的问题。<br>但是只有id=1’)) and 1=0报错，所以可以判断出来是单引号加两个括号闭合</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010332050.png" alt></p>
+<p>为什么最后的结果在数据库中不为空，是因为<a href="http://www.jb51.net/article/101531.htm" target="_blank" rel="noopener">MySQL的隐式转换</a></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010437721.png" alt></p>
+<p><a href="http://www.jb51.net/article/101531.htm" target="_blank" rel="noopener">MySQL的隐式类型转换整理总结</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@@datadir 读取数据库路径</span><br><span class="line">@@basedir MYSQL 获取安装路径</span><br><span class="line">这里可以通过在less1中获取网站的路径</span><br></pre></td></tr></table></figure></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010725295.png" alt></p>
+<p>可以猜到网站路径<code>E:\tool\PHPstudy\PHPTutorial\WWW</code><br>然后就可以通过使用<code>SELECT...INTO OUTFILE</code>语句导出数据到文本文件上上传一句话木马</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010739592.png" alt></p>
+<p>然后上菜刀</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010749207.png" alt></p>
+<h2 id="less-8-GET-Blind-Boolian-Based-Single-Quotes-布尔型单引号GET盲注"><a href="#less-8-GET-Blind-Boolian-Based-Single-Quotes-布尔型单引号GET盲注" class="headerlink" title="less 8 GET - Blind - Boolian Based - Single Quotes (布尔型单引号GET盲注)"></a>less 8 GET - Blind - Boolian Based - Single Quotes (布尔型单引号GET盲注)</h2><p>id=1</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010834731.png" alt></p>
+<p>id=1’</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327010852000.png" alt></p>
+<p>没有任何提示，因为它把错误信息隐藏了，所以并不能用显错式注入，只能用盲注。</p>
+<p>详解SQL盲注测试高级技巧<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MySQL盲注的相关函数：</span><br><span class="line">length(str)：返回str字符串的长度。</span><br><span class="line">substr(str, pos, len)：将str从pos位置开始截取len长度的字符进行返回。注意这里的pos位置是从1开始的，不是数组的0开始</span><br><span class="line">mid(str,pos,len):跟上面的一样，截取字符串</span><br><span class="line">ascii(str)：返回字符串str的最左面字符的ASCII代码值。</span><br><span class="line">ord(str):同上，返回ascii码</span><br><span class="line">if(a,b,c) :a为条件，a为true，返回b，否则返回c，如if(1&gt;2,1,0),返回0</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ascii(substr((select database()),1,1))：返回数据库名称的第一个字母,转化为ascii码</span><br><span class="line">if(ascii(substr((select database()),1,1))&gt;64, 1, 0)：ascii大于64就返回true，if就返回1，否则返回0</span><br></pre></td></tr></table></figure>
+<p>二分法猜数据库名字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1)&gt;64 %23   返回正确，大于64  </span><br><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1))&gt;96 %23  返回正确，大于96  </span><br><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1))&lt;123 %23 返回正确，小于123 ，区间在97-122  </span><br><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1))&gt;109 %23 返回正确，大于109，区间在110-122  </span><br><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1))&gt;116 %23 返回错误，所以在110-116之间  </span><br><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1))&gt;112 %23 返回正确，大于112，区间在113-116之间  </span><br><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1))&gt;114 %23 返回正确，大于114，间在115-116之间  </span><br><span class="line">http://localhost/sqli-labs/Less-8/?id=1&apos; and ascii(substr((select database()),1,1))&gt;115 %23 返回错误，不大于115，即第一个字母的ascii为115，即字母s</span><br></pre></td></tr></table></figure></p>
+<p>盲注一般是写脚本或者使用工具辅助，否则手动盲注需要大量时间</p>
+<h2 id="less-9-GET-Blind-Time-based-Single-Quotes-基于时间的GET单引号盲注"><a href="#less-9-GET-Blind-Time-based-Single-Quotes-基于时间的GET单引号盲注" class="headerlink" title="less 9 GET - Blind - Time based. - Single Quotes (基于时间的GET单引号盲注)"></a>less 9 GET - Blind - Time based. - Single Quotes (基于时间的GET单引号盲注)</h2><p>无论正确还是错误他都只会显示<code>you are in......</code>所以只能用基于时间的盲注</p>
+<p>只有单引号闭合的时候，他才会延迟5秒。所以可以判断出来这里是单引号闭合。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011135003.png" alt></p>
+<p>然后同less 8的盲注，</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011147798.png" alt></p>
+<p>当database()第一个字母的ascii大于115的时候会延迟5秒，当大于114的时候没有延迟，所以可以判断第一个字母的ascii直是115。其他数据查询方式同理</p>
+<h2 id="less-10-GET-Blind-Time-based-double-quotes-基于时间的双引号盲注"><a href="#less-10-GET-Blind-Time-based-double-quotes-基于时间的双引号盲注" class="headerlink" title="less 10 GET - Blind - Time based - double quotes (基于时间的双引号盲注)"></a>less 10 GET - Blind - Time based - double quotes (基于时间的双引号盲注)</h2><p>这道题跟less 9一摸一样，只不过是单引号闭合变为双引号闭合</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011209337.png" alt></p>
+<p>因为双引号闭合的时候，延迟了5秒。</p>
+<h2 id="less11-POST-Error-Based-Single-quotes-String-基于错误的POST型单引号字符型注入"><a href="#less11-POST-Error-Based-Single-quotes-String-基于错误的POST型单引号字符型注入" class="headerlink" title="less11 POST - Error Based - Single quotes- String (基于错误的POST型单引号字符型注入)"></a>less11 POST - Error Based - Single quotes- String (基于错误的POST型单引号字符型注入)</h2><p>查看元素可以知道两个POST分别是uname和passwd。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011238124.png" alt></p>
+<p>首先uname=1’&amp;passwd=2,报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;2&apos; LIMIT 0,1&apos; at line 1</span><br></pre></td></tr></table></figure></p>
+<p>发现1没有报错，2为什么两边只有一个单引号，看源码</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011406347.png" alt></p>
+<p>应该是加进去的单引号跟前面的单引号闭合，剩余的单引号与password前面的单引号闭合，最后剩余了password后面的单引号。</p>
+<p>加个or 1=1 – k发现登陆成功</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011417120.png" alt></p>
+<p>或者在passwd后面加单引号报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;&apos;2&apos;&apos; LIMIT 0,1&apos; at line 1</span><br></pre></td></tr></table></figure></p>
+<p>可以发现是单引号闭合，然后直接or 1=1 – k发现登陆成功</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011446658.png" alt></p>
+<p>如果是<code>uname=1&#39; or &#39;1&#39;=&#39;1&amp;passwd=2</code>，在源代码中显示正常</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011501411.png" alt></p>
+<p>可是却登陆失败。</p>
+<p>因为and的优先级高于or 【就是and先运算】， <code>&#39;1&#39;=&#39;1&#39; and password=&#39;2&#39;</code>先运算右边的<code>password=&#39;2&#39;</code>在数据表中不存在，所以右边是false，那么整个and就是false。然后计算<code>uname=&#39;1&#39; or false</code> ，而两边都是false所以最后的结果就是false。</p>
+<p>那么就<code>uname=1&amp;passwd=2&#39; or &#39;1&#39;=&#39;1</code>在源码中</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011536263.png" alt></p>
+<p>先计算<code>uname=&#39;1&#39; and password=&#39;2&#39;</code>结果是false，然后计算<code>false or 1=1</code>，右边是true，那么整个or就是true。</p>
+<p>这里也可以通过盲注获取信息</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011557607.png" alt></p>
+<h2 id="less-12-POST-Error-Based-Double-quotes-String-with-twist-基于错误的双引号POST型字符型变形的注入"><a href="#less-12-POST-Error-Based-Double-quotes-String-with-twist-基于错误的双引号POST型字符型变形的注入" class="headerlink" title="less 12 POST - Error Based - Double quotes- String-with twist (基于错误的双引号POST型字符型变形的注入)"></a>less 12 POST - Error Based - Double quotes- String-with twist (基于错误的双引号POST型字符型变形的注入)</h2><p>双引号报错</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011612178.png" alt></p>
+<p>可以知道是(“变量”)闭合，直接绕过</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011623357.png" alt></p>
+<h2 id="less-13-POST-Double-Injection-Single-quotes-String-twist-POST单引号变形双注入"><a href="#less-13-POST-Double-Injection-Single-quotes-String-twist-POST单引号变形双注入" class="headerlink" title="less 13 POST - Double Injection - Single quotes- String -twist (POST单引号变形双注入)"></a>less 13 POST - Double Injection - Single quotes- String -twist (POST单引号变形双注入)</h2><p>单引号报错</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011635743.png" alt></p>
+<p>知道是(‘变量’)闭合，可是却没有显示信息</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011646781.png" alt></p>
+<p>那么就用双注入查库</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011657366.png" alt></p>
+<p>查表</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011712048.png" alt></p>
+<p>其余操作前面有不再细说。</p>
+<h2 id="less-14-POST-Double-Injection-Single-quotes-String-twist-POST单引号变形双注入"><a href="#less-14-POST-Double-Injection-Single-quotes-String-twist-POST单引号变形双注入" class="headerlink" title="less 14 POST - Double Injection - Single quotes- String -twist (POST单引号变形双注入)"></a>less 14 POST - Double Injection - Single quotes- String -twist (POST单引号变形双注入)</h2><p>变为双引号闭合，操作同less 13</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011732912.png" alt></p>
+<h2 id="less-15-POST-Blind-Boolian-time-Based-Single-quotes-基于bool型-时间延迟单引号POST型盲注"><a href="#less-15-POST-Blind-Boolian-time-Based-Single-quotes-基于bool型-时间延迟单引号POST型盲注" class="headerlink" title="less 15 POST - Blind- Boolian/time Based - Single quotes (基于bool型/时间延迟单引号POST型盲注)"></a>less 15 POST - Blind- Boolian/time Based - Single quotes (基于bool型/时间延迟单引号POST型盲注)</h2><p>错误信息被隐藏了，所以只能用盲注。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011748231.png" alt></p>
+<p>说明是单引号闭合<br>数据库名长度为8</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011759626.png" alt></p>
+<p>数据库名第一个字母ASCII为115</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011811388.png" alt></p>
+<p>二分法加limit得到所有数据表名字</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011822831.png" alt></p>
+<p>同理可得到字段名，以及数据。</p>
+<p>如果我插入<code>uname=1&amp;passwd=2&#39; or sleep(5) -- k</code>会延迟1分多最后什么也没有显示。在cmd中返回为空</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011835149.png" alt></p>
+<p>原来是<code>false or sleep(5)</code>最后返回为0,最后就什么也查不到。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011858091.png" alt></p>
+<p><strong>and与or的截断性</strong></p>
+<p>在SQL语句中如果and前面为false那么后面的语句就不会执行。<br>如果or前面为true那么后面的语句就不会执行。</p>
+<h2 id="less-16-POST-Blind-Boolian-Time-Based-Double-quotes-基于bool型-时间延迟的双引号POST型盲注"><a href="#less-16-POST-Blind-Boolian-Time-Based-Double-quotes-基于bool型-时间延迟的双引号POST型盲注" class="headerlink" title="less 16 POST - Blind- Boolian/Time Based - Double quotes (基于bool型/时间延迟的双引号POST型盲注)"></a>less 16 POST - Blind- Boolian/Time Based - Double quotes (基于bool型/时间延迟的双引号POST型盲注)</h2><p>同15，这里用时间延迟盲注</p>
+<p>说明是(“闭合”)</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327011959345.png" alt></p>
+<p>lenth=8时不会延迟，说明数据库名字长度为8</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012007235.png" alt></p>
+<p>其他把length函数换成select的操作同less 7</p>
+<h2 id="less-17-POST-Update-Query-Error-Based-String-基于错误的更新查询POST注入"><a href="#less-17-POST-Update-Query-Error-Based-String-基于错误的更新查询POST注入" class="headerlink" title="less 17 POST - Update Query- Error Based - String (基于错误的更新查询POST注入)"></a>less 17 POST - Update Query- Error Based - String (基于错误的更新查询POST注入)</h2><p>注意：下面的注入，一不小心可能把数据库的user表的密码表给清空了</p>
+<p><a href="http://www.w3school.com.cn/xpath/" target="_blank" rel="noopener">xpath教程</a><br><a href="http://www.cnblogs.com/MiWhite/p/6228491.html" target="_blank" rel="noopener">UpdateXml() MYSQL显错注入</a></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012200415.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第一个参数是 目标xml</span><br><span class="line">第二个参数是 xpath的表达式，这个看w3c那个xpath教程</span><br><span class="line">第三个参数是 要将xpath的表达式的东西将目标xml替换成什么</span><br></pre></td></tr></table></figure>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012230713.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function check_input($value)</span><br><span class="line">    &#123;</span><br><span class="line">    if(!empty($value))</span><br><span class="line">        &#123;</span><br><span class="line">        $value = substr($value,0,15);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // // 去除斜杠</span><br><span class="line">        if (get_magic_quotes_gpc())</span><br><span class="line">            &#123;</span><br><span class="line">            $value = stripslashes($value);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        // 如果不是数字则加引号并转义</span><br><span class="line">        if (!ctype_digit($value))</span><br><span class="line">            &#123;</span><br><span class="line">            $value = &quot;&apos;&quot; . mysql_real_escape_string($value) . &quot;&apos;&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">    else</span><br><span class="line">        &#123;</span><br><span class="line">//是数字也要用intval转化成int，因为传过来的是字符型数字              </span><br><span class="line">        $value = intval($value);</span><br><span class="line">        &#125;</span><br><span class="line">    return $value;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">check_input函数首先判断如果不为空，就截取前15个字符。</span><br><span class="line">当magic_quotes_gpc=On的时候，函数get_magic_quotes_gpc()就会返回1</span><br><span class="line">当magic_quotes_gpc=Off的时候，函数get_magic_quotes_gpc()就会返回0</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/senlin1202/article/details/50799967" target="_blank" rel="noopener">magic_quotes_gpc函数</a><br><a href="http://www.w3school.com.cn/php/func_string_addslashes.asp" target="_blank" rel="noopener">addslashes函数</a><br><a href="http://www.w3school.com.cn/php/func_string_stripslashes.asp" target="_blank" rel="noopener">stripslashes函数</a><br><a href="http://php.net/manual/zh/function.ctype-digit.php" target="_blank" rel="noopener">ctype_digit函数</a><br><a href="http://www.w3school.com.cn/php/func_mysql_real_escape_string.asp" target="_blank" rel="noopener">mysql_real_escape_string函数</a></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012512983.png" alt></p>
+<p>首先通过用户名找到用户名和密码，接着更新那个用户名的密码为新输入的密码。</p>
+<p>首先要绕过通过用户名查询出用户名和密码，这个我们只能猜吧，比如admin，root，test什么的，这个可以用字典在这里我们就当知道是admin了，直接用admin就考虑下一步</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012525134.png" alt></p>
+<p>这里是单引号闭合，直接用updatexml显错注入。</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012534475.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012543876.png" alt></p>
+<p>查表</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012558948.png" alt></p>
+<p>查列</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012613692.png" alt></p>
+<p>查数据</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012620995.png" alt></p>
+<h2 id="less-18-POST-Header-Injection-Uagent-field-Error-based-基于错误的用户代理，头部POST注入"><a href="#less-18-POST-Header-Injection-Uagent-field-Error-based-基于错误的用户代理，头部POST注入" class="headerlink" title="less 18 POST - Header Injection - Uagent field - Error based (基于错误的用户代理，头部POST注入)"></a>less 18 POST - Header Injection - Uagent field - Error based (基于错误的用户代理，头部POST注入)</h2><p>这里对用户名和密码都加了过滤</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012633827.png" alt></p>
+<p>正常登陆后显示User Agent<br>用burp抓包改包，先在后面加单引号出现报错信息</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012643631.png" alt></p>
+<p>可以知道闭合方式为(‘变量’,’变量’,’变量’)，继续用updatexml显错注入</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012653168.png" alt></p>
+<h2 id="less-19-POST-Header-Injection-Referer-field-Error-based-基于头部的Referer-POST报错注入"><a href="#less-19-POST-Header-Injection-Referer-field-Error-based-基于头部的Referer-POST报错注入" class="headerlink" title="less 19 POST - Header Injection - Referer field - Error based (基于头部的Referer POST报错注入)"></a>less 19 POST - Header Injection - Referer field - Error based (基于头部的Referer POST报错注入)</h2><p>正常登陆后显示的是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Your IP ADDRESS is: 127.0.0.1</span><br><span class="line">Your Referer is: http://127.0.0.1/sqli-labs-master/Less-18/</span><br></pre></td></tr></table></figure></p>
+<p>抓包改包，referer后加个单引号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &apos;127.0.0.1&apos;)&apos; at line 1</span><br></pre></td></tr></table></figure></p>
+<p>可以猜测闭合方式为(‘变量’,’变量’)也可以用updatexml</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012721416.png" alt></p>
+<p>还有另一个报错函数extractvalue<br>第一个参数也是个xml，第二个参数就是xpath的表达式，这个函数是获取xml中某个节点的值</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012730874.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012740002.png" alt></p>
+<h2 id="less-20-POST-Cookie-injections-Uagent-field-Error-based-基于错误的cookie头部POST注入"><a href="#less-20-POST-Cookie-injections-Uagent-field-Error-based-基于错误的cookie头部POST注入" class="headerlink" title="less 20 POST - Cookie injections - Uagent field - Error based (基于错误的cookie头部POST注入)"></a>less 20 POST - Cookie injections - Uagent field - Error based (基于错误的cookie头部POST注入)</h2><p>两种方式</p>
+<p>1 登陆的时候抓包在cookie后面加单引号</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012752819.png" alt></p>
+<p>可以知道是单引号闭合，然后通过联合查询知道有3列</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012759666.png" alt></p>
+<p>然后就可以用concat函数获得数据。</p>
+<p>2.已经登陆并且有了cookie</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012811914.png" alt></p>
+<h2 id="less-21-Cookie-Injection-Error-Based-complex-string-基于错误的复杂的字符型Cookie注入"><a href="#less-21-Cookie-Injection-Error-Based-complex-string-基于错误的复杂的字符型Cookie注入" class="headerlink" title="less 21 Cookie Injection- Error Based- complex - string ( 基于错误的复杂的字符型Cookie注入)"></a>less 21 Cookie Injection- Error Based- complex - string ( 基于错误的复杂的字符型Cookie注入)</h2><p>抓包发现cookie经过了base64编码</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012823454.png" alt></p>
+<p>对admin’进行base64编码并发送过去发现报错信息</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012954436.png" alt></p>
+<p>可以知道是(‘变量’)闭合方式<br>对SQL语句进行BASE64编码并发送</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327012833476.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327013018759.png" alt></p>
+<p>其余同之前的操作</p>
+<h2 id="less-22-Cookie-Injection-Error-Based-Double-Quotes-string-基于错误的双引号字符型Cookie注入"><a href="#less-22-Cookie-Injection-Error-Based-Double-Quotes-string-基于错误的双引号字符型Cookie注入" class="headerlink" title="less 22 Cookie Injection- Error Based- Double Quotes - string (基于错误的双引号字符型Cookie注入)"></a>less 22 Cookie Injection- Error Based- Double Quotes - string (基于错误的双引号字符型Cookie注入)</h2><p>这个跟less 21一样只不过闭合方式变成了(“变量”)</p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327013032104.png" alt></p>
+<p><img src="/SQLi-LABS-学习SQL注入_1/20190327013041026.png" alt></p>
+<p>介绍：仅供技术交流学习探讨，请勿用于非法用途。本文部分资源来源于网络，如有侵权请联系版主删除。</p>
+
+      
+    </div>
+    
+    
+    
+	
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>纯属好玩，打赏多少您随意！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatimg.jpg" alt="Archimesan 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipayimg.jpg" alt="Archimesan 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Archimesan
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://archimesan.me/2018/06/01/SQLi-LABS-学习SQL注入_1/" title="SQLi-LABS 学习SQL注入1">http://archimesan.me/2018/06/01/SQLi-LABS-学习SQL注入_1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql注入/" rel="tag"><i class="fa fa-tag"></i> sql注入</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/DVWA学习（八）文件包含漏洞/" rel="next" title="DVWA学习（八）文件包含漏洞">
+                <i class="fa fa-chevron-left"></i> DVWA学习（八）文件包含漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/10/SQLi-LABS-学习SQL注入_2/" rel="prev" title="SQLi-LABS 学习SQL注入2">
+                SQLi-LABS 学习SQL注入2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Archimesan">
+            
+              <p class="site-author-name" itemprop="name">Archimesan</p>
+              <p class="site-description motion-element" itemprop="description">Archimesan's Blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/archimesan" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/472e95eede02" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://archimesan.me" title="Archimesan" target="_blank">Archimesan</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入"><span class="nav-number">1.2.</span> <span class="nav-text">less 1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入"><span class="nav-number">1.3.</span> <span class="nav-text">less 2 GET - Error based - Intiger based (基于错误的GET整型注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入"><span class="nav-number">1.4.</span> <span class="nav-text">less 3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）"><span class="nav-number">1.5.</span> <span class="nav-text">less 4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-5-GET-Double-Injection-Single-Quotes-String-双注入GET单引号字符型注入"><span class="nav-number">1.6.</span> <span class="nav-text">less 5 GET - Double Injection - Single Quotes - String (双注入GET单引号字符型注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-6-GET-Double-Injection-Double-Quotes-String-双注入GET双引号字符型注入"><span class="nav-number">1.7.</span> <span class="nav-text">less 6 GET - Double Injection - Double Quotes - String (双注入GET双引号字符型注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-7-GET-Dump-into-outfile-String-（导出文件GET字符型注入）"><span class="nav-number">1.8.</span> <span class="nav-text">less 7 GET - Dump into outfile - String （导出文件GET字符型注入）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-8-GET-Blind-Boolian-Based-Single-Quotes-布尔型单引号GET盲注"><span class="nav-number">1.9.</span> <span class="nav-text">less 8 GET - Blind - Boolian Based - Single Quotes (布尔型单引号GET盲注)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-9-GET-Blind-Time-based-Single-Quotes-基于时间的GET单引号盲注"><span class="nav-number">1.10.</span> <span class="nav-text">less 9 GET - Blind - Time based. - Single Quotes (基于时间的GET单引号盲注)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-10-GET-Blind-Time-based-double-quotes-基于时间的双引号盲注"><span class="nav-number">1.11.</span> <span class="nav-text">less 10 GET - Blind - Time based - double quotes (基于时间的双引号盲注)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less11-POST-Error-Based-Single-quotes-String-基于错误的POST型单引号字符型注入"><span class="nav-number">1.12.</span> <span class="nav-text">less11 POST - Error Based - Single quotes- String (基于错误的POST型单引号字符型注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-12-POST-Error-Based-Double-quotes-String-with-twist-基于错误的双引号POST型字符型变形的注入"><span class="nav-number">1.13.</span> <span class="nav-text">less 12 POST - Error Based - Double quotes- String-with twist (基于错误的双引号POST型字符型变形的注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-13-POST-Double-Injection-Single-quotes-String-twist-POST单引号变形双注入"><span class="nav-number">1.14.</span> <span class="nav-text">less 13 POST - Double Injection - Single quotes- String -twist (POST单引号变形双注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-14-POST-Double-Injection-Single-quotes-String-twist-POST单引号变形双注入"><span class="nav-number">1.15.</span> <span class="nav-text">less 14 POST - Double Injection - Single quotes- String -twist (POST单引号变形双注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-15-POST-Blind-Boolian-time-Based-Single-quotes-基于bool型-时间延迟单引号POST型盲注"><span class="nav-number">1.16.</span> <span class="nav-text">less 15 POST - Blind- Boolian/time Based - Single quotes (基于bool型/时间延迟单引号POST型盲注)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-16-POST-Blind-Boolian-Time-Based-Double-quotes-基于bool型-时间延迟的双引号POST型盲注"><span class="nav-number">1.17.</span> <span class="nav-text">less 16 POST - Blind- Boolian/Time Based - Double quotes (基于bool型/时间延迟的双引号POST型盲注)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-17-POST-Update-Query-Error-Based-String-基于错误的更新查询POST注入"><span class="nav-number">1.18.</span> <span class="nav-text">less 17 POST - Update Query- Error Based - String (基于错误的更新查询POST注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-18-POST-Header-Injection-Uagent-field-Error-based-基于错误的用户代理，头部POST注入"><span class="nav-number">1.19.</span> <span class="nav-text">less 18 POST - Header Injection - Uagent field - Error based (基于错误的用户代理，头部POST注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-19-POST-Header-Injection-Referer-field-Error-based-基于头部的Referer-POST报错注入"><span class="nav-number">1.20.</span> <span class="nav-text">less 19 POST - Header Injection - Referer field - Error based (基于头部的Referer POST报错注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-20-POST-Cookie-injections-Uagent-field-Error-based-基于错误的cookie头部POST注入"><span class="nav-number">1.21.</span> <span class="nav-text">less 20 POST - Cookie injections - Uagent field - Error based (基于错误的cookie头部POST注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-21-Cookie-Injection-Error-Based-complex-string-基于错误的复杂的字符型Cookie注入"><span class="nav-number">1.22.</span> <span class="nav-text">less 21 Cookie Injection- Error Based- complex - string ( 基于错误的复杂的字符型Cookie注入)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-22-Cookie-Injection-Error-Based-Double-Quotes-string-基于错误的双引号字符型Cookie注入"><span class="nav-number">1.23.</span> <span class="nav-text">less 22 Cookie Injection- Error Based- Double Quotes - string (基于错误的双引号字符型Cookie注入)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart" aria-hidden="true"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Archimesan</span>
+
+<!--
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">69k</span>
+  
+-->
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  海贼访客数:<span id="busuanzi_value_site_uv"></span>次
+</span>
+</div>
+
+<!--
+<span class="post-meta-divider">|</span>
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+-->
+<span class="post-meta-divider">|</span>
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共69k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'Archimesan',
+            repo: 'archimesan.github.io',
+            
+            lang: "zh-Hans" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '919c0e81082ddaf80a0057732718963ade43a74f',
+            
+                client_id: 'c03fea9aeaee9613c681'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("E7EEUaXt29pp5R2Rg0UEFxgk-gzGzoHsz", "KHszTeqDtEVA5SDGOtaizaNr");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":0,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+<!-- 页面点击小红心，在末尾添加，避免找不到 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+</html>
